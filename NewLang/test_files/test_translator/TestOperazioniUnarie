@@ -1,0 +1,27 @@
+|*
+    Programma NewLang utilizzato per testare la correttezza, della
+    traduzione in c delle operazioni binarie
+|
+
+
+
+start:
+def main(): void{
+
+    integer a;
+    float b;
+    boolean result;
+
+    ||Operazione MINUS (integer -> integer)
+    a<<-1;
+    (a)-->!;
+    ||OperazioneMINUS (float -> float)
+    b<<-2.5;
+    (b)-->!;
+    ||Operazione NOT (boolean -> boolean)
+    result<<not true;
+    (result)-->!;
+
+
+
+}

@@ -1,0 +1,170 @@
+|*
+    Programma NewLang utilizzato per testare la correttezza, della
+    traduzione in c delle operazioni binarie
+|
+
+
+
+start:
+def main(): void{
+
+    integer a;
+    float b;
+    string stringa;
+    boolean result;
+
+    ||Operazione PLUS,MINUS,TIMES,DIV,POW (integer,integer -> integer) [5]
+    a<<3+2;
+    (a)-->!;
+    a<<3-2;
+    (a)-->!;
+    a<<3*2;
+    (a)-->!;
+    a<<3/2;
+    (a)-->!;
+    a<<3^2;
+    (a)-->!;
+    ||Operazione PLUS,MINUS,TIMES,DIV,POW (integer,float -> float) [5]
+    b<<3+2.5;
+    (b)-->!;
+    b<<3-2.5;
+    (b)-->!;
+    b<<3*2.5;
+    (b)-->!;
+    b<<3/2.5;
+    (b)-->!;
+    b<<3^2.5;
+    (b)-->!;
+    ||Operazione PLUS,MINUS,TIMES,DIV,POW (float,integer -> float) [5]
+    b<<2.5+3;
+    (b)-->!;
+    b<<2.5-3;
+    (b)-->!;
+    b<<2.5*3;
+    (b)-->!;
+    b<<2.5/3;
+    (b)-->!;
+    b<<2.5^3;
+    (b)-->!;
+    ||Operazione PLUS,MINUS,TIMES,DIV,POW (float,float -> float) [5]
+    b<<2.5+3.1;
+    (b)-->!;
+    b<<2.5-3.1;
+    (b)-->!;
+    b<<2.5*3.1;
+    (b)-->!;
+    b<<2.5/3.1;
+    (b)-->!;
+    b<<2.5^3.1;
+    (b)-->!;
+    ||Operazione STR_CONCAT (string, string -> string)
+    stringa<<"Ciao"&"Mondo";
+    (stringa)-->!;
+    ||Operazione STR_CONCAT (string, integer -> string)
+    stringa<<"Ciao"&1;
+    (stringa)-->!;
+    ||Operazione STR_CONCAT (string, float -> string)
+    stringa<<"Ciao"&1.0;
+    (stringa)-->!;
+    ||Operazione STR_CONCAT (string, char -> string)
+    stringa<<"Ciao"&'!';
+    (stringa)-->!;
+    ||Operazione STR_CONCAT (integer, string -> string)
+    stringa<<1&"Ciao";
+    (stringa)-->!;
+    ||Operazione STR_CONCAT (float, string -> string)
+    stringa<<"1.0"&"Ciao";
+    (stringa)-->!;
+    ||Operazione STR_CONCAT (char, string -> string)
+    stringa<<'!'&"Ciao";
+    (stringa)-->!;
+    stringa<<"Ciao"&"Mondo"&"Come"&"Va?";
+    (stringa)-->!;
+
+    ||Operazione AND,OR (boolean, boolean -> boolean) [2]
+    result<<true and false;
+    (result)-->!;
+    result<<true or false;
+    (result)-->!;
+    ||Operazione GT, GE, LT, LE, EQ, NE (integer, integer -> boolean) [6]
+    result<<1>2;
+    (result)-->!;
+    result<<1>=2;
+    (result)-->!;
+    result<<1<2;
+    (result)-->!;
+    result<<1<=2;
+    (result)-->!;
+    result<<1=2;
+    (result)-->!;
+    result<<1!=2;
+    (result)-->!;
+    ||Operazione GT, GE, LT, LE, EQ, NE (integer, float -> boolean) [6]
+    result<<1>2.1;
+    (result)-->!;
+    result<<1>=2.1;
+    (result)-->!;
+    result<<1<2.1;
+    (result)-->!;
+    result<<1<=2.1;
+    (result)-->!;
+    result<<1=2.1;
+    (result)-->!;
+    result<<1!=2.1;
+    (result)-->!;
+    ||Operazione GT, GE, LT, LE, EQ, NE (float, integer -> boolean) [6]
+    result<<1.1>2;
+    (result)-->!;
+    result<<1.1>=2;
+    (result)-->!;
+    result<<1.1<2;
+    (result)-->!;
+    result<<1.1<=2;
+    (result)-->!;
+    result<<1.1=2;
+    (result)-->!;
+    result<<1.1!=2;
+    (result)-->!;
+    ||Operazione GT, GE, LT, LE, EQ, NE (float, float -> boolean) [6]
+    result<<1.1>2.1;
+    (result)-->!;
+    result<<1.1>=2.1;
+    (result)-->!;
+    result<<1.1<2.1;
+    (result)-->!;
+    result<<1.1<=2.1;
+    (result)-->!;
+    result<<1.1=2.1;
+    (result)-->!;
+    result<<1.1!=2.1;
+    (result)-->!;
+    ||Operazione GT, GE, LT, LE, EQ, NE (string, string -> boolean) [6]
+    result<<"ciao">"mondo";
+    (result)-->!;
+    result<<"ciao">="mondo";
+    (result)-->!;
+    result<<"ciao"<"mondo";
+    (result)-->!;
+    result<<"ciao"<="mondo";
+    (result)-->!;
+    result<<"ciao"="mondo";
+    (result)-->!;
+    result<<"ciao"!="mondo";
+    (result)-->!;
+    ||Operazione GT, GE, LT, LE, EQ, NE (char, char -> boolean) [6]
+    result<<'1'>'2';
+    (result)-->!;
+    result<<'1'>='2';
+    (result)-->!;
+    result<<'1'<'2';
+    (result)-->!;
+    result<<'1'<='2';
+    (result)-->!;
+    result<<'1'='2';
+    (result)-->!;
+    result<<'1'!='2';
+    (result)-->!;
+
+
+
+}

@@ -1,0 +1,330 @@
+// CUP specification for a simple expression evaluator (no actions)
+
+
+import java_cup.runtime.*;
+import java_cup.runtime.Symbol;
+import main.java.nodi.*;
+import main.java.nodi.expr.*;
+import main.java.nodi.statement.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.ArrayList;
+import main.java.utilsClass.Decl;
+
+/* Terminals (tokens returned by the scanner). */
+terminal String MAIN, SEMI, COMMA, PIPE, VAR, INT, FLOAT, STRING, BOOL, CHAR, VOID, DEF, OUT, FOR, IF, ELSE, WHILE,
+         TO, LOOP, READ, WRITE, WRITELN, LPAR, RPAR, LBRACK, RBRACK, COLON, ASSIGN, RETURN, ID, INTEGER_CONST, REAL_CONST,
+         STRING_CONST, CHAR_CONST, TRUE, FALSE, PLUS, MINUS, TIMES, DIV, POW, STR_CONCAT, EQ, NE, LT, LE, GT,
+         GE, AND, OR, NOT, THEN;
+
+/* Terminali per la precdenza*/
+terminal UMINUS, ASSOC;
+
+/* Non terminals */
+non terminal ProgramOp Program;
+non terminal Decl DeclList;
+non terminal FunOp MainFunDecl;
+non terminal VarDeclOp VarDecl;
+non terminal String Type;
+non terminal ArrayList<Expr> IdInitList;
+non terminal ArrayList<Expr> IdInitObblList;
+non terminal ConstOp Const;
+non terminal FunOp FunDecl;
+non terminal BodyOp Body;
+non terminal ArrayList<ParDeclOp> ParamDeclList;
+non terminal ArrayList<ParDeclOp> NonEmptyParamDeclList;
+non terminal ParDeclOp ParDecl;
+non terminal String TypeOrVoid;
+non terminal ArrayList<VarDeclOp> VarDeclList;
+non terminal ArrayList<Statement> StatList;
+non terminal Statement Stat;
+non terminal IfStatOp IfStat;
+non terminal BodyOp Else;
+non terminal WhileOp WhileStat;
+non terminal ForOp ForStat;
+non terminal ReadOp ReadStat;
+non terminal ArrayList<Identifier> IdList;
+non terminal ArrayList<Identifier> IdList2;
+non terminal WriteOp WriteStat;
+non terminal AssignOp AssignStat;
+non terminal CallFunOpExpr FunCall;
+non terminal ArrayList<Expr> ExprList;
+non terminal Expr Expr;
+
+/* Precedences */
+precedence left OR;
+precedence left AND;
+precedence right NOT;
+precedence nonassoc EQ, NE, LT, LE, GT, GE;
+precedence left STR_CONCAT;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIV;
+precedence left POW;
+precedence left UMINUS;
+precedence left ASSOC;
+
+
+
+
+/* The grammar */
+Program ::= DeclList:declList1 MainFunDecl:main DeclList:declList2 {:
+                ArrayList<VarDeclOp> listVarDecl=new ArrayList<VarDeclOp>();
+                listVarDecl.addAll(declList1.getVarDeclList());
+                listVarDecl.addAll(declList2.getVarDeclList());
+                ArrayList<FunOp> listFun=new ArrayList<FunOp>();
+                listFun.addAll(declList1.getFunOpList());
+                listFun.addAll(declList2.getFunOpList());
+                RESULT=new ProgramOp(listVarDecl,main,listFun);
+            :};
+
+DeclList ::= VarDecl:varDecl DeclList:declList
+            {:
+                RESULT= new Decl();
+                RESULT.addVarDecl(varDecl);
+                ArrayList<VarDeclOp> varDeclList=declList.getVarDeclList();
+                ArrayList<FunOp> funOpList=declList.getFunOpList();
+                RESULT.addsVarDeclList(varDeclList);
+                RESULT.addsFunOpList(funOpList);
+            :}
+            |
+            FunDecl: funDecl DeclList:declList
+            {:
+                RESULT= new Decl();
+                RESULT.addFunOp(funDecl);
+                ArrayList<VarDeclOp> varDeclList=declList.getVarDeclList();
+                ArrayList<FunOp> funOpList=declList.getFunOpList();
+                RESULT.addsVarDeclList(varDeclList);
+                RESULT.addsFunOpList(funOpList);
+            :}
+            |
+            /* empty */ {: RESULT= new Decl(); :};
+
+
+
+MainFunDecl ::= MAIN FunDecl:funDecl{:
+            RESULT=funDecl;
+            :};
+
+VarDecl ::= Type:type IdInitList:listId SEMI{:
+                RESULT=new VarDeclOp(type,listId);
+           :}
+        |
+        VAR IdInitObblList:idInitObbList SEMI{:
+            RESULT=new VarDeclOp("var",idInitObbList);
+        :};
+
+Type ::= INT {:RESULT="integer";:}
+        | BOOL {:RESULT="boolean";:}
+        | FLOAT {:RESULT="float";:}
+        | STRING {:RESULT="string";:}
+        | CHAR {:RESULT="char";:};
+
+IdInitList ::= ID:id {:
+                RESULT=new ArrayList<Expr>();
+                RESULT.add(new Identifier(id));
+            :}
+            |
+            IdInitList:idInitList COMMA ID:id {:
+                RESULT=new ArrayList<Expr>();
+                RESULT.addAll(idInitList);
+                RESULT.add(new Identifier(id));
+            :}
+            |
+            ID:id ASSIGN Expr:expr {:
+                RESULT=new ArrayList<Expr>();
+                IdInitOp idInit=new IdInitOp(new Identifier(id),expr);
+                RESULT.add(idInit);
+            :}
+            |
+            IdInitList:idInitList COMMA ID:id ASSIGN Expr:expr {:
+                RESULT=new ArrayList<Expr>();
+                RESULT.addAll(idInitList);
+                IdInitOp idInit=new IdInitOp(new Identifier(id),expr);
+                RESULT.add(idInit);
+            :};
+
+IdInitObblList ::= ID:id ASSIGN Const:con{:
+                     RESULT=new ArrayList<Expr>();
+                     IdInitObbOp idInitObb=new IdInitObbOp(new Identifier(id),con);
+                     RESULT.add(idInitObb);
+                 :}
+                |
+                IdInitObblList:idInitObbList COMMA ID:id ASSIGN Const:con{:
+                    RESULT=new ArrayList<Expr>();
+                    RESULT.addAll(idInitObbList);
+                    IdInitObbOp idInitObb=new IdInitObbOp(new Identifier(id),con);
+                    RESULT.add(idInitObb);
+                :};
+
+Const ::= INTEGER_CONST:lessema {:RESULT=new ConstOp("integer_const",lessema);:}
+        | REAL_CONST:lessema {:RESULT=new ConstOp("real_const",lessema);:}
+        | TRUE:lessema {:RESULT=new ConstOp("boolean_const","true");:}
+        | FALSE:lessema {:RESULT=new ConstOp("boolean_const","false");:}
+        | STRING_CONST:lessema {:RESULT=new ConstOp("string_const",lessema);:}
+        | CHAR_CONST:lessema {:RESULT=new ConstOp("char_const",lessema);:};
+
+FunDecl ::= DEF ID:id LPAR ParamDeclList:paramList RPAR COLON TypeOrVoid:type Body:body{:
+                if (paramList==null)
+                    RESULT=new FunOp(new Identifier(id),type,body);
+                else
+                    RESULT=new FunOp(new Identifier(id),paramList,type,body);
+            :};
+
+Body ::= LBRACK VarDeclList:varDeclList StatList:statList RBRACK{:
+            RESULT=new BodyOp(varDeclList,statList);
+        :};
+
+ParamDeclList ::= /*empty */{:RESULT=null;:}
+	            |
+	            NonEmptyParamDeclList:listParams{:RESULT=listParams;:};
+
+NonEmptyParamDeclList ::= ParDecl:parDecl {:
+                         RESULT=new ArrayList<ParDeclOp> ();
+                         RESULT.add(parDecl);
+                        :}
+                      |
+                      NonEmptyParamDeclList:listParams PIPE ParDecl:parDecl{:
+                         RESULT=new ArrayList<ParDeclOp>();
+                         RESULT.addAll(listParams);
+                         RESULT.add(parDecl);
+                      :};
+
+ParDecl ::= Type:type IdList:idList {:
+            RESULT=new ParDeclOp("in",type,idList);
+        :}
+        |
+        OUT Type:type IdList:idList{:
+            RESULT=new ParDeclOp("out",type,idList);
+        :};
+
+TypeOrVoid ::= Type:type {:RESULT=type;:}
+            |
+            VOID {:RESULT="void";:};
+
+VarDeclList ::= /* empty */ {:RESULT=null;:}
+            |
+            VarDecl:varDecl VarDeclList:varDeclList{:
+                RESULT=new ArrayList<VarDeclOp>();
+                RESULT.add(varDecl);
+                if(varDeclList!=null)
+                    RESULT.addAll(varDeclList);
+            :};
+
+StatList ::= /* empity */{:
+                RESULT=new ArrayList<Statement>();
+            :}
+            |
+            Stat:stat StatList:statList {:
+                RESULT=new ArrayList<Statement>();
+                RESULT.addAll(statList);
+                if(stat!=null)
+                    RESULT.add(stat);
+            :};
+
+Stat ::= IfStat:ifStat {:RESULT=ifStat;:}
+	| ForStat:forStat {:RESULT=forStat;:}
+	| ReadStat:readStat SEMI {:RESULT=readStat;:}
+	| WriteStat:writeStat SEMI {:RESULT=writeStat;:}
+	| AssignStat:assignStat SEMI {:RESULT=assignStat;:}
+    | WhileStat:whileStat {:RESULT=whileStat;:}
+	| FunCall:funCall SEMI {:
+        if (funCall.getListExpr()!=null)
+	        RESULT=new CallFunOpStat(funCall.getIdentifier(),funCall.getListExpr());
+        else
+            RESULT=new CallFunOpStat(funCall.getIdentifier());
+	:}
+	| RETURN Expr:expr SEMI {:RESULT=new ReturnOp(expr);:}
+	| RETURN SEMI {:RESULT=new ReturnOp();:};
+
+IfStat ::= IF Expr:expr THEN Body:body Else:elseBody{:
+                if (elseBody!=null)
+                    RESULT=new IfStatOp(expr,body,elseBody);
+                else
+                    RESULT=new IfStatOp(expr,body);
+            :};
+
+Else ::= /* empty */ {:RESULT=null;:}
+	    | ELSE Body:body {:RESULT=body;:};
+
+WhileStat ::= WHILE Expr:expr LOOP Body:body {:
+                RESULT=new WhileOp(expr,body);
+            :};
+
+ForStat ::= FOR ID:id ASSIGN INTEGER_CONST:const1 TO INTEGER_CONST:const2 LOOP Body:body{:
+                IdInitOp idInit=new IdInitOp(new Identifier(id),new ConstOp("integer_const",const1));
+                RESULT=new ForOp(idInit,new ConstOp("integer_const",const2),body);
+            :};
+
+ReadStat ::= IdList:idList READ STRING_CONST:lessema {:
+                RESULT=new ReadOp(idList,new ConstOp("string_const",lessema));
+            :}
+	        |  IdList:idList READ{:RESULT=new ReadOp(idList);:};
+
+/*IdList ::= ID | IdList COMMA ID;*/
+
+IdList ::= ID:id IdList2:idList{:
+            RESULT=new ArrayList<Identifier>();
+            RESULT.add(new Identifier(id));
+            if (idList!=null)
+                RESULT.addAll(idList);
+        :};
+
+IdList2 ::= COMMA IdList:idList {:RESULT=idList;:}
+            |
+            /* empty */{:RESULT=null;:};
+
+WriteStat ::= LPAR ExprList:exprList RPAR WRITE {:
+                RESULT=new WriteOp("write",exprList);
+            :}
+	        | LPAR ExprList:exprList RPAR WRITELN {:
+                RESULT=new WriteOp("writeln",exprList);
+	        :};
+
+AssignStat ::=  IdList:idList ASSIGN ExprList:exprList {:
+                RESULT=new AssignOp(idList,exprList);
+            :};
+
+FunCall ::= ID:id LPAR ExprList:exprList RPAR {:
+                RESULT=new CallFunOpExpr(new Identifier(id),exprList);
+           :}
+	    | ID:id LPAR RPAR{:
+	         RESULT=new CallFunOpExpr(new Identifier(id));
+	     :};
+
+ExprList ::= Expr:expr {:
+                RESULT=new ArrayList<Expr>();
+                RESULT.add(expr);
+            :}
+	        | Expr:expr COMMA ExprList:exprList {:
+	            RESULT=new ArrayList<Expr>();
+	            RESULT.add(expr);
+	            RESULT.addAll(exprList);
+	        :};
+
+Expr ::= TRUE:lessema {:RESULT=new ConstOp("boolean_const","true");:}
+    | FALSE:lessema {:RESULT=new ConstOp("boolean_const","false");:}
+	| INTEGER_CONST:lessema {:RESULT=new ConstOp("integer_const",lessema);:}
+	| REAL_CONST:lessema {:RESULT=new ConstOp("real_const",lessema);:}
+	| STRING_CONST:lessema {:RESULT=new ConstOp("string_const",lessema);:}
+	| CHAR_CONST:lessema {:RESULT=new ConstOp("char_const",lessema);:}
+	| ID:lessema {:RESULT=new Identifier(lessema);:}
+	| FunCall:funCall {:RESULT=funCall;:}
+	| Expr:expr1  PLUS Expr:expr2 {:RESULT=new AritAndRelOp("AddOp",expr1,expr2);:}
+	| Expr:expr1  MINUS Expr:expr2 {:RESULT=new AritAndRelOp("DiffOp",expr1,expr2);:}
+	| Expr:expr1  TIMES Expr:expr2 {:RESULT=new AritAndRelOp("MulOp",expr1,expr2);:}
+	| Expr:expr1  DIV Expr:expr2 {:RESULT=new AritAndRelOp("DivOp",expr1,expr2);:}
+	| Expr:expr1  AND Expr:expr2 {:RESULT=new AritAndRelOp("AndOp",expr1,expr2);:}
+	| Expr:expr1 POW Expr:expr2 {:RESULT=new AritAndRelOp("PowOp",expr1,expr2);:}
+	| Expr:expr1 STR_CONCAT Expr:expr2 {:RESULT=new AritAndRelOp("StrCatOp",expr1,expr2);:}
+	| Expr:expr1  OR Expr:expr2 {:RESULT=new AritAndRelOp("OrOp",expr1,expr2);:}
+	| Expr:expr1  GT Expr:expr2 {:RESULT=new AritAndRelOp("GTOp",expr1,expr2);:}
+	| Expr:expr1  GE Expr:expr2 {:RESULT=new AritAndRelOp("GEOp",expr1,expr2);:}
+	| Expr:expr1  LT Expr:expr2 {:RESULT=new AritAndRelOp("LTOp",expr1,expr2);:}
+	| Expr:expr1  LE Expr:expr2 {:RESULT=new AritAndRelOp("LEOp",expr1,expr2);:}
+	| Expr:expr1  EQ Expr:expr2 {:RESULT=new AritAndRelOp("EQOp",expr1,expr2);:}
+	| Expr:expr1  NE Expr:expr2 {:RESULT=new AritAndRelOp("NEOp",expr1,expr2);:}
+	| MINUS Expr:expr1 {:RESULT=new UnaryOp("UminusOp",expr1);:}
+	%prec UMINUS
+	| NOT Expr:expr1 {:RESULT=new UnaryOp("NotOp",expr1);:}
+	| LPAR Expr:expr1 RPAR {:RESULT=expr1;:}
+	%prec ASSOC;
+

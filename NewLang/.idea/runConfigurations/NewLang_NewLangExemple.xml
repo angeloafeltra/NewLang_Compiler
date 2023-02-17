@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="NewLang_NewLangExemple" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="main.java.main.NewLang" />
+    <module name="NewLang" />
+    <option name="PROGRAM_PARAMETERS" value="NewLangExemple" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

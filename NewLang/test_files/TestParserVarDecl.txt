@@ -1,0 +1,44 @@
+|* Programma di per verificare la correttezza del parser con le varie tipologie di dichiarazioni di variabili
+permesse da linguaggio NewLang |
+
+integer a;
+    boolean e;
+    float i;
+    char b;
+    string d;
+
+    float i<<-1.20;
+    boolean e<<true;
+    integer a<<10;
+    char b<<'a';
+    string d<<"dado";
+
+start:
+def esempio() : void {  ||Funzione main
+
+
+    integer a;
+    boolean e;
+    float i;
+    char b;
+    string d;
+
+    float i<<-1.20;
+    boolean e<<true;
+    integer a<<10;
+    char b<<'a';
+    string d<<"dado";
+
+    float i<<i+a;
+    integer a<<i-a;
+    string d<<"dado" & " " & "magico";
+
+    integer a,b,c,d,e;
+    integer a,b,c<<2;
+    integer a<<2,b;
+
+    var obb<<1;
+    var obb1<<2,obb<<3;
+
+
+}

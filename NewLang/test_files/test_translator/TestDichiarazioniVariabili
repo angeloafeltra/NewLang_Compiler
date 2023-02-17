@@ -1,0 +1,29 @@
+|*
+    Programma NewLang utilizzato per testare la correttezza, della
+    traduzione in c per la dichiarazione di variabili
+|
+
+
+
+start:
+def main(): void{
+
+    integer a;
+    float b;
+    char c;
+    string d;
+    integer e<<15,f,g<<5;
+    float h<<3.15, i;
+    char l<<'l';
+    string m<<"ciao",n;
+    boolean o;
+    boolean p<<true,q<<false;
+    var obb1<<3,obb2<<3.15,obb3<<'c',obb4<<"casa",obb5<<true;
+    (e,g)-->!;
+    (h)-->!;
+    (l)-->!;
+    (m)-->!;
+    (p,q)-->!;
+    (obb1,obb2,obb3,obb4,obb5)-->!;
+
+}

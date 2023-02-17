@@ -1,0 +1,47 @@
+|* Programma di per verificare la correttezza del parser con le varie tipologie di statement
+permesse da linguaggio NewLang |
+
+def somma(integer a,b): integer
+{
+    return a+b;
+}
+
+
+start:
+def esempio() : void {  ||Funzione main
+
+    integer a<<1,b<<2;
+    if a<b then
+    {
+        ("B maggiore di A")-->!;
+    }else
+    {
+        ("A maggiore di B")-->!;
+    }
+
+    if a<b then
+        {
+            ("A minore di B")-->!;
+        }
+
+    a <-- "Inserisci operazione:";
+
+    a<<2;
+
+    while a<b loop
+    {
+        a<<a+2;
+    }
+
+    a<<somma(a,b);
+
+    for i<<0 to 1 loop
+    {
+       ('c')-->;
+    }
+
+    somma(a+3);
+
+    return;
+
+}
