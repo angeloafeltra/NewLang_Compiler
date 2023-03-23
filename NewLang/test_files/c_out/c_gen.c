@@ -14,130 +14,47 @@ char* bool_to_str(bool i);
 char* str_concat(char* str1, char* str2);
 char* read_str();
 int str_to_bool(char* expr);
-float somma(float a, float b);
-float differenza(float a, float b);
-float prodotto(float a, float b);
-float divisione(float a, float b);
-float potenza(float a, float b);
-float succ_fibonacci(float i);
-int menu();
-void esempio();
+void main2();
 
 //Variabili Globali
 
 int main (int argc, char *argv[]){
-esempio();
+main2();
 return 0;
 }
-float somma(float a, float b){
-return a+b;
-}
-
-float differenza(float a, float b){
-return a-b;
-}
-
-float prodotto(float a, float b){
-float prod=0;
-int i=1;
-while(i<=b){
-prod=prod+a;
-i=i+1;
-}
-return prod;
-}
-
-float divisione(float a, float b){
-return a/b;
-}
-
-float potenza(float a, float b){
-return pow(a,b);
-}
-
-float succ_fibonacci(float i){
-if(i<0){
-return 0;
-}else{
-if(i==0){
-return 0;
-}else{
-if(i==1){
-return 1;
-}else{
-}
-}
-}
-return succ_fibonacci(i-1)+succ_fibonacci(i-2);
-}
-
-int menu(){
-int op;
-printf("%s\n","--------Menu--------");
-printf("%s\n","2) Addizione");
-printf("%s\n","3) Sottrazione");
-printf("%s\n","4) Moltiplicazione");
-printf("%s\n","5) Divisione");
-printf("%s\n","6) Potenza");
-printf("%s\n","7) Fibonacci");
-printf("Inserisci operazione:");
-scanf("%d",&op);
-while(op<2||op>7){
-printf("Operazione non valida [2-7], inserisci operazione:");
-scanf("%d",&op);
-}
-return op;
-}
-
-void esempio(){
-int op;
-float risultato;
-float a;
+void main2(){
+int a;
 float b;
-int comando=-1*(1);
-while(comando!=0){
-printf("%s\n","1) Visualizza Menù");
-printf("%s\n","0) Termina");
-printf("Inserisci comando:");
-scanf("%d",&comando);
-if(comando==1){
-op=menu();
-if(op!=7){
-printf("Inserisci il primo intero:");
-scanf("%f",&a);
-printf("Inserisci il secondo intero:");
-scanf("%f",&b);
-}else{
-printf("Inserisci il primo intero:");
-scanf("%f",&a);
-}
-if(op==2){
-risultato=somma(a,b);
-}else{
-if(op==3){
-risultato=differenza(a,b);
-}else{
-if(op==4){
-risultato=prodotto(a,b);
-}else{
-if(op==5){
-risultato=divisione(a,b);
-}else{
-if(op==6){
-risultato=potenza(a,b);
-}else{
-risultato=succ_fibonacci(a);
-}
-}
-}
-}
-}
-printf("%s\n",str_concat("Il risultato dell'operazione scelta è :",real_to_str(risultato)));
-}else{
-}
-}
-printf("%s","Ciao");
-return;
+char c;
+char* d;
+int f;
+float i;
+char* n;
+bool o;
+int e=15;
+int g=5;
+float h=3.15;
+char l='l';
+char* m="ciao";
+bool p=true;
+bool q=false;
+int obb1=3;
+float obb2=3.15;
+char obb3='c';
+char* obb4="casa";
+bool obb5=true;
+printf("%s\n",integer_to_str(e));
+printf("%s\n",integer_to_str(g));
+printf("%s\n",real_to_str(h));
+printf("%s\n",char_to_str(l));
+printf("%s\n",m);
+printf("%s\n",bool_to_str(p));
+printf("%s\n",bool_to_str(q));
+printf("%s\n",integer_to_str(obb1));
+printf("%s\n",real_to_str(obb2));
+printf("%s\n",char_to_str(obb3));
+printf("%s\n",obb4);
+printf("%s\n",bool_to_str(obb5));
 }
 
 //Funzioni di supporto 

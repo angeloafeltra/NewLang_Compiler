@@ -1,4 +1,4 @@
-package main.java;
+package compiler;
 import java_cup.runtime.*;
 %%
 

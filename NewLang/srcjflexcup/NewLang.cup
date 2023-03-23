@@ -1,14 +1,13 @@
 // CUP specification for a simple expression evaluator (no actions)
 
-
 import java_cup.runtime.*;
 import java_cup.runtime.Symbol;
-import main.java.nodi.*;
-import main.java.nodi.expr.*;
-import main.java.nodi.statement.*;
+import compiler.nodi.*;
+import compiler.nodi.expr.*;
+import compiler.nodi.statement.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
-import main.java.utilsClass.Decl;
+import compiler.utilsClass.Decl;
 
 /* Terminals (tokens returned by the scanner). */
 terminal String MAIN, SEMI, COMMA, PIPE, VAR, INT, FLOAT, STRING, BOOL, CHAR, VOID, DEF, OUT, FOR, IF, ELSE, WHILE,
