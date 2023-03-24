@@ -8,6 +8,7 @@ class NewLangApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

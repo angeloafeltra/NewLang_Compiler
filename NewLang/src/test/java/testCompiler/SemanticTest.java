@@ -5,7 +5,8 @@ import compiler.parser;
 import compiler.nodi.ProgramOp;
 import compiler.visitors.semanticVisitor.SemanticVisitor1;
 import compiler.visitors.semanticVisitor.SemanticVisitor2;
-import org.junit.Test;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.File;
@@ -23,6 +24,7 @@ public class SemanticTest {
         File input = new File(
                 System.getProperty("user.dir") +separator+"test_files"+ separator+ path_test_file);
         parser p = new parser(new Lexer(new FileReader(input)));
+        boolean catturata=false;
         try {
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) p.parse().value;
             //Genero le symbol table
@@ -31,8 +33,10 @@ public class SemanticTest {
             Logger log = Logger.getLogger(this.getClass().getName());
             log.info("\n Nessuna Eccezione Catturata");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            catturata=true;
         }
+
+        Assert.assertFalse(catturata);
 
     }
 
@@ -43,6 +47,7 @@ public class SemanticTest {
         File input = new File(
                 System.getProperty("user.dir") +separator+"test_files"+ separator+ path_test_file);
         parser p = new parser(new Lexer(new FileReader(input)));
+        boolean catturata=false;
         try {
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) p.parse().value;
             //Genero le symbol table
@@ -51,9 +56,10 @@ public class SemanticTest {
             Logger log = Logger.getLogger(this.getClass().getName());
             log.info("\n Nessuna Eccezione Catturata");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+
         }
 
+        Assert.assertFalse(catturata);
     }
 
 }

@@ -7,7 +7,7 @@ import compiler.visitors.TranslatorVisitor;
 import compiler.visitors.semanticVisitor.SemanticVisitor1;
 import compiler.visitors.semanticVisitor.SemanticVisitor2;
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
