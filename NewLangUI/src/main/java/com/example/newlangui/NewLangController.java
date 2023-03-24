@@ -29,7 +29,7 @@ public class NewLangController {
     @RequestMapping("/sendMessageContainer2")
     public String sendMessage() {
         System.out.println("RICEVUTO");
-        final String uri = "http://localhost:8080/listenCall";
+        final String uri = "http://back-end:8080/listenCall";
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(uri, String.class);
         if(result.equals("Messaggio Ricevuto e ricambiato"))
