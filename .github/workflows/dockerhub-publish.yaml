@@ -37,5 +37,5 @@ jobs:
           context: ./NewLangUI
           file: ./NewLangUI/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: front-end
           labels: ${{ steps.meta.outputs.labels }}
