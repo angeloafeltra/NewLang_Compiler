@@ -20,8 +20,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-
-permissions: read-all|write-all
+  permissions: read-all|write-all
 
 jobs:
   build:
