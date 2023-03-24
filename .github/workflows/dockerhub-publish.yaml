@@ -37,7 +37,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: angeloafeltra/newlang
+          images:angeloafeltra/newlang 
       
       - name: Build and push Docker image front-end
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -45,8 +45,8 @@ jobs:
           context: ./NewLangUI
           file: ./NewLangUI/Dockerfile
           push: true
-          tags: front-end
-          labels: front-end
+          tags: uangeloafeltra/newlang:front-end
+          labels: ${{ steps.meta.outputs.labels }}
           
       - name: Build and push Docker image back-end
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -54,5 +54,5 @@ jobs:
           context: ./NewLang
           file: ./NewLang/Dockerfile
           push: true
-          tags: back-end
-          labels: back-end
+          tags: uangeloafeltra/newlang:back-end
+          labels: ${{ steps.meta.outputs.labels }}
