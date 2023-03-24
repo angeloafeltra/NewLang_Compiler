@@ -45,7 +45,7 @@ jobs:
           context: ./NewLangUI
           file: ./NewLangUI/Dockerfile
           push: true
-          tags: uangeloafeltra/newlang:front-end
+          tags: angeloafeltra/newlang:front-end
           labels: ${{ steps.meta.outputs.labels }}
           
       - name: Build and push Docker image back-end
@@ -54,5 +54,5 @@ jobs:
           context: ./NewLang
           file: ./NewLang/Dockerfile
           push: true
-          tags: uangeloafeltra/newlang:back-end
+          tags: angeloafeltra/newlang:back-end
           labels: ${{ steps.meta.outputs.labels }}
