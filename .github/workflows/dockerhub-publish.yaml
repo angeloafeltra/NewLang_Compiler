@@ -39,3 +39,12 @@ jobs:
           push: true
           tags: angeloafeltra/newlang:front-end
           labels: ${{ steps.meta.outputs.labels }}
+          
+      - name: Build and push Docker image back-end
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./NewLang
+          file: ./NewLang/Dockerfile
+          push: true
+          tags: angeloafeltra/newlang:back-end
+          labels: ${{ steps.meta.outputs.labels }}
