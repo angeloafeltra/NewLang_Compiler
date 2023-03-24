@@ -10,8 +10,14 @@
 name: Publish Docker image
 
 on:
-  release:
-    types: [published]
+  schedule:
+    - cron: '19 3 * * *'
+  push:
+    branches: [ "main" ]
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   push_to_registry:
