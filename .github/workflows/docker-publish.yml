@@ -21,6 +21,7 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 
+permissions: read-all|write-all
 
 jobs:
   build:
