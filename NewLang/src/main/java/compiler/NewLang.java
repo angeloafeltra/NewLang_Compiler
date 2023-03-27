@@ -11,21 +11,24 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 
 public class NewLang {
-    public static void main(String[] args) throws FileNotFoundException {
-        JTree tree;
-        String separator = File.separator;
-        File input = new File(
-                System.getProperty("user.dir") +separator+"test_files"+ separator+ args[0]);
-        parser p = new parser(new Lexer(new FileReader(input)));
+
+    public File compile(byte[] fileContent,String fileName){
+
+        parser p = new parser(new Lexer(new InputStreamReader(new ByteArrayInputStream(fileContent))));
         try {
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) p.parse().value;
 
             ((ProgramOp) root).accept(new SemanticVisitor1());
             ((ProgramOp) root).accept(new SemanticVisitor2());
-            ((ProgramOp) root).accept(new TranslatorVisitor());
+            ((ProgramOp) root).accept(new TranslatorVisitor(fileName+".c"));
 
 
-            ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", "cd "+System.getProperty("user.dir")+"&& cd test_files && cd c_out && gcc " + TranslatorVisitor.FILE_NAME);
+            ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", "cd "+
+                                                        System.getProperty("user.dir")+
+                                                        "&& cd test_files && cd c_out && gcc " +
+                                                        fileName +
+                                                        ".c -lm -o" +
+                                                        fileName +".out");
             builder.redirectErrorStream(true);
             Process process = builder.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -37,9 +40,16 @@ public class NewLang {
                 }
                 System.out.println(line);
             }
+
+            File eseguibile = new File("test_files" + File.separator + "c_out" + File.separator + fileName +".out");
+            return eseguibile;
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace(System.out);
+            return null;
         }
 
+
     }
+
 }

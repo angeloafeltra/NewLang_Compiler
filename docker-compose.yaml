@@ -17,5 +17,5 @@ services:
       context: NewLang
       dockerfile: Dockerfile
     image: back-end:latest
-    ports:
-      - 8080
+
+

@@ -23,7 +23,7 @@ public class SemanticTestIf {
      */
     @Test
     public void tc_if1() throws FileNotFoundException {
-        String path_test_file="test_sematicException_files/If/Test_If1";
+        String path_test_file="test_sematicException_files/if/Test_If1";
         String separator = File.separator;
         File input = new File(
                 System.getProperty("user.dir") +separator+"test_files"+ separator+ path_test_file);
@@ -55,7 +55,7 @@ public class SemanticTestIf {
      */
     @Test
     public void tc1_if2() throws FileNotFoundException {
-        String path_test_file="test_sematicException_files/If/Test_If2";
+        String path_test_file="test_sematicException_files/if/Test_If2";
         String separator = File.separator;
         File input = new File(
                 System.getProperty("user.dir") +separator+"test_files"+ separator+ path_test_file);

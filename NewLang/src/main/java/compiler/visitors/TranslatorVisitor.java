@@ -17,15 +17,20 @@ import java.util.Collections;
 
 public class TranslatorVisitor implements Visitor{
 
-    public static String FILE_NAME = "c_gen.c";
+    public String FILE_NAME="c_gen.c";
     private static File FILE;
     private static FileWriter fileWriter;
     private static int currentTab = 0;
     private boolean main=false;
     private SymbolTable currentScope;
 
-    @Override
+    public TranslatorVisitor(String filNameToConvert){
+        FILE_NAME=filNameToConvert;
+    }
 
+    public TranslatorVisitor(){}
+
+    @Override
     public Object visit(ProgramOp programOp) throws Exception {
 
         currentScope=programOp.getSymbolTable();

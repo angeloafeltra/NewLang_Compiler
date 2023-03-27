@@ -27,7 +27,7 @@ public class TraductorTest {
             ((ProgramOp) root).accept(new TranslatorVisitor());
 
 
-            ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", "cd "+System.getProperty("user.dir")+"&& cd test_files && cd c_out && gcc " + TranslatorVisitor.FILE_NAME);
+            ProcessBuilder builder = new ProcessBuilder("/bin/bash", "-c", "cd "+System.getProperty("user.dir")+"&& cd test_files && cd c_out && gcc c_gen.c" );
             builder.redirectErrorStream(true);
             Process process = builder.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
