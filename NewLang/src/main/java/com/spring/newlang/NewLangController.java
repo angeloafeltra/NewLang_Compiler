@@ -78,8 +78,8 @@ public class NewLangController {
 
     }
 
-    @RequestMapping("/listenCall")
-    public String listenCall() {
+    @RequestMapping("/testListen")
+    public String listenMessage() {
         return "Messaggio Ricevuto e ricambiato";
     }
 

@@ -80,16 +80,16 @@ public class NewLangController {
 
 
 
-    @RequestMapping("/sendMessageContainer2")
-    public String sendMessage() {
-        System.out.println("RICEVUTO");
-        final String uri = "http://back-end:8080/listenCall";
+    @RequestMapping("/testConnection")
+    public String sendMessage(ModelMap model) {
+        final String uri = "http://localhost:8080/testListen";
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(uri, String.class);
         if(result.equals("Messaggio Ricevuto e ricambiato"))
-            return "Collegamento funzionante";
+            model.addAttribute("result","Connessione OK");
         else
-            return "Collegamento non funzionante";
+            model.addAttribute("result","Connessione Non Funzionante");
+        return "testPage";
     }
 
 }
