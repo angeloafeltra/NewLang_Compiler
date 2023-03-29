@@ -82,7 +82,7 @@ public class NewLangController {
 
     @RequestMapping("/testConnection")
     public String sendMessage(ModelMap model) {
-        final String uri = "http://back-end:8080/testListen";
+        final String uri = "http://localhost:8080/testListen";
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(uri, String.class);
         if(result.equals("Messaggio Ricevuto e ricambiato"))
