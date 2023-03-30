@@ -13,5 +13,6 @@ COPY src ./src
 COPY srcjflexcup ./srcjflexcup
 COPY test_files ./test_files
 
-EXPOSE 8080
-CMD ["./mvnw", "test" , "spring-boot:run"]
+RUN ./mvnw test
+
+CMD ["./mvnw", "spring-boot:run"]
