@@ -13,5 +13,6 @@ COPY src ./src
 COPY srcjflexcup ./srcjflexcup
 COPY test_files ./test_files
 
+RUN ./mvnw test
 
-CMD ["./mvnw", "test" , "spring-boot:run"]
+CMD ["./mvnw", "spring-boot:run"]
