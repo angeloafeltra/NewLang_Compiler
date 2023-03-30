@@ -13,6 +13,6 @@ COPY src ./src
 COPY srcjflexcup ./srcjflexcup
 COPY test_files ./test_files
 
-RUN ./mvnw test
+RUN ./mvnw package
 
-CMD ["./mvnw", "spring-boot:run"]
+CMD ["java", "-jar", "./target/NewLang-1.0-SNAPSHOT.jar"]
