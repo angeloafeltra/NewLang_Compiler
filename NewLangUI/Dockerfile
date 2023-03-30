@@ -12,4 +12,7 @@ COPY fileConvertiti ./fileConvertiti
 
 EXPOSE 8081
 
-CMD ["./mvnw", "spring-boot:run"]
+RUN ./mvnw package
+COPY target/NewLangUI-0.0.1-SNAPSHOT.jar ./
+
+CMD ["java", "-jar", "NewLangUI-0.0.1-SNAPSHOT.jar"]
