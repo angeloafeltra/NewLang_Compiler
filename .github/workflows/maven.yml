@@ -27,5 +27,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Build NewLang with Maven
       run: mvn -B package --file NewLang/pom.xml
+      
+    - name: Build NewLang_UI with Maven
+      run: mvn -B package --file NewLangUI/pom.xml
