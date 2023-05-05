@@ -42,8 +42,8 @@ public class SemanticTestVariabili {
             if(e instanceof Eccezioni.MultipleDeclaration)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione MultipleDeclaration Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione MultipleDeclaration Catturata");
             }
         }
 
@@ -71,8 +71,8 @@ public class SemanticTestVariabili {
             if (e instanceof Eccezioni.InizializationError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione InizializationError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione InizializationError Catturata");
             }
         }
         Assert.assertTrue(catturata);
@@ -101,8 +101,8 @@ public class SemanticTestVariabili {
             if(e instanceof Eccezioni.NoDeclarationError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione NoDeclarationError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione NoDeclarationError Catturata");
             }
         }
 

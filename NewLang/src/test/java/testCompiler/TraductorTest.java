@@ -37,7 +37,7 @@ public class TraductorTest {
                 if (line == null) {
                     break;
                 }
-                System.out.println(line);
+                //System.out.println(line);
             }
 
         } catch (Exception e) {

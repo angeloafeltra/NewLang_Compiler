@@ -38,8 +38,8 @@ public class SemanticTestCallFun {
         } catch (Exception e) {
             if(e instanceof Eccezioni.CallFunNumParamError) {
                 catturata = true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione CallFunNumParamError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione CallFunNumParamError Catturata");
             }
         }
 
@@ -68,8 +68,8 @@ public class SemanticTestCallFun {
             if(e instanceof Eccezioni.CallFunTypeParamError)
             {
                 cattura=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione CallFunTypeParamError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione CallFunTypeParamError Catturata");
             }
         }
 
@@ -97,8 +97,8 @@ public class SemanticTestCallFun {
             if(e instanceof Eccezioni.NoDeclarationError)
             {
                 cattura=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione NoDeclarationError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione NoDeclarationError Catturata");
             }
         }
 

@@ -36,8 +36,8 @@ public class SemanticTestReturn {
             if(e instanceof Eccezioni.NoDeclarationError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione NoDeclarationError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione NoDeclarationError Catturata");
             }
         }
 

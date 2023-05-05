@@ -40,8 +40,8 @@ public class SemanticTestAssegnazione {
             if(e instanceof Eccezioni.NoDeclarationError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione NoDeclarationError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione NoDeclarationError Catturata");
             }
         }
 
@@ -72,8 +72,8 @@ public class SemanticTestAssegnazione {
             if(e instanceof Eccezioni.AssignError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione AssignError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione AssignError Catturata");
             }
         }
 
@@ -106,8 +106,8 @@ public class SemanticTestAssegnazione {
             if(e instanceof Eccezioni.TypeAssignError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione TypeAssignError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione TypeAssignError Catturata");
             }
         }
 

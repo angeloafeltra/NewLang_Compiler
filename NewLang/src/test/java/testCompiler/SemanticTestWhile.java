@@ -42,8 +42,8 @@ public class SemanticTestWhile {
             if(e instanceof Eccezioni.ConditionNotValid)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ConditionNotValid Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ConditionNotValid Catturata");
             }
         }
 
@@ -73,8 +73,8 @@ public class SemanticTestWhile {
             if(e instanceof Eccezioni.NoDeclarationError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione NoDeclarationError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione NoDeclarationError Catturata");
             }
         }
 

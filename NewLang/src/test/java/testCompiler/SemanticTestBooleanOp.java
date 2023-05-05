@@ -40,8 +40,8 @@ public class SemanticTestBooleanOp {
             if(e instanceof Eccezioni.BooleanOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione BooleanOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione BooleanOpError Catturata");
             }
         }
 
@@ -71,8 +71,8 @@ public class SemanticTestBooleanOp {
             if(e instanceof Eccezioni.BooleanOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione BooleanOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione BooleanOpError Catturata");
             }
         }
 
@@ -102,8 +102,8 @@ public class SemanticTestBooleanOp {
             if(e instanceof Eccezioni.BooleanOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione BooleanOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione BooleanOpError Catturata");
             }
         }
 
@@ -133,8 +133,8 @@ public class SemanticTestBooleanOp {
             if(e instanceof Eccezioni.BooleanOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione BooleanOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione BooleanOpError Catturata");
             }
         }
 

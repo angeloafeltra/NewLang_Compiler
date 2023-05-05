@@ -40,8 +40,8 @@ public class SemanticTestAritmeticOp {
             if(e instanceof Eccezioni.ArithmeticOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ArithmeticOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ArithmeticOpError Catturata");
             }
         }
 
@@ -71,8 +71,8 @@ public class SemanticTestAritmeticOp {
             if(e instanceof Eccezioni.ArithmeticOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ArithmeticOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ArithmeticOpError Catturata");
             }
         }
 
@@ -102,8 +102,8 @@ public class SemanticTestAritmeticOp {
             if(e instanceof Eccezioni.ArithmeticOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ArithmeticOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ArithmeticOpError Catturata");
             }
         }
 
@@ -133,8 +133,8 @@ public class SemanticTestAritmeticOp {
             if(e instanceof Eccezioni.ArithmeticOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ArithmeticOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ArithmeticOpError Catturata");
             }
         }
 
@@ -164,8 +164,8 @@ public class SemanticTestAritmeticOp {
             if(e instanceof Eccezioni.ArithmeticOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ArithmeticOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ArithmeticOpError Catturata");
             }
         }
 
@@ -196,8 +196,8 @@ public class SemanticTestAritmeticOp {
             if(e instanceof Eccezioni.ArithmeticOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ArithmeticOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ArithmeticOpError Catturata");
             }
         }
 

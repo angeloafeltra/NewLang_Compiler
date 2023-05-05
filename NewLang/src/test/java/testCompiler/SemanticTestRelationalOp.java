@@ -41,8 +41,8 @@ public class SemanticTestRelationalOp {
             if(e instanceof Eccezioni.RelationalOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione RelationalOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione RelationalOpError Catturata");
             }
         }
 
@@ -72,8 +72,8 @@ public class SemanticTestRelationalOp {
             if(e instanceof Eccezioni.RelationalOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione RelationalOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione RelationalOpError Catturata");
             }
         }
 
@@ -103,8 +103,8 @@ public class SemanticTestRelationalOp {
             if(e instanceof Eccezioni.RelationalOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione RelationalOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione RelationalOpError Catturata");
             }
         }
 
@@ -134,8 +134,8 @@ public class SemanticTestRelationalOp {
             if(e instanceof Eccezioni.RelationalOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione RelationalOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione RelationalOpError Catturata");
             }
         }
 
@@ -165,8 +165,8 @@ public class SemanticTestRelationalOp {
         } catch (Exception e) {
             if (e instanceof Eccezioni.RelationalOpError) {
                 catturata = true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione RelationalOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione RelationalOpError Catturata");
             }
         }
     }
@@ -194,8 +194,8 @@ public class SemanticTestRelationalOp {
             if(e instanceof Eccezioni.RelationalOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione RelationalOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione RelationalOpError Catturata");
             }
         }
 
@@ -226,8 +226,8 @@ public class SemanticTestRelationalOp {
             if(e instanceof Eccezioni.RelationalOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione RelationalOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione RelationalOpError Catturata");
             }
         }
 

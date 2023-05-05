@@ -40,8 +40,8 @@ public class SemanticTestUnaryOp {
             if(e instanceof Eccezioni.MinusOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione MinusOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione MinusOpError Catturata");
             }
         }
 
@@ -71,8 +71,8 @@ public class SemanticTestUnaryOp {
             if(e instanceof Eccezioni.MinusOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione MinusOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione MinusOpError Catturata");
             }
         }
 
@@ -102,8 +102,8 @@ public class SemanticTestUnaryOp {
             if(e instanceof Eccezioni.MinusOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione MinusOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione MinusOpError Catturata");
             }
         }
 
@@ -134,8 +134,8 @@ public class SemanticTestUnaryOp {
             if(e instanceof Eccezioni.NotOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione NotOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione NotOpError Catturata");
             }
         }
 
@@ -165,8 +165,8 @@ public class SemanticTestUnaryOp {
             if(e instanceof Eccezioni.NotOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione NotOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione NotOpError Catturata");
             }
         }
 
@@ -196,8 +196,8 @@ public class SemanticTestUnaryOp {
             if(e instanceof Eccezioni.NotOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione NotOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione NotOpError Catturata");
             }
         }
 
@@ -227,8 +227,8 @@ public class SemanticTestUnaryOp {
             if(e instanceof Eccezioni.NotOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione NotOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione NotOpError Catturata");
             }
         }
 

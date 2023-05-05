@@ -21,6 +21,7 @@ import java.util.Random;
 @RestController
 public class NewLangController {
 
+    private Random random = new Random();
 
     @RequestMapping("/compile")
     public Map<String,byte[]> compileFileNewLang(@RequestBody Map<String,byte[]> json) throws IOException {
@@ -31,7 +32,7 @@ public class NewLangController {
             fileName=fileName.substring(0,index);
 
         //Aggiungo un numero random al file name
-        Random random = new Random();
+
         int number= random.nextInt(1000,2000);
         fileName=fileName+Integer.toString(number);
 

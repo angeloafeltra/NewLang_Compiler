@@ -30,8 +30,8 @@ public class SemanticTest {
             //Genero le symbol table
             ((ProgramOp) root).accept(new SemanticVisitor1());
             ((ProgramOp) root).accept(new SemanticVisitor2());
-            Logger log = Logger.getLogger(this.getClass().getName());
-            log.info("\n Nessuna Eccezione Catturata");
+            //Logger log = Logger.getLogger(this.getClass().getName());
+            //log.info("\n Nessuna Eccezione Catturata");
         } catch (Exception e) {
             catturata=true;
         }
@@ -53,8 +53,8 @@ public class SemanticTest {
             //Genero le symbol table
             ((ProgramOp) root).accept(new SemanticVisitor1());
             ((ProgramOp) root).accept(new SemanticVisitor2());
-            Logger log = Logger.getLogger(this.getClass().getName());
-            log.info("\n Nessuna Eccezione Catturata");
+            //Logger log = Logger.getLogger(this.getClass().getName());
+            //log.info("\n Nessuna Eccezione Catturata");
         } catch (Exception e) {
 
         }

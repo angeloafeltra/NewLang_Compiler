@@ -41,8 +41,8 @@ public class SemanticTestStringOp {
             if(e instanceof Eccezioni.StringOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione StringOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione StringOpError Catturata");
             }
         }
 
@@ -72,8 +72,8 @@ public class SemanticTestStringOp {
             if(e instanceof Eccezioni.StringOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione StringOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione StringOpError Catturata");
             }
         }
 
@@ -103,8 +103,8 @@ public class SemanticTestStringOp {
             if(e instanceof Eccezioni.StringOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione StringOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione StringOpError Catturata");
             }
         }
 
@@ -134,8 +134,8 @@ public class SemanticTestStringOp {
             if(e instanceof Eccezioni.StringOpError)
             {
                 catturata=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione StringOpError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione StringOpError Catturata");
             }
         }
 

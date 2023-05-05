@@ -38,8 +38,8 @@ public class SemanticTestFunzioni {
         } catch (Exception e) {
             if(e instanceof Eccezioni.MultipleDeclaration) {
                 catturata = true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione MultipleDeclaration Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione MultipleDeclaration Catturata");
             }
         }
 
@@ -68,8 +68,8 @@ public class SemanticTestFunzioni {
             if(e instanceof Eccezioni.ReturnError)
             {
                 cattura=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ReturnError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ReturnError Catturata");
             }
         }
 
@@ -97,8 +97,8 @@ public class SemanticTestFunzioni {
             if(e instanceof Eccezioni.ReturnError)
             {
                 cattura=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ReturnError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ReturnError Catturata");
             }
         }
 
@@ -127,8 +127,8 @@ public class SemanticTestFunzioni {
             if(e instanceof Eccezioni.ReturnError)
             {
                 cattura=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ReturnError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ReturnError Catturata");
             }
         }
 
@@ -157,8 +157,8 @@ public class SemanticTestFunzioni {
             if(e instanceof Eccezioni.ReturnError)
             {
                 cattura=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione ReturnError Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione ReturnError Catturata");
             }
         }
 
@@ -187,8 +187,8 @@ public class SemanticTestFunzioni {
             if(e instanceof Eccezioni.MultipleDeclaration)
             {
                 cattura=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione MultipleDeclaration Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione MultipleDeclaration Catturata");
             }
         }
 
@@ -218,8 +218,8 @@ public class SemanticTestFunzioni {
             if(e instanceof Eccezioni.MultipleDeclaration)
             {
                 cattura=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione MultipleDeclaration Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione MultipleDeclaration Catturata");
             }
         }
         Assert.assertTrue(cattura);
@@ -248,8 +248,8 @@ public class SemanticTestFunzioni {
             if(e instanceof Eccezioni.MultipleDeclaration)
             {
                 cattura=true;
-                Logger log = Logger.getLogger(this.getClass().getName());
-                log.info("\n Eccezione MultipleDeclaration Catturata");
+                //Logger log = Logger.getLogger(this.getClass().getName());
+                //log.info("\n Eccezione MultipleDeclaration Catturata");
             }
         }
         Assert.assertTrue(cattura);
