@@ -69,7 +69,7 @@ public class NewLangController {
         }else{
             File gcc=new File("test_files" + File.separator + "c_out" + File.separator + fileName +".c");
             if(gcc!=null)
-                gcc.delete();
+                if(!gcc.delete()) { System.out.println("Errore nel eliminazione del file"); }
 
             Map<String, byte[]> json2 = new HashMap<String, byte[]>();
             json2.put("file", new byte[0]);

@@ -39,7 +39,8 @@ public class TranslatorVisitor implements Visitor{
             Files.createDirectory(Paths.get("test_files" + File.separator + "c_out" + File.separator));
         }
         FILE = new File("test_files" + File.separator + "c_out" + File.separator + FILE_NAME);
-        FILE.createNewFile();
+        if (!FILE.createNewFile() ) return
+
         fileWriter = new FileWriter(FILE);
 
 
