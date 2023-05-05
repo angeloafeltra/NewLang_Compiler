@@ -38,7 +38,6 @@ public class SemanticTestRead {
             ((ProgramOp) root).accept(new SemanticVisitor1());
             ((ProgramOp) root).accept(new SemanticVisitor2());
         } catch (Exception e) {
-            e.printStackTrace();
             if(e instanceof Eccezioni.NoDeclarationError)
             {
                 catturata=true;

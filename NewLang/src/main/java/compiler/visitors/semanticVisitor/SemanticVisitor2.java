@@ -124,7 +124,7 @@ public class SemanticVisitor2 implements Visitor {
         currentScope=funOp.getSymbolTable();
         returnPresente=false;
         funOp.getBody().accept(this); //Lancio i controlli nel body
-        if(returnPresente==false && !funOp.getType().equals("void"))
+        if(returnPresente==false && !funOp.getType().equals(VOID))
             throw new Eccezioni.ReturnError();
         returnPresente=false;
         currentScope=funOp.getSymbolTable().getFather();
@@ -260,7 +260,7 @@ public class SemanticVisitor2 implements Visitor {
         //Verifico che il limite minimo e massimo (e1 ed e2) sono constanti intere
         String typeE1= (String) forOp.getId().getExpr().accept(this);
         String typeE2=(String) forOp.getCons().accept(this);
-        if(!typeE1.equals("integer") || !typeE2.equals("integer"))
+        if(!typeE1.equals(INTEGER) || !typeE2.equals(INTEGER))
             throw new Eccezioni.ForExpressionTypeError();
 
         //Entro nello scope
@@ -281,7 +281,7 @@ public class SemanticVisitor2 implements Visitor {
 
         //Ottengo il tipo del espressione
         String tipo= (String) ifStatOp.getExpr().accept(this);
-        if (!tipo.equals("boolean"))
+        if (!tipo.equals(BOOLEAN))
             throw new Eccezioni.ConditionNotValid();
 
         //BodyThen
@@ -382,7 +382,7 @@ public class SemanticVisitor2 implements Visitor {
 
         //Ottengo il tipo dell'espressione nella condizione
         String condition= (String) whileOp.getExpr().accept(this);
-        if (!condition.equals("boolean"))
+        if (!condition.equals(BOOLEAN))
             throw new Eccezioni.ConditionNotValid();
 
         //Entro nello scope
@@ -545,24 +545,24 @@ public class SemanticVisitor2 implements Visitor {
     public Object visit(ConstOp constOp) throws Exception {
         String type = constOp.getTypeConst();
         if (type.equals("boolean_const")) {
-            constOp.setTipoEspressione("boolean");
-            return "boolean";
+            constOp.setTipoEspressione(BOOLEAN);
+            return BOOLEAN;
         }
         if (type.equals("integer_const")) {
-            constOp.setTipoEspressione("integer");
-            return "integer";
+            constOp.setTipoEspressione(INTEGER);
+            return INTEGER;
         }
         if (type.equals("real_const")) {
-            constOp.setTipoEspressione("float");
-            return "float";
+            constOp.setTipoEspressione(FLOAT);
+            return FLOAT;
         }
         if (type.equals("string_const")) {
-            constOp.setTipoEspressione("string");
-            return "string";
+            constOp.setTipoEspressione(STRING);
+            return STRING;
         }
         if (type.equals("char_const")) {
-            constOp.setTipoEspressione("char");
-            return "char";
+            constOp.setTipoEspressione(CHAR);
+            return CHAR;
         }
 
         return null;

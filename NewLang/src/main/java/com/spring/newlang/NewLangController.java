@@ -46,7 +46,6 @@ public class NewLangController {
 
 
         if(eseguibile!=null){
-            //fileContent= Files.readAllBytes(eseguibile.toPath());
             byte[] buffer = new byte[1024];
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             try (InputStream input = new FileInputStream(eseguibile)) {
@@ -61,13 +60,13 @@ public class NewLangController {
             if(eseguibile.delete() && gcc.delete()){
                 Map<String, byte[]> json2 = new HashMap<String, byte[]>();
                 json2.put(CONST_FILE, executableBytes);
-                json2.put(CONST_ERROR,new String("Compilazione corretta").getBytes());
+                json2.put(CONST_ERROR,"Compilazione corretta".getBytes());
                 json2.put(CONST_FILE_NAME,fileName.getBytes());
                 return json2;
             }else{
                 Map<String, byte[]> json2 = new HashMap<String, byte[]>();
                 json2.put(CONST_FILE, new byte[0]);
-                json2.put(CONST_ERROR, new String("Errore cancellazione").getBytes());
+                json2.put(CONST_ERROR, "Errore cancellazione".getBytes());
                 return json2;
             }
 
@@ -78,7 +77,7 @@ public class NewLangController {
 
             Map<String, byte[]> json2 = new HashMap<String, byte[]>();
             json2.put(CONST_FILE, new byte[0]);
-            json2.put(CONST_ERROR, new String("Errore compilazione").getBytes());
+            json2.put(CONST_ERROR, "Errore compilazione".getBytes());
             return json2;
         }
 
