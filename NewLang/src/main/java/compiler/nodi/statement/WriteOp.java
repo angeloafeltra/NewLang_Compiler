@@ -42,9 +42,11 @@ public class WriteOp extends Statement implements Visitable {
         this.listExpr.addAll(listExpr);
     }
 
+    @Override
     public Object accept(Visitor v) throws Exception {
         return (v.visit(this));
     }
 
+    @Override
     public String toString() {return super.toString();}
 }

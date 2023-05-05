@@ -36,9 +36,11 @@ public class WhileOp extends Statement implements Visitable {
 
     public SymbolTable getSymbolTable() {return this.symbolTable;}
 
+    @Override
     public Object accept(Visitor v) throws Exception {
         return (v.visit(this));
     }
 
+    @Override
     public String toString() {return super.toString();}
 }

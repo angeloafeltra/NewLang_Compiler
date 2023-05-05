@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class TypeField {
 
+    private TypeField(){}
 
     public static class TypeFieldFunction extends TypeField{
         private ArrayList<String> inputParam;

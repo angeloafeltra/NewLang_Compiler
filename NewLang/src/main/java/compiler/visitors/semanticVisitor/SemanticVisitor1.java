@@ -33,8 +33,8 @@ public class SemanticVisitor1 implements Visitor {
         //Se sono presenti variabili le aggiungo allo scope
         if(programOp.getVarDeclList()!=null){
             ArrayList<RowTable> listaVar;
-            for(VarDeclOp var:programOp.getVarDeclList()){
-                listaVar= (ArrayList<RowTable>) var.accept(this);
+            for(VarDeclOp variable:programOp.getVarDeclList()){
+                listaVar= (ArrayList<RowTable>) variable.accept(this);
                 for(RowTable row :listaVar){
                     symbolTable.addRow(row);
                 }
@@ -85,8 +85,6 @@ public class SemanticVisitor1 implements Visitor {
         symbolTable.addRow(new RowTable(identificatore,FunOp.class,typeField,typeStream));
 
 
-        //Riga da eliminare
-        //programOp.getSymbolTable().toString();
 
         //Lancio la generazione degli scope per le funzioni
         if(programOp.getFunOpList()!=null) {
@@ -99,7 +97,7 @@ public class SemanticVisitor1 implements Visitor {
         padre=programOp.getSymbolTable();
         programOp.getMain().accept(this);
 
-        //programOp.getSymbolTable().toString();
+
 
         return null;
     }
@@ -188,15 +186,14 @@ public class SemanticVisitor1 implements Visitor {
 
         if(bodyOp.getListVar()!=null){
             ArrayList<RowTable> listaVar;
-            for(VarDeclOp var:bodyOp.getListVar()){
-                listaVar= (ArrayList<RowTable>) var.accept(this);
+            for(VarDeclOp variable:bodyOp.getListVar()){
+                listaVar= (ArrayList<RowTable>) variable.accept(this);
                 for(RowTable row :listaVar){
                     padre.addRow(row);
                 }
             }
         }
 
-        //padre.toString();
 
         if(bodyOp.getListStatement()!=null){
             for (Statement stat:bodyOp.getListStatement()){

@@ -70,8 +70,8 @@ public class SemanticVisitor2 implements Visitor {
 
         currentScope=programOp.getSymbolTable();
         if(programOp.getVarDeclList()!=null){
-            for (VarDeclOp var: programOp.getVarDeclList())
-                var.accept(this);
+            for (VarDeclOp variable: programOp.getVarDeclList())
+                variable.accept(this);
         }
 
 
@@ -145,8 +145,8 @@ public class SemanticVisitor2 implements Visitor {
     public Object visit(BodyOp bodyOp) throws Exception {
         //Se il body contiene delle variabili, controllo le variabili
         if(bodyOp.getListVar()!=null){
-            for(VarDeclOp var:bodyOp.getListVar())
-                var.accept(this);
+            for(VarDeclOp variable:bodyOp.getListVar())
+                variable.accept(this);
         }
 
 
@@ -510,7 +510,7 @@ public class SemanticVisitor2 implements Visitor {
                     String tipo= (String) expr.accept(this);
                     boolean isCompatibile=false;
                     for(String[] riduzione: compatibilita){
-                        if(inputParam.get(i).equals(riduzione[0])&&tipo.equals(riduzione[1]))
+                        if(inputParam.get(i).equals(riduzione[0]) && tipo.equals(riduzione[1]))
                             isCompatibile=true;
                     }
                     if(!tipo.equals(inputParam.get(i))) {
@@ -598,7 +598,6 @@ public class SemanticVisitor2 implements Visitor {
 
         RowTable result=currentScope.lookup(identifier.getLessema());
         if(result==null) {
-            System.out.println(identifier.getLessema());
             throw new Eccezioni.NoDeclarationError();
         }else{
 

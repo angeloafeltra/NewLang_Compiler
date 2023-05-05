@@ -57,6 +57,7 @@ public class IfStatOp extends Statement implements Visitable {
 
     public void setSymbolTableElse(SymbolTable symbolTable) {this.symbolTableElse=symbolTable;}
 
+    @Override
     public String toString() {return super.toString();}
 
     @Override

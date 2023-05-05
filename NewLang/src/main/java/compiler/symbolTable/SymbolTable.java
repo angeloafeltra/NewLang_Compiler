@@ -24,7 +24,7 @@ public class SymbolTable {
 
     }
 
-    public void addRow(RowTable row) throws Exception {
+    public void addRow(RowTable row) throws Eccezioni.MultipleDeclaration {
 
         if (shadowing) {
             if (probe(row.getSymbol()) || (row.getSymbol().equals(scope) && !row.getSymbol().equals("Root")))

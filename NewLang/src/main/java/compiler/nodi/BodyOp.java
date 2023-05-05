@@ -19,8 +19,8 @@ public class BodyOp  extends DefaultMutableTreeNode implements Visitable {
 
 
         if (listVar!=null) {
-            for (VarDeclOp var : listVar)
-                super.add(var);
+            for (VarDeclOp variable : listVar)
+                super.add(variable);
             this.listVar = listVar;
         }else{
             this.listVar=null;
@@ -38,8 +38,8 @@ public class BodyOp  extends DefaultMutableTreeNode implements Visitable {
 
     public BodyOp() {
         super("BodyOp");
-        for(VarDeclOp var: listVar)
-            super.add(var);
+        for(VarDeclOp variable: listVar)
+            super.add(variable);
         this.listVar = null;
         this.listStatement = null;
     }
@@ -48,13 +48,13 @@ public class BodyOp  extends DefaultMutableTreeNode implements Visitable {
     public ArrayList<Statement> getListStatement() { return this.listStatement; }
 
 
-    public void addVar(VarDeclOp var) {
-        super.add(var);
-        this.listVar.add(var);
+    public void addVar(VarDeclOp variable) {
+        super.add(variable);
+        this.listVar.add(variable);
     }
     public void addsListVar(ArrayList<VarDeclOp> listVar) {
-        for(VarDeclOp var:listVar)
-            super.add(var);
+        for(VarDeclOp variable:listVar)
+            super.add(variable);
         this.listVar.addAll(listVar);
     }
 
@@ -69,6 +69,7 @@ public class BodyOp  extends DefaultMutableTreeNode implements Visitable {
         this.listStatement.addAll(stms);
     }
 
+    @Override
     public String toString() { return super.toString(); }
 
     @Override

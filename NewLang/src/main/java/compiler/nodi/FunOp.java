@@ -79,7 +79,7 @@ public class FunOp extends DefaultMutableTreeNode implements Visitable {
     public SymbolTable getSymbolTable(){return this.symbolTable;}
 
 
-
+    @Override
     public String toString(){ return super.toString(); }
 
     @Override

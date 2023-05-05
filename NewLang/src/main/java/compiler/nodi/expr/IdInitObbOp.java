@@ -25,10 +25,12 @@ public class IdInitObbOp extends Expr implements Visitable {
         return expr;
     }
 
+    @Override
     public Object accept(Visitor v) throws Exception {
         return (v.visit(this));
     }
 
+    @Override
     public String toString() {return super.toString();}
 
 }

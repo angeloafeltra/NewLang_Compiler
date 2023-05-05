@@ -2,6 +2,8 @@ package compiler.visitors.semanticVisitor;
 
 public class Eccezioni {
 
+    private Eccezioni(){}
+
     public static class MultipleDeclaration extends Exception {
         public MultipleDeclaration() {
             super("Dichiarazione Multipla");

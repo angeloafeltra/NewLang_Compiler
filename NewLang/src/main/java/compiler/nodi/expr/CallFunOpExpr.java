@@ -10,7 +10,6 @@ public class CallFunOpExpr extends Expr implements Visitable {
 
     private Identifier identifier;
     private ArrayList<Expr> listExpr;
-    private ArrayList<String> mode=null;
 
     public CallFunOpExpr(Identifier identifier){
         super("CallFunOpExpr");
@@ -54,10 +53,13 @@ public class CallFunOpExpr extends Expr implements Visitable {
         this.listExpr.addAll(listExpr);
     }
 
+    @Override
     public void setTipoEspressione(String type) {super.setTipoEspressione(type);}
 
+    @Override
     public String getTipoEspressione() {return super.getTipoEspressione();}
 
+    @Override
     public String toString() {return super.toString();}
 
     @Override

@@ -41,6 +41,7 @@ public class ParDeclOp extends DefaultMutableTreeNode implements Visitable {
             super.add(id);
         this.idList.addAll(idList); }
 
+    @Override
     public String toString() { return super.toString(); }
 
     @Override

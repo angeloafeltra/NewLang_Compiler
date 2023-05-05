@@ -22,10 +22,13 @@ public class ConstOp extends Expr implements Visitable {
         return typeConst;
     }
 
+    @Override
     public void setTipoEspressione(String type) {super.setTipoEspressione(type);}
 
+    @Override
     public String getTipoEspressione() {return super.getTipoEspressione();}
 
+    @Override
     public String toString() {return super.toString();}
 
     @Override

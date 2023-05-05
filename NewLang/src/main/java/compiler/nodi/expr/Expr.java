@@ -31,6 +31,7 @@ public class Expr extends DefaultMutableTreeNode implements Visitable {
         this.tipoEspressione=tipoEspressione;
     }
 
+    @Override
     public String toString() {return super.toString();}
 
     @Override

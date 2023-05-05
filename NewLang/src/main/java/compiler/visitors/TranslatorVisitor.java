@@ -30,7 +30,7 @@ public class TranslatorVisitor implements Visitor{
     public String FILE_NAME="c_gen.c";
     private File FILE;
     private  FileWriter fileWriter;
-    private static int currentTab = 0;
+
     private boolean main=false;
     private SymbolTable currentScope;
 
@@ -84,17 +84,17 @@ public class TranslatorVisitor implements Visitor{
         fileWriter.write("//Variabili Globali\n");
         if(programOp.getVarDeclList()!=null){
 
-            for(VarDeclOp var:programOp.getVarDeclList()){
-                String tipo=convertType(var.getType());
-                for(Expr expr:var.getExprList()){
+            for(VarDeclOp variable:programOp.getVarDeclList()){
+                String tipo=convertType(variable.getType());
+                for(Expr expr:variable.getExprList()){
                     if(expr instanceof Identifier) {
                         fileWriter.write(tipo+" " + ((Identifier) expr).getLessema() + ";\n");
                     }
                 }
             }
 
-            for(VarDeclOp var:programOp.getVarDeclList()){
-                var.accept(this);
+            for(VarDeclOp variable:programOp.getVarDeclList()){
+                variable.accept(this);
             }
         }
         fileWriter.write("\n");
@@ -104,13 +104,13 @@ public class TranslatorVisitor implements Visitor{
         fileWriter.write("int main (int argc, char *argv[]){\n");
 
         //Richiamo la funzione di start nel main
-        FunOp main=programOp.getMain();
-        fileWriter.write(main.getIdentificatore().getLessema()+"(");
+        FunOp main_fun=programOp.getMain();
+        fileWriter.write(main_fun.getIdentificatore().getLessema()+"(");
         //Se la funzione di start possiede dei parametri, li recupero da argv
-        if(main.getParams()!=null){
+        if(main_fun.getParams()!=null){
             int i=0;
             String parametri="";
-            for(ParDeclOp param: main.getParams()){
+            for(ParDeclOp param: main_fun.getParams()){
                 String tipo=param.getType();
                 for(Identifier id:param.getIdList()){
                     i++;
@@ -179,10 +179,6 @@ public class TranslatorVisitor implements Visitor{
         String tipo=convertType(varDecl.getType());
 
         for(Expr expr: varDecl.getExprList()){
-            /*
-            if(expr instanceof Identifier) {
-                fileWriter.write(tipo+" " + ((Identifier) expr).getLessema() + ";\n");
-            }*/
             if(expr instanceof IdInitObbOp){
                 String espressione= (String)((IdInitObbOp)expr).accept(this);
                 fileWriter.write(espressione+";\n");
@@ -255,16 +251,14 @@ public class TranslatorVisitor implements Visitor{
                 }
             }
 
-            for(VarDeclOp var:bodyOp.getListVar())
-                var.accept(this);
+            for(VarDeclOp variable:bodyOp.getListVar())
+                variable.accept(this);
         }
 
         if(bodyOp.getListStatement()!=null){
             Collections.reverse(bodyOp.getListStatement()); //Provare ordine senza dopo aver completato altro
             for(Statement stmt: bodyOp.getListStatement()){
-                if(main==true && stmt instanceof ReturnOp){
-
-                }else {
+                if(!(main==true && stmt instanceof ReturnOp)) {
                     stmt.accept(this);
                 }
             }
@@ -318,13 +312,13 @@ public class TranslatorVisitor implements Visitor{
     public Object visit(ForOp forOp) throws Exception {
         currentScope=forOp.getSymbolTable();
         String init=(String) forOp.getId().accept(this); //Esempio: i<<1
-        String var=((IdInitOp)forOp.getId()).getId().getLessema(); //Esempio i
+        String variable=((IdInitOp)forOp.getId()).getId().getLessema(); //Esempio i
         String ind1=((ConstOp)forOp.getId().getExpr()).getLessema();
         String ind2= (String) forOp.getCons().accept(this);
         if(Integer.valueOf(ind1)<=Integer.valueOf(ind2))
-            fileWriter.write("for(int "+init+";"+var+"<="+ind2+";"+var+"++){\n");
+            fileWriter.write("for(int "+init+";"+variable+"<="+ind2+";"+variable+"++){\n");
         else
-            fileWriter.write("for(int "+init+";"+var+">="+ind2+";"+var+"--){\n");
+            fileWriter.write("for(int "+init+";"+variable+">="+ind2+";"+variable+"--){\n");
         forOp.getBodyop().accept(this);
         fileWriter.write("}\n");
         currentScope=forOp.getSymbolTable().getFather();

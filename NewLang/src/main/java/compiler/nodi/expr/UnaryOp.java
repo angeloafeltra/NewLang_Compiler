@@ -7,7 +7,6 @@ public class UnaryOp extends Expr implements Visitable {
 
     private Expr expr;
     private String type;
-    private String typeResult;
 
     public UnaryOp(String type, Expr expr){
         super(type);
@@ -25,13 +24,17 @@ public class UnaryOp extends Expr implements Visitable {
         return type;
     }
 
+    @Override
     public void setTipoEspressione(String type) {super.setTipoEspressione(type);}
 
+    @Override
     public String getTipoEspressione() {return super.getTipoEspressione();}
 
+    @Override
     public Object accept(Visitor v) throws Exception {
         return (v.visit(this));
     }
 
+    @Override
     public String toString() { return super.toString(); }
 }

@@ -31,10 +31,13 @@ public class AritAndRelOp extends Expr implements Visitable {
         return expr2;
     }
 
+    @Override
     public void setTipoEspressione(String type) {super.setTipoEspressione(type);}
 
+    @Override
     public String getTipoEspressione() {return super.getTipoEspressione();}
 
+    @Override
     public String toString() {return super.toString();}
 
     @Override
