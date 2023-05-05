@@ -27,14 +27,14 @@ public class SymbolTable {
     public void addRow(RowTable row) throws Exception {
 
         if (shadowing) {
-            if (probe(row.getSymbol()) | (row.getSymbol().equals(scope) && !row.getSymbol().equals("Root")))
+            if (probe(row.getSymbol()) || (row.getSymbol().equals(scope) && !row.getSymbol().equals("Root")))
                 throw new Eccezioni.MultipleDeclaration();
             else
                 listRow.add(row);
         } else {
             SymbolTable symbolTable = this;
             while (symbolTable != null) {
-                if (symbolTable.probe(row.getSymbol()) | (row.getSymbol().equals(symbolTable.scope) && !row.getSymbol().equals("Root")))
+                if (symbolTable.probe(row.getSymbol()) || (row.getSymbol().equals(symbolTable.scope) && !row.getSymbol().equals("Root")))
                     throw new Eccezioni.MultipleDeclaration();
                 else
                     symbolTable = symbolTable.getFather();
