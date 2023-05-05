@@ -117,7 +117,7 @@ public class SemanticVisitor2 implements Visitor {
         currentScope=funOp.getSymbolTable();
         returnPresente=false;
         funOp.getBody().accept(this); //Lancio i controlli nel body
-        if(returnPresente==false && funOp.getType()!="void")
+        if(returnPresente==false && !funOp.getType().equals("void"))
             throw new Eccezioni.ReturnError();
         returnPresente=false;
         currentScope=funOp.getSymbolTable().getFather();
