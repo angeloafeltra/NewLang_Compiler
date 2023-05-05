@@ -477,7 +477,7 @@ public class TranslatorVisitor implements Visitor{
 
 
         //Operazioni Relazionali
-        if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") |
+        if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") ||
             typeOp.equals("EQOp") || typeOp.equals("NEOp")) {
 
             if (aritAndRelOp.getExpr1().getTipoEspressione().equals("string") || aritAndRelOp.getExpr1().getTipoEspressione().equals("char")){
@@ -642,7 +642,7 @@ public class TranslatorVisitor implements Visitor{
         String exp1= (String) unaryOp.getExpr().accept(this);
         String typeOp=unaryOp.getType();
         String operazione=convertTypeOp(typeOp);
-        if (typeOp.equals("UminusOp") | typeOp.equals("NotOp")){
+        if (typeOp.equals("UminusOp") || typeOp.equals("NotOp")){
             espressione=operazione+"("+exp1+")";
         }
 

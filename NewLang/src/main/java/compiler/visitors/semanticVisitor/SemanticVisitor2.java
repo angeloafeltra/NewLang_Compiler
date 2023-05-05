@@ -416,7 +416,7 @@ public class SemanticVisitor2 implements Visitor {
 
         //Ottengo il tipo di operazione
         String typeOp=aritAndRelOp.getTypeOp();
-        if(typeOp.equals("AddOp") || typeOp.equals("DiffOp") || typeOp.equals("MulOp") || typeOp.equals("DivOp") |
+        if(typeOp.equals("AddOp") || typeOp.equals("DiffOp") || typeOp.equals("MulOp") || typeOp.equals("DivOp") ||
             typeOp.equals("PowOp")){
            //Si tratta di un operazione aritmetica
 
@@ -431,7 +431,7 @@ public class SemanticVisitor2 implements Visitor {
         }
 
 
-        if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") |
+        if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") ||
                 typeOp.equals("EQOp") || typeOp.equals("NEOp")){
             //Si tratta di un operazione relazionale
             for (String[] combinazione:combinazioniRelOp) {
@@ -454,7 +454,7 @@ public class SemanticVisitor2 implements Visitor {
             throw new Eccezioni.StringOpError();
         }
 
-        if(typeOp.equals("AndOp") | typeOp.equals("OrOp")){
+        if(typeOp.equals("AndOp") || typeOp.equals("OrOp")){
             //Si tratta di un operazione su stringhe
             for (String[] combinazione:combinazioniBooleanOp) {
                 if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])) {
