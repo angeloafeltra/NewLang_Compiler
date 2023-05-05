@@ -253,7 +253,7 @@ public class SemanticVisitor2 implements Visitor {
         //Verifico che il limite minimo e massimo (e1 ed e2) sono constanti intere
         String typeE1= (String) forOp.getId().getExpr().accept(this);
         String typeE2=(String) forOp.getCons().accept(this);
-        if(!typeE1.equals("integer") | !typeE2.equals("integer"))
+        if(!typeE1.equals("integer") || !typeE2.equals("integer"))
             throw new Eccezioni.ForExpressionTypeError();
 
         //Entro nello scope
@@ -416,7 +416,7 @@ public class SemanticVisitor2 implements Visitor {
 
         //Ottengo il tipo di operazione
         String typeOp=aritAndRelOp.getTypeOp();
-        if(typeOp.equals("AddOp") | typeOp.equals("DiffOp") | typeOp.equals("MulOp") | typeOp.equals("DivOp") |
+        if(typeOp.equals("AddOp") || typeOp.equals("DiffOp") || typeOp.equals("MulOp") || typeOp.equals("DivOp") |
             typeOp.equals("PowOp")){
            //Si tratta di un operazione aritmetica
 
@@ -431,8 +431,8 @@ public class SemanticVisitor2 implements Visitor {
         }
 
 
-        if(typeOp.equals("GTOp") | typeOp.equals("GEOp") | typeOp.equals("LTOp") | typeOp.equals("LEOp") |
-                typeOp.equals("EQOp") | typeOp.equals("NEOp")){
+        if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") |
+                typeOp.equals("EQOp") || typeOp.equals("NEOp")){
             //Si tratta di un operazione relazionale
             for (String[] combinazione:combinazioniRelOp) {
                 if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])) {

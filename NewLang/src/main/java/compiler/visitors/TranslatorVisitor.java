@@ -470,17 +470,17 @@ public class TranslatorVisitor implements Visitor{
         String typeOp=aritAndRelOp.getTypeOp();
 
         //Operazioni Aritmetiche
-        if(typeOp.equals("AddOp") | typeOp.equals("DiffOp") | typeOp.equals("MulOp") | typeOp.equals("DivOp")){
+        if(typeOp.equals("AddOp") || typeOp.equals("DiffOp") || typeOp.equals("MulOp") || typeOp.equals("DivOp")){
             espressione = expr1 + tipoOperazione + expr2;
             return espressione;
         }
 
 
         //Operazioni Relazionali
-        if(typeOp.equals("GTOp") | typeOp.equals("GEOp") | typeOp.equals("LTOp") | typeOp.equals("LEOp") |
-            typeOp.equals("EQOp") | typeOp.equals("NEOp")) {
+        if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") |
+            typeOp.equals("EQOp") || typeOp.equals("NEOp")) {
 
-            if (aritAndRelOp.getExpr1().getTipoEspressione().equals("string") | aritAndRelOp.getExpr1().getTipoEspressione().equals("char")){
+            if (aritAndRelOp.getExpr1().getTipoEspressione().equals("string") || aritAndRelOp.getExpr1().getTipoEspressione().equals("char")){
                 if(aritAndRelOp.getExpr1().getTipoEspressione().equals("char"))
                     expr1="char_to_str("+expr1+")";
                 if(aritAndRelOp.getExpr2().getTipoEspressione().equals("char"))
@@ -495,7 +495,7 @@ public class TranslatorVisitor implements Visitor{
 
         }
 
-        if(typeOp.equals("AndOp") | typeOp.equals("OrOp")){
+        if(typeOp.equals("AndOp") || typeOp.equals("OrOp")){
 
             espressione = expr1 + tipoOperazione + expr2;
             return espressione;
