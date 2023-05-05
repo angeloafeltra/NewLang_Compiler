@@ -27,8 +27,7 @@ public class TranslatorVisitor implements Visitor{
     public static final String CONST_BOOLEAN="boolean";
     public static final String CONST_CHAR="char";
 
-    public String FILE_NAME="c_gen.c";
-    private File FILE;
+    public static String FILE_NAME="c_gen.c";
     private  FileWriter fileWriter;
 
     private boolean main=false;
@@ -42,7 +41,7 @@ public class TranslatorVisitor implements Visitor{
 
     @Override
     public Object visit(ProgramOp programOp) throws Exception {
-
+        File FILE;
         currentScope=programOp.getSymbolTable();
         // Inizializzo il file di scrittura
         if (!(new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator)).exists()) {

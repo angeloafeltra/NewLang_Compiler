@@ -11,13 +11,13 @@ public class Decl {
     private ArrayList<FunOp> funOpList;
 
     public Decl(){
-        this.varDeclList=new ArrayList<VarDeclOp>();
-        this.funOpList=new ArrayList<FunOp>();
+        this.varDeclList=new ArrayList<>();
+        this.funOpList=new ArrayList<>();
     }
 
     public Decl(ArrayList<VarDeclOp> varDeclList, ArrayList<FunOp> funOpList){
-        this.varDeclList=new ArrayList<VarDeclOp>();
-        this.funOpList=new ArrayList<FunOp>();
+        this.varDeclList=new ArrayList<>();
+        this.funOpList=new ArrayList<>();
         this.varDeclList.addAll(varDeclList);
         this.funOpList.addAll(funOpList);
     }

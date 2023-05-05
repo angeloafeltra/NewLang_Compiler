@@ -11,8 +11,8 @@ public class TypeField {
         private ArrayList<String> outputParam;
 
         public TypeFieldFunction(){
-            inputParam=new ArrayList<String>();
-            outputParam=new ArrayList<String>();
+            inputParam=new ArrayList<>();
+            outputParam=new ArrayList<>();
         }
 
         public TypeFieldFunction (ArrayList<String> inputParam, ArrayList<String> outputParam){
@@ -46,7 +46,7 @@ public class TypeField {
 
         public String toString(){
             String str;
-            if (inputParam==null || inputParam.size()==0)
+            if (inputParam==null || inputParam.isEmpty())
                 str="->"+outputParam.toString();
             else
                 str=inputParam.toString()+"->"+outputParam.toString();

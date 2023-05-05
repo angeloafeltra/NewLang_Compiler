@@ -6,7 +6,6 @@ import compiler.visitors.TranslatorVisitor;
 import compiler.visitors.semanticVisitor.SemanticVisitor1;
 import compiler.visitors.semanticVisitor.SemanticVisitor2;
 
-import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 
@@ -41,8 +40,7 @@ public class NewLang {
                 System.out.println(line);
             }
 
-            File eseguibile = new File("test_files" + File.separator + "c_out" + File.separator + fileName +".out");
-            return eseguibile;
+            return new File("test_files" + File.separator + "c_out" + File.separator + fileName +".out");
 
         } catch (Exception e) {
             e.printStackTrace(System.out);

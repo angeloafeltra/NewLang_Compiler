@@ -14,7 +14,7 @@ public class SymbolTable {
 
     public SymbolTable(){
         father=null;
-        listRow=new ArrayList<RowTable>();
+        listRow=new ArrayList<>();
     }
 
     public SymbolTable(SymbolTable father, ArrayList<RowTable> listRow,String scope){
@@ -93,8 +93,7 @@ public class SymbolTable {
         RowTable row=padre.lookup(scopeName); //Se la lookup fallisce ho un errore in sematica 1
         if(row!=null){
             TypeField.TypeFieldFunction typeFieldFunction=(TypeField.TypeFieldFunction) row.getType();
-            String typeOutput=typeFieldFunction.getOutputParam().get(0);
-            return typeOutput;
+            return typeFieldFunction.getOutputParam().get(0);
         }else{
             return null;
         }
