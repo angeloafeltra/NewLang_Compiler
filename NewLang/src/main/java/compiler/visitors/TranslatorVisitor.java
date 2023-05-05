@@ -37,9 +37,12 @@ public class TranslatorVisitor implements Visitor{
         // Inizializzo il file di scrittura
         if (!(new File("test_files" + File.separator + "c_out" + File.separator)).exists()) {
             Files.createDirectory(Paths.get("test_files" + File.separator + "c_out" + File.separator));
+            FILE = new File("test_files" + File.separator + "c_out" + File.separator + FILE_NAME);
+            boolean status=FILE.createNewFile();
+            if(!status) return null;
+        }else{
+            FILE = new File("test_files" + File.separator + "c_out" + File.separator + FILE_NAME);
         }
-        FILE = new File("test_files" + File.separator + "c_out" + File.separator + FILE_NAME);
-        if (!FILE.createNewFile() ) return
 
         fileWriter = new FileWriter(FILE);
 
