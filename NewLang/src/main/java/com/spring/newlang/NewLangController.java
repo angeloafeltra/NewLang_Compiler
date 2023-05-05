@@ -21,12 +21,17 @@ import java.util.Random;
 @RestController
 public class NewLangController {
 
+
+    public static final String CONST_ERROR="error";
+    public static final String CONST_FILE="file";
+    public static final String CONST_FILE_NAME="fileName";
+
     private Random random = new Random();
 
     @RequestMapping("/compile")
     public Map<String,byte[]> compileFileNewLang(@RequestBody Map<String,byte[]> json) throws IOException {
-        byte[] fileContent= json.get("file");
-        String fileName=new String(json.get("fileName"));
+        byte[] fileContent= json.get(CONST_FILE);
+        String fileName=new String(json.get(CONST_FILE_NAME));
         int index = fileName.indexOf(".");
         if(index>0)
             fileName=fileName.substring(0,index);
@@ -55,14 +60,14 @@ public class NewLangController {
 
             if(eseguibile.delete() && gcc.delete()){
                 Map<String, byte[]> json2 = new HashMap<String, byte[]>();
-                json2.put("file", executableBytes);
-                json2.put("error",new String("Compilazione corretta").getBytes());
-                json2.put("fileName",fileName.getBytes());
+                json2.put(CONST_FILE, executableBytes);
+                json2.put(CONST_ERROR,new String("Compilazione corretta").getBytes());
+                json2.put(CONST_FILE_NAME,fileName.getBytes());
                 return json2;
             }else{
                 Map<String, byte[]> json2 = new HashMap<String, byte[]>();
-                json2.put("file", new byte[0]);
-                json2.put("error", new String("Errore cancellazione").getBytes());
+                json2.put(CONST_FILE, new byte[0]);
+                json2.put(CONST_ERROR, new String("Errore cancellazione").getBytes());
                 return json2;
             }
 
@@ -72,8 +77,8 @@ public class NewLangController {
                 if(!gcc.delete()) { System.out.println("Errore nel eliminazione del file"); }
 
             Map<String, byte[]> json2 = new HashMap<String, byte[]>();
-            json2.put("file", new byte[0]);
-            json2.put("error", new String("Errore compilazione").getBytes());
+            json2.put(CONST_FILE, new byte[0]);
+            json2.put(CONST_ERROR, new String("Errore compilazione").getBytes());
             return json2;
         }
 

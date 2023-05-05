@@ -33,6 +33,7 @@ public class SemanticTest {
             //Logger log = Logger.getLogger(this.getClass().getName());
             //log.info("\n Nessuna Eccezione Catturata");
         } catch (Exception e) {
+            e.printStackTrace();
             catturata=true;
         }
 

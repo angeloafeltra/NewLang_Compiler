@@ -17,9 +17,19 @@ import java.util.Collections;
 
 public class TranslatorVisitor implements Visitor{
 
+    public static final String DIR_TEST_FILES="test_files";
+    public static final String DIR_FILE_C="c_out";
+    public static final String ALTERNATIV_MAIN="main2";
+
+    public static final String CONST_STRING="string";
+    public static final String CONST_INTEGER="integer";
+    public static final String CONST_FLOAT="float";
+    public static final String CONST_BOOLEAN="boolean";
+    public static final String CONST_CHAR="char";
+
     public String FILE_NAME="c_gen.c";
-    private static File FILE;
-    private static FileWriter fileWriter;
+    private File FILE;
+    private  FileWriter fileWriter;
     private static int currentTab = 0;
     private boolean main=false;
     private SymbolTable currentScope;
@@ -35,13 +45,13 @@ public class TranslatorVisitor implements Visitor{
 
         currentScope=programOp.getSymbolTable();
         // Inizializzo il file di scrittura
-        if (!(new File("test_files" + File.separator + "c_out" + File.separator)).exists()) {
-            Files.createDirectory(Paths.get("test_files" + File.separator + "c_out" + File.separator));
-            FILE = new File("test_files" + File.separator + "c_out" + File.separator + FILE_NAME);
+        if (!(new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator)).exists()) {
+            Files.createDirectory(Paths.get(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator));
+            FILE = new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator + FILE_NAME);
             boolean status=FILE.createNewFile();
             if(!status) return null;
         }else{
-            FILE = new File("test_files" + File.separator + "c_out" + File.separator + FILE_NAME);
+            FILE = new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator + FILE_NAME);
         }
 
         fileWriter = new FileWriter(FILE);
@@ -63,7 +73,7 @@ public class TranslatorVisitor implements Visitor{
             //cambio il nome in main2, poiche avrei
             //un errore altrimenti
             if (programOp.getMain().getIdentificatore().getLessema().equals("main"))
-                programOp.getMain().getIdentificatore().setLessema("main2");
+                programOp.getMain().getIdentificatore().setLessema(ALTERNATIV_MAIN);
             String prototipo=generaPrototipo(programOp.getMain()); //Prototipo Main
             fileWriter.write(prototipo);
         }
@@ -104,17 +114,17 @@ public class TranslatorVisitor implements Visitor{
                 String tipo=param.getType();
                 for(Identifier id:param.getIdList()){
                     i++;
-                    if(!tipo.equals("string")){
-                        if(tipo.equals("integer")){
+                    if(!tipo.equals(CONST_STRING)){
+                        if(tipo.equals(CONST_INTEGER)){
                             parametri=parametri+"atoi(argv["+i+"]),";
                         }
-                        if(tipo.equals("float")){
+                        if(tipo.equals(CONST_FLOAT)){
                             parametri=parametri+"atof(argv["+i+"]),";
                         }
-                        if(tipo.equals("boolean")){
+                        if(tipo.equals(CONST_BOOLEAN)){
                             parametri=parametri+"str_to_bool(argv["+i+"]),";
                         }
-                        if(tipo.equals("char")){
+                        if(tipo.equals(CONST_CHAR)){
                             parametri=parametri+"*argv["+i+"],";
                         }
                     }
@@ -283,7 +293,7 @@ public class TranslatorVisitor implements Visitor{
     public Object visit(CallFunOpStat callFunOpStat) throws Exception {
         String id=callFunOpStat.getIdentifier().getLessema();
         if(id.equals("main"))
-            id="main2";
+            id=ALTERNATIV_MAIN;
         String espressione="";
         fileWriter.write(id+"(");
 
@@ -350,19 +360,19 @@ public class TranslatorVisitor implements Visitor{
             fileWriter.write("printf("+espressione+");\n"); //Stampo il messaggio della read
 
         for(Identifier id:readOp.getListId()){
-            if(id.getTipoEspressione().equals("integer")) {
+            if(id.getTipoEspressione().equals(CONST_INTEGER)) {
                 fileWriter.write("scanf(\"%d\",&" + id.getLessema() + ");\n");
             }else {
-                if (id.getTipoEspressione().equals("float")) {
+                if (id.getTipoEspressione().equals(CONST_FLOAT)) {
                     fileWriter.write("scanf(\"%f\",&" + id.getLessema() + ");\n");
                 }else {
-                    if (id.getTipoEspressione().equals("char")) {
+                    if (id.getTipoEspressione().equals(CONST_CHAR)) {
                         fileWriter.write("scanf(\"%c\",&" + id.getLessema() + ");\n");
                     }else {
-                        if (id.getTipoEspressione().equals("string")) {
+                        if (id.getTipoEspressione().equals(CONST_STRING)) {
                             fileWriter.write(id.getLessema() + "=read_str();\n");
                         }else {
-                            if (id.getTipoEspressione().equals("boolean")) {
+                            if (id.getTipoEspressione().equals(CONST_BOOLEAN)) {
                                 fileWriter.write("scanf(\"%b\",&" + id.getLessema() + ");\n");
                             }
                         }
@@ -442,13 +452,13 @@ public class TranslatorVisitor implements Visitor{
             else
                 fileWriter.write("printf(\"%s\",");
             String espressione= (String) expr.accept(this);
-            if(expr.getTipoEspressione().equals("integer"))
+            if(expr.getTipoEspressione().equals(CONST_INTEGER))
                 espressione="integer_to_str("+espressione+")";
-            if(expr.getTipoEspressione().equals("float"))
+            if(expr.getTipoEspressione().equals(CONST_FLOAT))
                 espressione="real_to_str("+espressione+")";
-            if(expr.getTipoEspressione().equals("char"))
+            if(expr.getTipoEspressione().equals(CONST_CHAR))
                 espressione="char_to_str("+espressione+")";
-            if(expr.getTipoEspressione().equals("boolean"))
+            if(expr.getTipoEspressione().equals(CONST_BOOLEAN))
                 espressione="bool_to_str("+espressione+")";
             fileWriter.write(espressione+");\n");
         }
@@ -480,10 +490,10 @@ public class TranslatorVisitor implements Visitor{
         if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") ||
             typeOp.equals("EQOp") || typeOp.equals("NEOp")) {
 
-            if (aritAndRelOp.getExpr1().getTipoEspressione().equals("string") || aritAndRelOp.getExpr1().getTipoEspressione().equals("char")){
-                if(aritAndRelOp.getExpr1().getTipoEspressione().equals("char"))
+            if (aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_STRING) || aritAndRelOp.getExpr1().getTipoEspressione().equals("char")){
+                if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_CHAR))
                     expr1="char_to_str("+expr1+")";
-                if(aritAndRelOp.getExpr2().getTipoEspressione().equals("char"))
+                if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_CHAR))
                     expr2="char_to_str("+expr2+")";
                 espressione="strcmp("+expr1+","+expr2+")"+tipoOperazione+"0";
             }else{
@@ -504,21 +514,21 @@ public class TranslatorVisitor implements Visitor{
 
         if(typeOp.equals("StrCatOp")){
             //Converto le espressioni in stringhe se sono di altro tipo
-            if(aritAndRelOp.getExpr1().getTipoEspressione().equals("integer"))
+            if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_INTEGER))
                 expr1="integer_to_str("+expr1+")";
-            if(aritAndRelOp.getExpr2().getTipoEspressione().equals("integer"))
+            if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_INTEGER))
                 expr2="integer_to_str("+expr2+")";
-            if(aritAndRelOp.getExpr1().getTipoEspressione().equals("float"))
+            if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_FLOAT))
                 expr1="real_to_str("+expr1+")";
-            if(aritAndRelOp.getExpr2().getTipoEspressione().equals("float"))
+            if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_FLOAT))
                 expr2="real_to_str("+expr2+")";
-            if(aritAndRelOp.getExpr1().getTipoEspressione().equals("char"))
+            if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_CHAR))
                 expr1="char_to_str("+expr1+")";
-            if(aritAndRelOp.getExpr2().getTipoEspressione().equals("char"))
+            if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_CHAR))
                 expr2="char_to_str("+expr2+")";
-            if(aritAndRelOp.getExpr1().getTipoEspressione().equals("boolean"))
+            if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_BOOLEAN))
                 expr1="bool_to_str("+expr1+")";
-            if(aritAndRelOp.getExpr2().getTipoEspressione().equals("boolean"))
+            if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_BOOLEAN))
                 expr2="bool_to_str("+expr2+")";
 
             espressione="str_concat("+expr1+","+expr2+")";
@@ -538,7 +548,7 @@ public class TranslatorVisitor implements Visitor{
     public Object visit(CallFunOpExpr callFunOpExpr) throws Exception {
         String id=callFunOpExpr.getIdentifier().getLessema();
         if(id.equals("main"))
-            id="main2";
+            id=ALTERNATIV_MAIN;
         String espressione=id+"(";
         if(callFunOpExpr.getListExpr()!=null) {
             for (Expr expr : callFunOpExpr.getListExpr()){
@@ -650,9 +660,9 @@ public class TranslatorVisitor implements Visitor{
     }
 
     public String convertType(String type){
-        if(type.equals("integer")) type="int";
-        if(type.equals("boolean")) type="bool";
-        if(type.equals("string")) type="char*";
+        if(type.equals(CONST_INTEGER)) type="int";
+        if(type.equals(CONST_BOOLEAN)) type="bool";
+        if(type.equals(CONST_STRING)) type="char*";
         return type;
     }
 

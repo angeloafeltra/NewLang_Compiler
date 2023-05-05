@@ -8,6 +8,7 @@ import compiler.symbolTable.SymbolTable;
 import compiler.symbolTable.TypeField;
 import compiler.visitors.Visitor;
 
+import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 
 /**
@@ -15,45 +16,51 @@ import java.util.ArrayList;
  */
 public class SemanticVisitor2 implements Visitor {
 
+    private static final String INTEGER="integer";
+    private static final String FLOAT="float";
+    private static final String CHAR="char";
+    private static final String STRING="string";
+    private static final String BOOLEAN="boolean";
+    private static final String VOID="void";
     private SymbolTable currentScope;
 
-    private static final String[][] combinazioniAritOp= { {"integer", "integer", "integer"},
-                                                        {"integer", "float", "float"},
-                                                        {"float", "integer", "float"},
-                                                        {"float", "float", "float"} };
+    private static final String[][] combinazioniAritOp= { {INTEGER, INTEGER, INTEGER},
+                                                        {INTEGER, FLOAT, FLOAT},
+                                                        {FLOAT, INTEGER, FLOAT},
+                                                        {FLOAT, FLOAT, FLOAT} };
 
-    private static final String[][] combinazioniStrOp= { {"string", "string", "string"},
-                                                        {"string", "float","string"},
-                                                        {"string","integer","string"},
-                                                        {"string", "char", "string"},
-                                                        {"integer","string","string"},
-                                                        {"float","string","string"},
-                                                        {"char","string","string"},
-                                                        {"boolean","string","string"},
-                                                        {"string","boolean","string"}};
+    private static final String[][] combinazioniStrOp= { {STRING, STRING, STRING},
+                                                        {STRING, FLOAT,STRING},
+                                                        {STRING,INTEGER,STRING},
+                                                        {STRING, CHAR, STRING},
+                                                        {INTEGER,STRING,STRING},
+                                                        {FLOAT,STRING,STRING},
+                                                        {CHAR,STRING,STRING},
+                                                        {BOOLEAN,STRING,STRING},
+                                                        {STRING,BOOLEAN,STRING}};
 
-    private static final String[][] combinazioniBooleanOp= { {"boolean", "boolean", "boolean"} };
+    private static final String[][] combinazioniBooleanOp= { {BOOLEAN, BOOLEAN, BOOLEAN} };
 
-    private static final String[][] combinazioniRelOp= { {"integer", "integer", "boolean"},
-                                                        {"integer", "float", "boolean"},
-                                                        {"float", "integer", "boolean"},
-                                                        {"float", "float", "boolean"},
-                                                        {"string","string","boolean"},
-                                                        {"char","char","boolean"}};
+    private static final String[][] combinazioniRelOp= { {INTEGER, INTEGER, BOOLEAN},
+                                                        {INTEGER, FLOAT,BOOLEAN},
+                                                        {FLOAT, INTEGER, BOOLEAN},
+                                                        {FLOAT, FLOAT, BOOLEAN},
+                                                        {STRING,STRING,BOOLEAN},
+                                                        {CHAR,CHAR,BOOLEAN}};
 
-    private static final String[][] combinazioniMinus= { {"integer", "integer"},
-                                                        {"float", "float"} };
+    private static final String[][] combinazioniMinus= { {INTEGER, INTEGER},
+                                                        {FLOAT, FLOAT} };
 
 
-    private static final String[][] combinazioniNot= { {"boolean", "boolean"} };
+    private static final String[][] combinazioniNot= { {BOOLEAN, BOOLEAN} };
 
-    private static final String[][] compatibilita= {{"integer","integer"},
-                                                    {"float","float"},
-                                                    {"float","integer"},
-                                                    {"char","char"},
-                                                    {"string","string"},
-                                                    {"boolean","boolean"},
-                                                    {"void","void"}};
+    private static final String[][] compatibilita= {{INTEGER,INTEGER},
+                                                    {FLOAT,FLOAT},
+                                                    {FLOAT,INTEGER},
+                                                    {CHAR,CHAR},
+                                                    {STRING,STRING},
+                                                    {BOOLEAN,BOOLEAN},
+                                                    {VOID,VOID}};
 
     private boolean returnPresente;
 
