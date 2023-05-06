@@ -20,6 +20,7 @@ public class NewLangController {
     public static final String CONST_FILE="file";
     public static final String CONST_FILE_NAME="fileName";
 
+
     private Random random = new Random();
 
     @RequestMapping("/compile")
@@ -38,7 +39,6 @@ public class NewLangController {
         NewLang newLang=new NewLang();
         File eseguibile=newLang.compile(fileContent,fileName);
 
-
         if(eseguibile!=null){
             byte[] buffer = new byte[1024];
             ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -49,9 +49,8 @@ public class NewLangController {
                 }
             }
             byte[] executableBytes = output.toByteArray();
-            File gcc=new File("test_files" + File.separator + "c_out" + File.separator + fileName +".c");
 
-            if(eseguibile.delete() && gcc.delete()){
+            if(eseguibile.delete() ){
                 Map<String, byte[]> json2 = new HashMap<>();
                 json2.put(CONST_FILE, executableBytes);
                 json2.put(CONST_ERROR,"Compilazione corretta".getBytes());
@@ -65,9 +64,6 @@ public class NewLangController {
             }
 
         }else{
-            File gcc=new File("test_files" + File.separator + "c_out" + File.separator + fileName +".c");
-            if(!gcc.delete()) { System.out.println("Errore nel eliminazione del file"); }
-
             Map<String, byte[]> json2 = new HashMap<>();
             json2.put(CONST_FILE, new byte[0]);
             json2.put(CONST_ERROR, "Errore compilazione".getBytes());
