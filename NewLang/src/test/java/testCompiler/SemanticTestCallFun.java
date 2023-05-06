@@ -15,7 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.logging.Logger;
 
-public class SemanticTestCallFun {
+class SemanticTestCallFun {
 
 
     /**
@@ -23,7 +23,7 @@ public class SemanticTestCallFun {
      * Viene lanciata l'eccezione CallFunNumParamError.
      */
     @Test
-    public void tc_callFun1() throws FileNotFoundException {
+    void tc_callFun1() throws FileNotFoundException {
         String path_test_file="test_sematicException_files/CallFun/Test_callFun1";
         String separator = File.separator;
         File input = new File(
@@ -52,7 +52,7 @@ public class SemanticTestCallFun {
      * Viene lanciata l'eccezione CallFunTypeParamError
      */
     @Test
-    public void t_callFun2() throws FileNotFoundException {
+    void t_callFun2() throws FileNotFoundException {
         String path_test_file="test_sematicException_files/CallFun/Test_callFun2";
         String separator = File.separator;
         File input = new File(
@@ -81,7 +81,7 @@ public class SemanticTestCallFun {
      * Viene lanciata l'eccezione NoDeclarationError
      */
     @Test
-    public void t_callFun3() throws FileNotFoundException {
+    void t_callFun3() throws FileNotFoundException {
         String path_test_file="test_sematicException_files/CallFun/Test_callFun3";
         String separator = File.separator;
         File input = new File(

@@ -15,14 +15,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.logging.Logger;
 
-public class SemanticTestAssegnazione {
+class SemanticTestAssegnazione {
 
     /**
      * Test in eseguo un assegnazione con un identificatore non dichiarato.
      * Viene lanciata l'eccezione NoDeclaration Error
      */
     @Test
-    public void tc_assOp1() throws FileNotFoundException {
+    void tc_assOp1() throws FileNotFoundException {
         String path_test_file="test_sematicException_files/Assegnazioni/Test_AssOp3";
         String separator = File.separator;
         File input = new File(
@@ -54,7 +54,7 @@ public class SemanticTestAssegnazione {
      * Viene lanciata l'eccezione AssignError Error
      */
     @Test
-    public void tc_assOp2() throws FileNotFoundException {
+    void tc_assOp2() throws FileNotFoundException {
         String path_test_file="test_sematicException_files/Assegnazioni/Test_AssOp1";
         String separator = File.separator;
         File input = new File(
@@ -87,7 +87,7 @@ public class SemanticTestAssegnazione {
      * Viene lanciata l'eccezione AssignError Error
      */
     @Test
-    public void tc_assOp3() throws FileNotFoundException {
+    void tc_assOp3() throws FileNotFoundException {
         String path_test_file="test_sematicException_files/Assegnazioni/Test_AssOp2";
         String separator = File.separator;
         File input = new File(

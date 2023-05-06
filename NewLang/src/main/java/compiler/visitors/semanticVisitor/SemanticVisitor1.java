@@ -47,42 +47,42 @@ public class SemanticVisitor1 implements Visitor {
             for(FunOp fun:programOp.getFunOpList()){
                 String identificatore=fun.getIdentificatore().getLessema();
                 TypeField.TypeFieldFunction typeField=new TypeField.TypeFieldFunction();
-                String typeStream="";
+                StringBuilder typeStream=new StringBuilder();
                 if(fun.getParams()!=null){
-                    ArrayList<String[]> listaParametri=new ArrayList<String[]>();
+                    ArrayList<String[]> listaParametri=new ArrayList<>();
                     for(ParDeclOp param: fun.getParams())
                         listaParametri.addAll((Collection<? extends String[]>) param.accept(this));
 
                     for(String[] parametro:listaParametri){
                         typeField.addInputParam(parametro[1]);
-                        typeStream=typeStream+parametro[2]+",";
+                        typeStream.append(parametro[2]+",");
                     }
                 }
                 typeField.addOutputParam(fun.getType());
-                symbolTable.addRow(new RowTable(identificatore,FunOp.class,typeField,typeStream));
+                symbolTable.addRow(new RowTable(identificatore,FunOp.class,typeField,typeStream.toString()));
             }
         }
 
         //Aggiungo la funzione main allo scope
         String identificatore=programOp.getMain().getIdentificatore().getLessema();
         TypeField.TypeFieldFunction typeField=new TypeField.TypeFieldFunction();
-        String typeStream="";
+        StringBuilder typeStream=new StringBuilder();
         if(programOp.getMain().getParams()!=null){
-            ArrayList<String[]> listaParametri=new ArrayList<String[]>();
+            ArrayList<String[]> listaParametri=new ArrayList<>();
             for(ParDeclOp param: programOp.getMain().getParams())
                 listaParametri.addAll((Collection<? extends String[]>) param.accept(this));
 
             for(String[] parametro:listaParametri){
                 typeField.addInputParam(parametro[1]);
-                typeStream=typeStream+parametro[2]+",";
+                typeStream.append(parametro[2]+",");
             }
         }
 
-        if (typeStream.endsWith(","))
-            typeStream=typeStream.substring(0,typeStream.length()-1);
+        if (typeStream.toString().endsWith(","))
+            typeStream= new StringBuilder(typeStream.toString().substring(0, typeStream.length() - 1));
 
         typeField.addOutputParam(programOp.getMain().getType());
-        symbolTable.addRow(new RowTable(identificatore,FunOp.class,typeField,typeStream));
+        symbolTable.addRow(new RowTable(identificatore,FunOp.class,typeField,typeStream.toString()));
 
 
 
@@ -108,13 +108,13 @@ public class SemanticVisitor1 implements Visitor {
      */
     public Object visit(VarDeclOp varDecl) throws Exception {
 
-        ArrayList<RowTable> listVar=new ArrayList<RowTable>();
+        ArrayList<RowTable> listVar=new ArrayList<>();
 
         String identificatore="";
         String tipo="";
         for (Expr expr:varDecl.getExprList()){
             if (expr instanceof Identifier){
-                identificatore=((Identifier) expr).getLessema();
+                identificatore= ((Identifier) expr).getLessema();
                 tipo=varDecl.getType(); //Il tipo della variabile corrispone con quello della dichiarazione
             }
             if (expr instanceof IdInitOp){
@@ -146,7 +146,7 @@ public class SemanticVisitor1 implements Visitor {
 
         //Se sono presenti parametri li aggiungo allo scope
         if(funOp.getParams()!=null){
-            ArrayList<String[]> listaParametri=new ArrayList<String[]>();
+            ArrayList<String[]> listaParametri=new ArrayList<>();
             for(ParDeclOp param: funOp.getParams()){
                 listaParametri.addAll((Collection<? extends String[]>) param.accept(this));
             }
@@ -170,7 +170,7 @@ public class SemanticVisitor1 implements Visitor {
     @Override
     public Object visit(ParDeclOp parDeclOp) {
 
-        ArrayList<String[]> listParametri=new ArrayList<String[]>();
+        ArrayList<String[]> listParametri=new ArrayList<>();
         for (Identifier id:parDeclOp.getIdList()){
             listParametri.add(new String[]{id.getLessema(),parDeclOp.getType(),parDeclOp.getTypeStream()});
         }
@@ -199,13 +199,13 @@ public class SemanticVisitor1 implements Visitor {
             for (Statement stat:bodyOp.getListStatement()){
                 if(stat instanceof WhileOp)
                     //Genero lo scope di While
-                    ((WhileOp) stat).accept(this);
+                    stat.accept(this);
                 if(stat instanceof ForOp)
                     //Genero lo scope di For
-                    ((ForOp) stat).accept(this);
+                    stat.accept(this);
                 //Genero lo scope di If
                 if(stat instanceof IfStatOp)
-                    ((IfStatOp) stat).accept(this);
+                    stat.accept(this);
             }
         }
 

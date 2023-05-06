@@ -14,11 +14,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.logging.Logger;
 
-public class SemanticTest {
+class SemanticTest {
 
 
     @Test
-    public void tc_correct1() throws FileNotFoundException {
+    void tc_correct1() throws FileNotFoundException {
         String path_test_file="NewLangExemple";
         String separator = File.separator;
         File input = new File(
@@ -41,7 +41,7 @@ public class SemanticTest {
     }
 
     @Test
-    public void tc_correct2() throws FileNotFoundException {
+    void tc_correct2() throws FileNotFoundException {
         String path_test_file="ExempleProgram.txt";
         String separator = File.separator;
         File input = new File(

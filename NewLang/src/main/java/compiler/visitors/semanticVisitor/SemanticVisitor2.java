@@ -7,8 +7,6 @@ import compiler.symbolTable.RowTable;
 import compiler.symbolTable.SymbolTable;
 import compiler.symbolTable.TypeField;
 import compiler.visitors.Visitor;
-
-import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 
 /**
@@ -336,7 +334,7 @@ public class SemanticVisitor2 implements Visitor {
             }
         }
 
-        if(lancioEccezione==true) {
+        if(lancioEccezione) {
             throw new Eccezioni.ReturnError();
         }
 
@@ -348,25 +346,25 @@ public class SemanticVisitor2 implements Visitor {
     public Object visit(Statement statement) throws Exception {
 
         if(statement instanceof AssignOp){
-            return ((AssignOp) statement).accept(this);
+            return statement.accept(this);
         }
         if(statement instanceof CallFunOpStat){
-            return ((CallFunOpStat) statement).accept(this);
+            return statement.accept(this);
         }
         if(statement instanceof ForOp){
-            return ((ForOp) statement).accept(this);
+            return statement.accept(this);
         }
         if(statement instanceof IfStatOp){
-            return ((IfStatOp) statement).accept(this);
+            return statement.accept(this);
         }
         if(statement instanceof ReadOp){
-            return ((ReadOp) statement).accept(this);
+            return statement.accept(this);
         }
         if(statement instanceof WhileOp){
-            return ((WhileOp) statement).accept(this);
+            return statement.accept(this);
         }
         if(statement instanceof WriteOp){
-            return ((WriteOp) statement).accept(this);
+            return statement.accept(this);
         }
 
 
@@ -522,7 +520,7 @@ public class SemanticVisitor2 implements Visitor {
 
                     }
                 }
-                if(dichiarazione.getOutputParam()!=null && dichiarazione.getOutputParam().size()>0) {
+                if(dichiarazione.getOutputParam()!=null && !dichiarazione.getOutputParam().isEmpty()) {
                     callFunOpExpr.setTipoEspressione(dichiarazione.getOutputParam().get(0));
                     return dichiarazione.getOutputParam().get(0);
                 }else
