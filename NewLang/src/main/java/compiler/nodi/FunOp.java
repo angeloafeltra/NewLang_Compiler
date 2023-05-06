@@ -7,6 +7,7 @@ import compiler.visitors.Visitor;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FunOp extends DefaultMutableTreeNode implements Visitable {
 
@@ -19,7 +20,7 @@ public class FunOp extends DefaultMutableTreeNode implements Visitable {
 
 
 
-    public FunOp(Identifier identificatore, ArrayList<ParDeclOp> params, String type, BodyOp body){
+    public FunOp(Identifier identificatore, List<ParDeclOp> params, String type, BodyOp body){
 
         super("FunOp");
 
@@ -31,7 +32,7 @@ public class FunOp extends DefaultMutableTreeNode implements Visitable {
 
 
         this.identificatore=identificatore;
-        this.params=params;
+        this.params= (ArrayList<ParDeclOp>) params;
         this.type=type;
         this.body=body;
 
@@ -55,7 +56,7 @@ public class FunOp extends DefaultMutableTreeNode implements Visitable {
 
     public Identifier getIdentificatore() { return identificatore; }
 
-    public ArrayList<ParDeclOp> getParams() { return params; }
+    public List<ParDeclOp> getParams() { return params; }
 
     public String getType() { return type; }
 
@@ -68,7 +69,7 @@ public class FunOp extends DefaultMutableTreeNode implements Visitable {
         this.params.add(param);
     }
 
-    public void addsParams(ArrayList<ParDeclOp> params) {
+    public void addsParams(List<ParDeclOp> params) {
         for (ParDeclOp param: params)
             super.add(param);
         this.params.addAll(params);

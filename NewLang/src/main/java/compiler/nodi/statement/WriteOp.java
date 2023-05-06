@@ -6,20 +6,21 @@ import compiler.visitors.Visitor;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class WriteOp extends Statement implements Visitable {
 
     private String type;
     private ArrayList<Expr> listExpr;
 
-    public WriteOp(String type,ArrayList<Expr> listExpr){
+    public WriteOp(String type, List<Expr> listExpr){
         super("WriteOp");
         super.add(new DefaultMutableTreeNode(type));
         for (Expr exp:listExpr)
             super.add(exp);
 
         this.type=type;
-        this.listExpr=listExpr;
+        this.listExpr= (ArrayList<Expr>) listExpr;
 
     }
 
@@ -27,7 +28,7 @@ public class WriteOp extends Statement implements Visitable {
         return type;
     }
 
-    public ArrayList<Expr> getListExpr() {
+    public List<Expr> getListExpr() {
         return listExpr;
     }
 
@@ -36,7 +37,7 @@ public class WriteOp extends Statement implements Visitable {
         this.listExpr.add(exp);
     }
 
-    public void addsListExpr(ArrayList<Expr> listExpr){
+    public void addsListExpr(List<Expr> listExpr){
         for(Expr exp:listExpr)
             super.add(exp);
         this.listExpr.addAll(listExpr);

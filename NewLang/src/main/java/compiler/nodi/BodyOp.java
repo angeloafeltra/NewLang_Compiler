@@ -6,6 +6,7 @@ import compiler.visitors.Visitor;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BodyOp  extends DefaultMutableTreeNode implements Visitable {
 
@@ -14,20 +15,20 @@ public class BodyOp  extends DefaultMutableTreeNode implements Visitable {
 
 
 
-    public BodyOp(ArrayList<VarDeclOp> listVar, ArrayList<Statement> listStatement) {
+    public BodyOp(List<VarDeclOp> listVar, List<Statement> listStatement) {
         super("BodyOp");
 
 
         if (listVar!=null) {
             for (VarDeclOp variable : listVar)
                 super.add(variable);
-            this.listVar = listVar;
+            this.listVar = (ArrayList<VarDeclOp>) listVar;
         }else{
             this.listVar=null;
         }
 
         if (listStatement!=null) {
-            this.listStatement = listStatement;
+            this.listStatement = (ArrayList<Statement>) listStatement;
             for(Statement statement: listStatement)
                 super.add(statement);
         }else{
@@ -44,15 +45,15 @@ public class BodyOp  extends DefaultMutableTreeNode implements Visitable {
         this.listStatement = null;
     }
 
-    public ArrayList<VarDeclOp> getListVar() { return this.listVar; }
-    public ArrayList<Statement> getListStatement() { return this.listStatement; }
+    public List<VarDeclOp> getListVar() { return this.listVar; }
+    public List<Statement> getListStatement() { return this.listStatement; }
 
 
     public void addVar(VarDeclOp variable) {
         super.add(variable);
         this.listVar.add(variable);
     }
-    public void addsListVar(ArrayList<VarDeclOp> listVar) {
+    public void addsListVar(List<VarDeclOp> listVar) {
         for(VarDeclOp variable:listVar)
             super.add(variable);
         this.listVar.addAll(listVar);
@@ -63,7 +64,7 @@ public class BodyOp  extends DefaultMutableTreeNode implements Visitable {
         this.listStatement.add(stm);
     }
 
-    public void addStatements(ArrayList<Statement> stms) {
+    public void addStatements(List<Statement> stms) {
         for(Statement stm:stms)
             super.add(stm);
         this.listStatement.addAll(stms);

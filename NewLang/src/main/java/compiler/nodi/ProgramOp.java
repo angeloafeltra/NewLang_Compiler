@@ -6,6 +6,7 @@ import compiler.visitors.Visitor;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProgramOp extends DefaultMutableTreeNode implements Visitable {
 
@@ -15,7 +16,7 @@ public class ProgramOp extends DefaultMutableTreeNode implements Visitable {
     private SymbolTable symbolTable;
 
 
-    public ProgramOp(ArrayList<VarDeclOp> varDeclList, FunOp main, ArrayList<FunOp> funOpList){
+    public ProgramOp(List<VarDeclOp> varDeclList, FunOp main, List<FunOp> funOpList){
 
         super("ProgramOp");
         for (VarDeclOp varDecl: varDeclList)
@@ -27,14 +28,14 @@ public class ProgramOp extends DefaultMutableTreeNode implements Visitable {
         main.setUserObject("Main");
         super.add(main);
 
-        this.varDeclList = varDeclList;
-        this.funOpList = funOpList;
+        this.varDeclList = (ArrayList<VarDeclOp>) varDeclList;
+        this.funOpList = (ArrayList<FunOp>) funOpList;
         this.main=main;
 
 
     }
 
-    public ProgramOp(FunOp main, ArrayList<FunOp> funOpList){
+    public ProgramOp(FunOp main, List<FunOp> funOpList){
 
         super("ProgramOp");
 
@@ -45,7 +46,7 @@ public class ProgramOp extends DefaultMutableTreeNode implements Visitable {
         super.add(main);
 
         this.varDeclList =null;
-        this.funOpList = funOpList;
+        this.funOpList = (ArrayList<FunOp>) funOpList;
         this.main=main;
 
     }
@@ -59,24 +60,24 @@ public class ProgramOp extends DefaultMutableTreeNode implements Visitable {
         this.funOpList.add(funOp);
     }
 
-    public void addsVarDec(ArrayList<VarDeclOp> varDecList) {
+    public void addsVarDec(List<VarDeclOp> varDecList) {
         for (VarDeclOp varDecOp: varDecList) {
             super.add(varDecOp);
             this.varDeclList.add(varDecOp);
         }
     }
 
-    public void addsFunOp(ArrayList<FunOp> funOpList) {
+    public void addsFunOp(List<FunOp> funOpList) {
         for (FunOp funOp: funOpList) {
             super.add(funOp);
             this.funOpList.add(funOp);
         }
     }
 
-    public ArrayList<VarDeclOp> getVarDeclList() { return this.varDeclList; }
+    public List<VarDeclOp> getVarDeclList() { return this.varDeclList; }
     public FunOp getMain() { return this.main; }
 
-    public ArrayList<FunOp> getFunOpList() {return this.funOpList;}
+    public List<FunOp> getFunOpList() {return this.funOpList;}
 
     public void setSymbolTable(SymbolTable symbolTable){this.symbolTable=symbolTable;}
 

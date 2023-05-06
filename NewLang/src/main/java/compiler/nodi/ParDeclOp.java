@@ -6,6 +6,7 @@ import compiler.visitors.Visitor;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ParDeclOp extends DefaultMutableTreeNode implements Visitable {
 
@@ -14,7 +15,7 @@ public class ParDeclOp extends DefaultMutableTreeNode implements Visitable {
     private ArrayList<Identifier> idList;
 
 
-    public ParDeclOp(String typeStream, String type, ArrayList<Identifier> idList) {
+    public ParDeclOp(String typeStream, String type, List<Identifier> idList) {
         super("ParDeclOp");
         super.add(new DefaultMutableTreeNode(typeStream));
         super.add(new DefaultMutableTreeNode(type));
@@ -25,18 +26,18 @@ public class ParDeclOp extends DefaultMutableTreeNode implements Visitable {
 
         this.typeStream = typeStream;
         this.type = type;
-        this.idList = idList;
+        this.idList = (ArrayList<Identifier>) idList;
     }
 
     public String getTypeStream() { return typeStream; }
     public String getType() { return type; }
-    public ArrayList<Identifier> getIdList() { return idList; }
+    public List<Identifier> getIdList() { return idList; }
 
     public void addId(Identifier id) {
         super.add(id);
         this.idList.add(id);
     }
-    public void addAllId(ArrayList<Identifier> idList) {
+    public void addAllId(List<Identifier> idList) {
         for(Identifier id: idList)
             super.add(id);
         this.idList.addAll(idList); }

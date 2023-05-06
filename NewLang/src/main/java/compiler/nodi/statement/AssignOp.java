@@ -6,21 +6,22 @@ import compiler.visitors.Visitable;
 import compiler.visitors.Visitor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AssignOp extends Statement implements Visitable  {
 
     private ArrayList<Identifier> listId;
     private ArrayList<Expr> listExpr;
 
-    public AssignOp(ArrayList<Identifier> listId, ArrayList<Expr> listExpr){
+    public AssignOp(List<Identifier> listId, List<Expr> listExpr){
         super("AssignOp");
         for(Identifier id: listId)
             super.add(id);
         for(Expr exp: listExpr)
             super.add(exp);
 
-        this.listId=listId;
-        this.listExpr=listExpr;
+        this.listId= (ArrayList<Identifier>) listId;
+        this.listExpr= (ArrayList<Expr>) listExpr;
     }
 
     public ArrayList<Identifier> getListId() {
@@ -37,7 +38,7 @@ public class AssignOp extends Statement implements Visitable  {
     }
 
 
-    public void addsListId(ArrayList<Identifier> listId){
+    public void addsListId(List<Identifier> listId){
         for(Identifier id: listId)
             super.add(id);
         this.listId.addAll(listId);
@@ -48,7 +49,7 @@ public class AssignOp extends Statement implements Visitable  {
         this.listExpr.add(exp);
     }
 
-    public void addsListExp(ArrayList<Expr> listExpr){
+    public void addsListExp(List<Expr> listExpr){
         for(Expr exp:listExpr)
             super.add(exp);
         this.listExpr.addAll(listExpr);

@@ -5,6 +5,7 @@ import compiler.visitors.Visitor;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CallFunOpExpr extends Expr implements Visitable {
 
@@ -19,7 +20,7 @@ public class CallFunOpExpr extends Expr implements Visitable {
         this.listExpr=null;
     }
 
-    public CallFunOpExpr(Identifier identifier, ArrayList<Expr> listExpr){
+    public CallFunOpExpr(Identifier identifier, List<Expr> listExpr){
         super("CallFunOpExpr");
         super.add(identifier);
         for(Expr expr:listExpr){
@@ -28,7 +29,7 @@ public class CallFunOpExpr extends Expr implements Visitable {
             super.add(new DefaultMutableTreeNode(mode));
         }
 
-        this.listExpr=listExpr;
+        this.listExpr= (ArrayList<Expr>) listExpr;
         this.identifier=identifier;
     }
 
@@ -45,7 +46,7 @@ public class CallFunOpExpr extends Expr implements Visitable {
         this.listExpr.add(expr);
     }
 
-    public void addsListExpr(ArrayList<Expr> listExpr){
+    public void addsListExpr(List<Expr> listExpr){
         for(Expr expr: listExpr){
             super.add(expr);
             super.add(new DefaultMutableTreeNode(expr.getMode()));
