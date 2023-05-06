@@ -19,25 +19,21 @@ public class NewLangController {
     public static final String CONST_ERROR="error";
     public static final String CONST_FILE="file";
     public static final String CONST_FILE_NAME="fileName";
-
+    static private String targetDirectory = "test_files" + File.separator + "c_out" + File.separator;
 
     private Random random = new Random();
 
     @RequestMapping("/compile")
     public Map<String,byte[]> compileFileNewLang(@RequestBody Map<String,byte[]> json) throws IOException {
+
         byte[] fileContent= json.get(CONST_FILE);
-        String fileName=new String(json.get(CONST_FILE_NAME));
-        int index = fileName.indexOf(".");
-        if(index>0)
-            fileName=fileName.substring(0,index);
-
-        //Aggiungo un numero random al file name
-
-        int number= random.nextInt(1000,2000);
-        fileName=fileName+Integer.toString(number);
+        String fileName=generateRandomFileName(12);
 
         NewLang newLang=new NewLang();
+
         File eseguibile=newLang.compile(fileContent,fileName);
+        File gcc=new File("test_files" + File.separator + "c_out" + File.separator + fileName +".c");
+
 
         if(eseguibile!=null){
             byte[] buffer = new byte[1024];
@@ -50,7 +46,8 @@ public class NewLangController {
             }
             byte[] executableBytes = output.toByteArray();
 
-            if(eseguibile.delete() ){
+
+            if(eseguibile.delete() && gcc.delete()){
                 Map<String, byte[]> json2 = new HashMap<>();
                 json2.put(CONST_FILE, executableBytes);
                 json2.put(CONST_ERROR,"Compilazione corretta".getBytes());
@@ -64,6 +61,8 @@ public class NewLangController {
             }
 
         }else{
+            if(!gcc.delete()) { System.out.println("Errore nel eliminazione del file"); }
+
             Map<String, byte[]> json2 = new HashMap<>();
             json2.put(CONST_FILE, new byte[0]);
             json2.put(CONST_ERROR, "Errore compilazione".getBytes());
@@ -75,6 +74,20 @@ public class NewLangController {
     @RequestMapping("/testListen")
     public String listenMessage() {
         return "Messaggio Ricevuto e ricambiato";
+    }
+
+
+    private String generateRandomFileName(int lunghezza){
+
+        String alphaNumericStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
+        StringBuilder s=new StringBuilder();
+
+        for(int i=0;i<lunghezza;i++){
+            int ch = random.nextInt(0,alphaNumericStr.length());
+            s.append(alphaNumericStr.charAt(ch));
+        }
+
+        return s.toString();
     }
 
 }
