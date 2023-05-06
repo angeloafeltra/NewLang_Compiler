@@ -211,7 +211,7 @@ public class SemanticVisitor2 implements Visitor {
         }else{
             TypeField.TypeFieldFunction dichiarazione= (TypeField.TypeFieldFunction) result.getType();
             //Ottengo il tipo dei parametri d'input della funzione
-            ArrayList<String> inputParam=dichiarazione.getInputParam();
+            ArrayList<String> inputParam= (ArrayList<String>) dichiarazione.getInputParam();
             //Ottengo il type stream dei parametri
             String[] typeStream=result.getPropreties().split(",");
 
@@ -493,7 +493,7 @@ public class SemanticVisitor2 implements Visitor {
             throw new Eccezioni.NoDeclarationError(); //La funzione non è stata dichairata
         }else{
             TypeField.TypeFieldFunction dichiarazione =(TypeField.TypeFieldFunction) result.getType();
-            ArrayList<String> inputParam=dichiarazione.getInputParam();
+            ArrayList<String> inputParam= (ArrayList<String>) dichiarazione.getInputParam();
             String[] typeStream=result.getPropreties().split(",");
             int numeroParamteri=inputParam.size();
             int numeroParametriChiamata=0;

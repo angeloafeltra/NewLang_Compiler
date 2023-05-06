@@ -3,6 +3,7 @@ package compiler.symbolTable;
 import compiler.visitors.semanticVisitor.Eccezioni;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SymbolTable {
 
@@ -17,9 +18,9 @@ public class SymbolTable {
         listRow=new ArrayList<>();
     }
 
-    public SymbolTable(SymbolTable father, ArrayList<RowTable> listRow,String scope){
+    public SymbolTable(SymbolTable father, List<RowTable> listRow, String scope){
         this.father=father;
-        this.listRow=listRow;
+        this.listRow= (ArrayList<RowTable>) listRow;
         this.scope=scope;
 
     }
@@ -70,7 +71,7 @@ public class SymbolTable {
 
     public SymbolTable getFather() {return this.father;}
 
-    public ArrayList<RowTable> getListRow() {return this.listRow;}
+    public List<RowTable> getListRow() {return this.listRow;}
 
     public void setScope(String scope){
         this.scope=scope;
@@ -104,11 +105,15 @@ public class SymbolTable {
 
     @Override
     public String toString() {
-        String str="SymbolTable: "+scope+"\n";
-        if(father!=null) str=str+"Father: "+father.getScope()+"\n";
-        for (RowTable row:listRow)
-            str=str+row.toString()+"\n";
-        return str;
+        StringBuilder str=new StringBuilder();
+        str.append("SymbolTable: "+scope+"\n");
+        if(father!=null) {
+            str.append("Father: "+father.getScope()+"\n");
+        }
+        for (RowTable row:listRow) {
+            str.append(row.toString()+"\n");
+        }
+        return str.toString();
     }
 
 }

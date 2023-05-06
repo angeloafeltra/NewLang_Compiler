@@ -27,7 +27,7 @@ public class TranslatorVisitor implements Visitor{
     public static final String CONST_BOOLEAN="boolean";
     public static final String CONST_CHAR="char";
 
-    public static String FILE_NAME="c_gen.c";
+    public  String FILE_NAME="c_gen.c";
     private  FileWriter fileWriter;
 
     private boolean main=false;
@@ -108,40 +108,40 @@ public class TranslatorVisitor implements Visitor{
         //Se la funzione di start possiede dei parametri, li recupero da argv
         if(main_fun.getParams()!=null){
             int i=0;
-            String parametri="";
+            StringBuilder parametri=new StringBuilder();
             for(ParDeclOp param: main_fun.getParams()){
                 String tipo=param.getType();
                 for(Identifier id:param.getIdList()){
                     i++;
                     if(!tipo.equals(CONST_STRING)){
                         if(tipo.equals(CONST_INTEGER)){
-                            parametri=parametri+"atoi(argv["+i+"]),";
+                            parametri.append("atoi(argv["+i+"]),");
                         }
                         if(tipo.equals(CONST_FLOAT)){
-                            parametri=parametri+"atof(argv["+i+"]),";
+                            parametri.append("atof(argv["+i+"]),");
                         }
                         if(tipo.equals(CONST_BOOLEAN)){
-                            parametri=parametri+"str_to_bool(argv["+i+"]),";
+                            parametri.append("str_to_bool(argv["+i+"]),");
                         }
                         if(tipo.equals(CONST_CHAR)){
-                            parametri=parametri+"*argv["+i+"],";
+                            parametri.append("*argv["+i+"],");
                         }
                     }
                     else
-                        parametri=parametri+"argv["+i+"],";
+                        parametri.append("argv["+i+"],");
                 }
             }
-            if(!parametri.equals(""))
-                parametri=parametri.substring(0,parametri.length()-1);
-            fileWriter.write(parametri);
+            if(!parametri.toString().equals(""))
+                parametri= new StringBuilder(parametri.toString().substring(0, parametri.length() - 1));
+            fileWriter.write(parametri.toString());
         }
 
         fileWriter.write(");\n");
 
         /**
-        currentScope=programOp.getMain().getSymbolTable();
-        programOp.getMain().getBody().accept(this);
-        currentScope=programOp.getSymbolTable();
+         currentScope=programOp.getMain().getSymbolTable();
+         programOp.getMain().getBody().accept(this);
+         currentScope=programOp.getSymbolTable();
          */
         fileWriter.write("return 0;\n");
         fileWriter.write("}\n");
@@ -199,17 +199,17 @@ public class TranslatorVisitor implements Visitor{
         String tipo=convertType(funOp.getType());
         fileWriter.write(tipo+" "+id+ "(");
 
-        if(funOp.getParams()!=null && funOp.getParams().size()>0) {
-            ArrayList<String> parms = new ArrayList<String>(); //Lista di parametri
+        if(funOp.getParams()!=null && !funOp.getParams().isEmpty()) {
+            ArrayList<String> parms = new ArrayList<>(); //Lista di parametri
             for(ParDeclOp param:funOp.getParams()){
                 parms.addAll((Collection<? extends String>) param.accept(this));
             }
-            String parametri="";
+            StringBuilder parametri=new StringBuilder();
             for(String par:parms){
-                parametri=parametri+par+", ";
+                parametri.append(par+", ");
             }
-            parametri=parametri.substring(0,parametri.length()-2);
-            fileWriter.write(parametri);
+            parametri= new StringBuilder(parametri.toString().substring(0, parametri.length() - 2));
+            fileWriter.write(parametri.toString());
         }
 
         fileWriter.write("){\n");
@@ -223,7 +223,7 @@ public class TranslatorVisitor implements Visitor{
 
     @Override
     public Object visit(ParDeclOp parDeclOp) throws Exception {
-        ArrayList<String> params=new ArrayList<String>();
+        ArrayList<String> params=new ArrayList<>();
         String tipo=convertType(parDeclOp.getType());
 
         String typeStream=parDeclOp.getTypeStream();
@@ -241,9 +241,9 @@ public class TranslatorVisitor implements Visitor{
     public Object visit(BodyOp bodyOp) throws Exception {
         if(bodyOp.getListVar()!=null){
             //Inserisco prima solo le dichiarazioni degli identificatori(ese: integer id;)
-            for(VarDeclOp var:bodyOp.getListVar()){
-                String tipo=convertType(var.getType());
-                for(Expr expr:var.getExprList()){
+            for(VarDeclOp variable:bodyOp.getListVar()){
+                String tipo=convertType(variable.getType());
+                for(Expr expr:variable.getExprList()){
                     if(expr instanceof Identifier) {
                         fileWriter.write(tipo+" " + ((Identifier) expr).getLessema() + ";\n");
                     }
@@ -257,7 +257,7 @@ public class TranslatorVisitor implements Visitor{
         if(bodyOp.getListStatement()!=null){
             Collections.reverse(bodyOp.getListStatement()); //Provare ordine senza dopo aver completato altro
             for(Statement stmt: bodyOp.getListStatement()){
-                if(!(main==true && stmt instanceof ReturnOp)) {
+                if(!(main && stmt instanceof ReturnOp)) {
                     stmt.accept(this);
                 }
             }
@@ -287,7 +287,7 @@ public class TranslatorVisitor implements Visitor{
         String id=callFunOpStat.getIdentifier().getLessema();
         if(id.equals("main"))
             id=ALTERNATIV_MAIN;
-        String espressione="";
+        StringBuilder espressione=new StringBuilder();
         fileWriter.write(id+"(");
 
         if(callFunOpStat.getListExpr()!=null) {
@@ -295,12 +295,12 @@ public class TranslatorVisitor implements Visitor{
                 String tipoChiamata="";
                 if(expr.getMode().equals("out"))
                     tipoChiamata="&";
-                espressione=espressione+tipoChiamata+(String) expr.accept(this);
-                espressione=espressione+",";
+                espressione.append(tipoChiamata+(String) expr.accept(this));
+                espressione.append(",");
             }
-            fileWriter.write(espressione.substring(0,espressione.length()-1));
+            fileWriter.write(espressione.toString().substring(0,espressione.length()-1));
         }else{
-            fileWriter.write(espressione);
+            fileWriter.write(espressione.toString());
         }
         fileWriter.write(");\n");
         return null;
@@ -311,7 +311,7 @@ public class TranslatorVisitor implements Visitor{
     public Object visit(ForOp forOp) throws Exception {
         currentScope=forOp.getSymbolTable();
         String init=(String) forOp.getId().accept(this); //Esempio: i<<1
-        String variable=((IdInitOp)forOp.getId()).getId().getLessema(); //Esempio i
+        String variable=forOp.getId().getId().getLessema(); //Esempio i
         String ind1=((ConstOp)forOp.getId().getExpr()).getLessema();
         String ind2= (String) forOp.getCons().accept(this);
         if(Integer.valueOf(ind1)<=Integer.valueOf(ind2))
@@ -394,29 +394,29 @@ public class TranslatorVisitor implements Visitor{
     public Object visit(Statement statement) throws Exception {
 
         if(statement instanceof AssignOp){
-            ((AssignOp) statement).accept(this);
+            statement.accept(this);
         }
         if(statement instanceof CallFunOpStat){
-            ((CallFunOpStat) statement).accept(this);
+            statement.accept(this);
         }
         if(statement instanceof ForOp){
-            ((ForOp) statement).accept(this);
+            statement.accept(this);
         }
         if(statement instanceof IfStatOp){
-            ((IfStatOp) statement).accept(this);
+            statement.accept(this);
         }
         if(statement instanceof ReadOp){
-            ((ReadOp) statement).accept(this);
+            statement.accept(this);
         }
         if(statement instanceof WhileOp){
-            ((WhileOp) statement).accept(this);
+            statement.accept(this);
         }
         if(statement instanceof WriteOp){
-            ((WriteOp) statement).accept(this);
+            statement.accept(this);
         }
 
         if (statement instanceof ReturnOp){
-            ((ReturnOp) statement).accept(this);
+            statement.accept(this);
         }
 
         return null;
@@ -481,7 +481,7 @@ public class TranslatorVisitor implements Visitor{
 
         //Operazioni Relazionali
         if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") ||
-            typeOp.equals("EQOp") || typeOp.equals("NEOp")) {
+                typeOp.equals("EQOp") || typeOp.equals("NEOp")) {
 
             if (aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_STRING) || aritAndRelOp.getExpr1().getTipoEspressione().equals("char")){
                 if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_CHAR))
@@ -542,20 +542,21 @@ public class TranslatorVisitor implements Visitor{
         String id=callFunOpExpr.getIdentifier().getLessema();
         if(id.equals("main"))
             id=ALTERNATIV_MAIN;
-        String espressione=id+"(";
+        StringBuilder espressione=new StringBuilder();
+        espressione.append(id+"(");
         if(callFunOpExpr.getListExpr()!=null) {
             for (Expr expr : callFunOpExpr.getListExpr()){
                 String tipoChiamata="";
                 if(expr.getMode().equals("out"))
                     tipoChiamata="&";
-                espressione=espressione+tipoChiamata+(String) expr.accept(this);
-                espressione=espressione+",";
+                espressione.append(tipoChiamata+(String) expr.accept(this));
+                espressione.append(",");
             }
-            espressione=espressione.substring(0,espressione.length()-1);
+            espressione= new StringBuilder(espressione.toString().substring(0, espressione.length() - 1));
         }
 
-        espressione=espressione+")";
-        return espressione;
+        espressione.append(")");
+        return espressione.toString();
     }
 
     @Override
@@ -662,19 +663,19 @@ public class TranslatorVisitor implements Visitor{
     public String generaPrototipo(FunOp fun) throws Exception {
         String tipoFunzione=convertType(fun.getType()); //Tipo della funzione
         String nomeFunzione=fun.getIdentificatore().getLessema(); //Nome della funzione
-        String parametri=""; //Parametri Funzione
-        if(fun.getParams()!=null && fun.getParams().size()>0) {
-            ArrayList<String> parms = new ArrayList<String>(); //Lista di parametri
+        StringBuilder parametri=new StringBuilder(); //Parametri Funzione
+        if(fun.getParams()!=null && !fun.getParams().isEmpty()) {
+            ArrayList<String> parms = new ArrayList<>(); //Lista di parametri
             for(ParDeclOp param:fun.getParams()){
                 parms.addAll((Collection<? extends String>) param.accept(this));
             }
             for(String par:parms){
-                parametri=parametri+par+", ";
+                parametri.append(par+", ");
             }
-            parametri=parametri.substring(0,parametri.length()-2);
+            parametri= new StringBuilder(parametri.toString().substring(0, parametri.length() - 2));
         }
 
-        return tipoFunzione+" "+nomeFunzione+ "("+parametri+");\n";
+        return tipoFunzione+" "+nomeFunzione+ "("+parametri.toString()+");\n";
     }
 
     public String convertTypeOp(String typeOp){

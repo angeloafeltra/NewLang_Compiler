@@ -1,6 +1,7 @@
 package compiler.symbolTable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TypeField {
 
@@ -15,12 +16,12 @@ public class TypeField {
             outputParam=new ArrayList<>();
         }
 
-        public TypeFieldFunction (ArrayList<String> inputParam, ArrayList<String> outputParam){
-            this.inputParam=inputParam;
-            this.outputParam=outputParam;
+        public TypeFieldFunction (List<String> inputParam, List<String> outputParam){
+            this.inputParam= (ArrayList<String>) inputParam;
+            this.outputParam= (ArrayList<String>) outputParam;
         }
 
-        public ArrayList<String> getInputParam() {
+        public List<String> getInputParam() {
             return inputParam;
         }
 
@@ -28,11 +29,11 @@ public class TypeField {
             this.inputParam.add(inputParm);
         }
 
-        public void addsListInputParam(ArrayList<String> listInputParam) {
+        public void addsListInputParam(List<String> listInputParam) {
             this.inputParam.addAll(listInputParam);
         }
 
-        public ArrayList<String> getOutputParam() {
+        public List<String> getOutputParam() {
             return outputParam;
         }
 
@@ -40,7 +41,7 @@ public class TypeField {
             this.outputParam.add(outputParm);
         }
 
-        public void addsListOutputParam(ArrayList<String> listOutputParm) {
+        public void addsListOutputParam(List<String> listOutputParm) {
             this.outputParam.addAll(listOutputParm);
         }
 

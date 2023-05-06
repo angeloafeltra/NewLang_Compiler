@@ -4,6 +4,7 @@ import compiler.nodi.FunOp;
 import compiler.nodi.VarDeclOp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Decl {
 
@@ -15,7 +16,7 @@ public class Decl {
         this.funOpList=new ArrayList<>();
     }
 
-    public Decl(ArrayList<VarDeclOp> varDeclList, ArrayList<FunOp> funOpList){
+    public Decl(List<VarDeclOp> varDeclList, List<FunOp> funOpList){
         this.varDeclList=new ArrayList<>();
         this.funOpList=new ArrayList<>();
         this.varDeclList.addAll(varDeclList);
@@ -23,10 +24,10 @@ public class Decl {
     }
 
     public void addVarDecl(VarDeclOp varDecl) {this.varDeclList.add(varDecl);}
-    public void addsVarDeclList(ArrayList<VarDeclOp> varDeclList) {this.varDeclList.addAll(varDeclList);}
+    public void addsVarDeclList(List<VarDeclOp> varDeclList) {this.varDeclList.addAll(varDeclList);}
 
     public void addFunOp(FunOp funOp) {this.funOpList.add(funOp);}
-    public void addsFunOpList(ArrayList<FunOp> funOpList) {this.funOpList.addAll(funOpList);}
+    public void addsFunOpList(List<FunOp> funOpList) {this.funOpList.addAll(funOpList);}
 
 
     public ArrayList<VarDeclOp> getVarDeclList() {return this.varDeclList;}
