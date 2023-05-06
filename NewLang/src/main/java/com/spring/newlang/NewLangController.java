@@ -3,9 +3,11 @@ package com.spring.newlang;
 import compiler.NewLang;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -21,9 +23,9 @@ public class NewLangController {
     public static final String CONST_FILE_NAME="fileName";
     static private String targetDirectory = "test_files" + File.separator + "c_out" + File.separator;
 
-    private Random random = new Random();
+    private SecureRandom random = new SecureRandom();
 
-    @RequestMapping("/compile")
+    @RequestMapping(path="/compile", method = RequestMethod.POST)
     public Map<String,byte[]> compileFileNewLang(@RequestBody Map<String,byte[]> json) throws IOException {
 
         byte[] fileContent= json.get(CONST_FILE);
@@ -71,7 +73,7 @@ public class NewLangController {
 
     }
 
-    @RequestMapping("/testListen")
+    @RequestMapping(path="/testListen", method = RequestMethod.GET)
     public String listenMessage() {
         return "Messaggio Ricevuto e ricambiato";
     }
