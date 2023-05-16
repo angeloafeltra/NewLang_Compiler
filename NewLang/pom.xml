@@ -200,10 +200,10 @@
                 <version>1.1.10</version>
                 <configuration>
                     <targetClasses>
-                        <param>com.baeldung.testing.mutation.*</param>
+                        <param>compiler.visitors.semanticVisitor.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>com.baeldung.mutation.test.*</param>
+                        <param>testCompiler.SemanticTest</param>
                     </targetTests>
                 </configuration>
             </plugin>
