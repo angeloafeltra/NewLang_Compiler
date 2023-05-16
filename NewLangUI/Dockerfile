@@ -1,4 +1,4 @@
-FROM eclipse-temurin:19-jdk-jammy
+FROM eclipse-temurin:17-jdk-jammy
 
 WORKDIR /NewLangUi
 
