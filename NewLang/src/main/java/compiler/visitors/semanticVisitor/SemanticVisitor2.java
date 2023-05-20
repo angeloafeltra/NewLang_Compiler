@@ -403,51 +403,24 @@ public class SemanticVisitor2 implements Visitor {
         if(typeOp.equals("AddOp") || typeOp.equals("DiffOp") || typeOp.equals("MulOp") || typeOp.equals("DivOp") ||
             typeOp.equals("PowOp")){
            //Si tratta di un operazione aritmetica
+            return resultAritmeticOp(aritAndRelOp,typeExpr1,typeExpr2);
 
-            for (String[] combinazione:combinazioniAritOp) {
-                if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])){
-                    aritAndRelOp.setTipoEspressione(combinazione[2]);
-                    return combinazione[2];
-                }
-            }
-
-           throw new Eccezioni.ArithmeticOpError();
         }
-
 
         if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") ||
                 typeOp.equals("EQOp") || typeOp.equals("NEOp")){
             //Si tratta di un operazione relazionale
-            for (String[] combinazione:combinazioniRelOp) {
-                if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])) {
-                    aritAndRelOp.setTipoEspressione(combinazione[2]);
-                    return combinazione[2];
-                }
-            }
-            throw new Eccezioni.RelationalOpError();
+            return resultRelOp(aritAndRelOp,typeExpr1,typeExpr2);
         }
 
         if(typeOp.equals("StrCatOp")){
             //Si tratta di un operazione su stringhe
-            for (String[] combinazione:combinazioniStrOp) {
-                if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])) {
-                    aritAndRelOp.setTipoEspressione(combinazione[2]);
-                    return combinazione[2];
-                }
-            }
-            throw new Eccezioni.StringOpError();
+            return resultStringOp(aritAndRelOp,typeExpr1,typeExpr2);
         }
 
         if(typeOp.equals("AndOp") || typeOp.equals("OrOp")){
             //Si tratta di un operazione su stringhe
-            for (String[] combinazione:combinazioniBooleanOp) {
-                if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])) {
-                    aritAndRelOp.setTipoEspressione(combinazione[2]);
-                    return combinazione[2];
-                }
-            }
-
-            throw new Eccezioni.BooleanOpError();
+            return resultBooleanOp(aritAndRelOp,typeExpr1,typeExpr2);
         }
 
         return new Eccezioni.BinaryOpNotValid();
@@ -630,7 +603,47 @@ public class SemanticVisitor2 implements Visitor {
         if(!isCompatibile) throw new Eccezioni.CallFunTypeParamError();
     }
 
+    private String resultAritmeticOp(AritAndRelOp aritAndRelOp,String typeExpr1,String typeExpr2) throws Eccezioni.ArithmeticOpError {
+        for (String[] combinazione:combinazioniAritOp) {
+            if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])){
+                aritAndRelOp.setTipoEspressione(combinazione[2]);
+                return combinazione[2];
+            }
+        }
 
+        throw new Eccezioni.ArithmeticOpError();
+    }
+
+    private String resultRelOp(AritAndRelOp aritAndRelOp,String typeExpr1,String typeExpr2) throws Eccezioni.RelationalOpError {
+        for (String[] combinazione:combinazioniRelOp) {
+            if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])) {
+                aritAndRelOp.setTipoEspressione(combinazione[2]);
+                return combinazione[2];
+            }
+        }
+        throw new Eccezioni.RelationalOpError();
+    }
+
+    private String resultStringOp(AritAndRelOp aritAndRelOp,String typeExpr1,String typeExpr2) throws Eccezioni.StringOpError {
+        for (String[] combinazione:combinazioniStrOp) {
+            if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])) {
+                aritAndRelOp.setTipoEspressione(combinazione[2]);
+                return combinazione[2];
+            }
+        }
+        throw new Eccezioni.StringOpError();
+    }
+
+    private String resultBooleanOp(AritAndRelOp aritAndRelOp,String typeExpr1,String typeExpr2) throws Eccezioni.BooleanOpError {
+        for (String[] combinazione:combinazioniBooleanOp) {
+            if (typeExpr1.equals(combinazione[0]) && typeExpr2.equals(combinazione[1])) {
+                aritAndRelOp.setTipoEspressione(combinazione[2]);
+                return combinazione[2];
+            }
+        }
+
+        throw new Eccezioni.BooleanOpError();
+    }
 
 
 }
