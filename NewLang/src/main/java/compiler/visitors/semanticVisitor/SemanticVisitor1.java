@@ -137,27 +137,12 @@ public class SemanticVisitor1 implements Visitor {
     public Object visit(BodyOp bodyOp) throws Exception {
 
         if(bodyOp.getListVar()!=null){
-            ArrayList<RowTable> listaVar;
-            for(VarDeclOp variable:bodyOp.getListVar()){
-                listaVar= (ArrayList<RowTable>) variable.accept(this);
-                for(RowTable row :listaVar){
-                    padre.addRow(row);
-                }
-            }
+            addVariableToScope((ArrayList<VarDeclOp>) bodyOp.getListVar(),padre);//Se sono presenti variabili le aggiungo allo scope
         }
-
 
         if(bodyOp.getListStatement()!=null){
             for (Statement stat:bodyOp.getListStatement()){
-                if(stat instanceof WhileOp)
-                    //Genero lo scope di While
-                    stat.accept(this);
-                if(stat instanceof ForOp)
-                    //Genero lo scope di For
-                    stat.accept(this);
-                //Genero lo scope di If
-                if(stat instanceof IfStatOp)
-                    stat.accept(this);
+                stat.accept(this);
             }
         }
 
@@ -235,7 +220,18 @@ public class SemanticVisitor1 implements Visitor {
     }
 
     @Override
-    public Object visit(Statement statement) {
+    public Object visit(Statement statement) throws Exception {
+
+        if(statement instanceof WhileOp)
+            //Genero lo scope di While
+            statement.accept(this);
+        if(statement instanceof ForOp)
+            //Genero lo scope di For
+            statement.accept(this);
+        //Genero lo scope di If
+        if(statement instanceof IfStatOp)
+            statement.accept(this);
+
         return null;
     }
 
