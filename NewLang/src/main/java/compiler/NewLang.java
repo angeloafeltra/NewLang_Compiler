@@ -5,7 +5,6 @@ import compiler.nodi.ProgramOp;
 import compiler.visitors.TranslatorVisitor;
 import compiler.visitors.semanticVisitor.SemanticVisitor1;
 import compiler.visitors.semanticVisitor.SemanticVisitor2;
-import org.openjdk.jmh.annotations.Benchmark;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;

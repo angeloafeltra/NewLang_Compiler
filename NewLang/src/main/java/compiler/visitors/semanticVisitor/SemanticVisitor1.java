@@ -30,60 +30,12 @@ public class SemanticVisitor1 implements Visitor {
         symbolTable.setFather(null);
         padre=symbolTable;
 
-        //Se sono presenti variabili le aggiungo allo scope
-        if(programOp.getVarDeclList()!=null){
-            ArrayList<RowTable> listaVar;
-            for(VarDeclOp variable:programOp.getVarDeclList()){
-                listaVar= (ArrayList<RowTable>) variable.accept(this);
-                for(RowTable row :listaVar){
-                    symbolTable.addRow(row);
-                }
-            }
-        }
-
-
-        //Se sono presenti funzioni le aggiungo allo scope
-        if(programOp.getFunOpList()!=null){
-            for(FunOp fun:programOp.getFunOpList()){
-                String identificatore=fun.getIdentificatore().getLessema();
-                TypeField.TypeFieldFunction typeField=new TypeField.TypeFieldFunction();
-                StringBuilder typeStream=new StringBuilder();
-                if(fun.getParams()!=null){
-                    ArrayList<String[]> listaParametri=new ArrayList<>();
-                    for(ParDeclOp param: fun.getParams())
-                        listaParametri.addAll((Collection<? extends String[]>) param.accept(this));
-
-                    for(String[] parametro:listaParametri){
-                        typeField.addInputParam(parametro[1]);
-                        typeStream.append(parametro[2]+",");
-                    }
-                }
-                typeField.addOutputParam(fun.getType());
-                symbolTable.addRow(new RowTable(identificatore,FunOp.class,typeField,typeStream.toString()));
-            }
-        }
-
+        addVariableToScope((ArrayList<VarDeclOp>) programOp.getVarDeclList(),symbolTable);//Se sono presenti variabili le aggiungo allo scope
+        addFunToScope((ArrayList<FunOp>) programOp.getFunOpList(),symbolTable);//Se sono presenti funzioni le aggiungo allo scope
         //Aggiungo la funzione main allo scope
-        String identificatore=programOp.getMain().getIdentificatore().getLessema();
-        TypeField.TypeFieldFunction typeField=new TypeField.TypeFieldFunction();
-        StringBuilder typeStream=new StringBuilder();
-        if(programOp.getMain().getParams()!=null){
-            ArrayList<String[]> listaParametri=new ArrayList<>();
-            for(ParDeclOp param: programOp.getMain().getParams())
-                listaParametri.addAll((Collection<? extends String[]>) param.accept(this));
-
-            for(String[] parametro:listaParametri){
-                typeField.addInputParam(parametro[1]);
-                typeStream.append(parametro[2]+",");
-            }
-        }
-
-        if (typeStream.toString().endsWith(","))
-            typeStream= new StringBuilder(typeStream.toString().substring(0, typeStream.length() - 1));
-
-        typeField.addOutputParam(programOp.getMain().getType());
-        symbolTable.addRow(new RowTable(identificatore,FunOp.class,typeField,typeStream.toString()));
-
+        ArrayList<FunOp> listFun=new ArrayList<>();
+        listFun.add(programOp.getMain());
+        addFunToScope(listFun,symbolTable);
 
 
         //Lancio la generazione degli scope per le funzioni
@@ -363,4 +315,40 @@ public class SemanticVisitor1 implements Visitor {
     public Object visit(UnaryOp unaryOp) throws Exception {
         return null;
     }
+
+    private void addVariableToScope(ArrayList<VarDeclOp> listVariabili,SymbolTable scope) throws Exception {
+        if (listVariabili!=null){
+            ArrayList<RowTable> listaVar;
+            for(VarDeclOp variable:listVariabili){
+                listaVar= (ArrayList<RowTable>) variable.accept(this);
+                for(RowTable row :listaVar){
+                   scope.addRow(row);
+                }
+            }
+        }
+    }
+
+    private void addFunToScope(ArrayList<FunOp> listaFunzioni,SymbolTable scope) throws Exception {
+        if(listaFunzioni!=null){
+            for(FunOp fun:listaFunzioni){
+                String identificatore=fun.getIdentificatore().getLessema();
+                TypeField.TypeFieldFunction typeField=new TypeField.TypeFieldFunction();
+                StringBuilder typeStream=new StringBuilder();
+                if(fun.getParams()!=null){
+                    ArrayList<String[]> listaParametri=new ArrayList<>();
+                    for(ParDeclOp param: fun.getParams())
+                        listaParametri.addAll((Collection<? extends String[]>) param.accept(this));
+
+                    for(String[] parametro:listaParametri){
+                        typeField.addInputParam(parametro[1]);
+                        typeStream.append(parametro[2]+",");
+                    }
+                }
+                typeField.addOutputParam(fun.getType());
+                scope.addRow(new RowTable(identificatore,FunOp.class,typeField,typeStream.toString()));
+            }
+        }
+    }
+
+
 }
