@@ -202,50 +202,29 @@ public class SemanticVisitor2 implements Visitor {
      */
     public Object visit(CallFunOpStat callFunOpStat) throws Exception {
 
-        //Ottengo la dichiarazione della funzione dal type env
         RowTable result=currentScope.lookup(callFunOpStat.getIdentifier().getLessema());
-        if(result==null){ //Controllo se la funzione e presente nel typ env
-            throw new Eccezioni.NoDeclarationError(); //La funzione non è stata dichairata
-        }else{
-            TypeField.TypeFieldFunction dichiarazione= (TypeField.TypeFieldFunction) result.getType();
-            //Ottengo il tipo dei parametri d'input della funzione
-            ArrayList<String> inputParam= (ArrayList<String>) dichiarazione.getInputParam();
-            //Ottengo il type stream dei parametri
-            String[] typeStream=result.getPropreties().split(",");
+        if (result==null) throw new Eccezioni.NoDeclarationError();//La funzione non è stata dichairata
+
+        TypeField.TypeFieldFunction dichiarazione= (TypeField.TypeFieldFunction) result.getType();
+        ArrayList<String> inputParam= (ArrayList<String>) dichiarazione.getInputParam();//Ottengo il tipo dei parametri d'input della funzione
+        String[] typeStream=result.getPropreties().split(",");//Ottengo il type stream dei parametri
+
+        int numeroParamteri=inputParam.size();
+        int numeroParametriChiamata= callFunOpStat.getListExpr()!=null ? callFunOpStat.getListExpr().size() : 0;
 
 
-            int numeroParamteri=inputParam.size();
-            int numeroParametriChiamata=0;
+        if(numeroParamteri!=numeroParametriChiamata) throw new Eccezioni.CallFunNumParamError(); //Il Numero di parametri non coincide
 
-            //Verifico che il numero di parametri coincide
-            if(callFunOpStat.getListExpr()!=null)
-                numeroParametriChiamata=callFunOpStat.getListExpr().size();
-            if(numeroParamteri!=numeroParametriChiamata){
-                throw new Eccezioni.CallFunNumParamError(); //Il Numero di parametri non coincide
-            }else{
-                //Verifico che il tipo coincide
-                for(int i=0;i<numeroParametriChiamata;i++){
-                    Expr expr=(callFunOpStat.getListExpr().get(i));
-                    String tipo= (String) expr.accept(this);
-                    //Controllo se ce qualche riduzione
-                    boolean isCompatibile=false;
-                    for(String[] riduzione: compatibilita){
-                        if(inputParam.get(i).equals(riduzione[0])&&tipo.equals(riduzione[1]))
-                            isCompatibile=true;
-                    }
-                    if(!isCompatibile) {
-                        throw new Eccezioni.CallFunTypeParamError();
-                    }else{
-                        //Aggiungo lo stream dei parametri al ast
-                        if (expr.getMode()==null)
-                            expr.setMode(typeStream[i]);
-
-                    }
-                }
-                return null;
-            }
+        //Verifico che il tipo coincide
+        for(int i=0;i<numeroParametriChiamata;i++){
+            Expr expr=(callFunOpStat.getListExpr().get(i));
+            String tipo= (String) expr.accept(this);
+            checkRiduzioni(inputParam.get(i),tipo);
+            //Aggiungo lo stream dei parametri al ast
+            if (expr.getMode()==null)
+                expr.setMode(typeStream[i]);
         }
-
+        return null;
     }
 
     @Override
@@ -484,49 +463,34 @@ public class SemanticVisitor2 implements Visitor {
      */
     public Object visit(CallFunOpExpr callFunOpExpr) throws Exception {
 
-
         //Verifico che il numero di parametri nella chiamata coincide
         RowTable result=currentScope.lookup(callFunOpExpr.getIdentifier().getLessema());
-        if(result==null){
-            throw new Eccezioni.NoDeclarationError(); //La funzione non è stata dichairata
-        }else{
-            TypeField.TypeFieldFunction dichiarazione =(TypeField.TypeFieldFunction) result.getType();
-            ArrayList<String> inputParam= (ArrayList<String>) dichiarazione.getInputParam();
-            String[] typeStream=result.getPropreties().split(",");
-            int numeroParamteri=inputParam.size();
-            int numeroParametriChiamata=0;
-            if(callFunOpExpr.getListExpr()!=null)
-                numeroParametriChiamata=callFunOpExpr.getListExpr().size();
+        if(result==null) throw new Eccezioni.NoDeclarationError(); //La funzione non è stata dichairata
 
-            if(numeroParamteri!=numeroParametriChiamata){
-                throw new Eccezioni.CallFunNumParamError(); //Il Numero di parametri non coincide
-            }else{
-                //Verifico che il tipo coincide
-                for(int i=0;i<numeroParametriChiamata;i++){
-                    Expr expr=(callFunOpExpr.getListExpr().get(i));
-                    //Controllo se ce qualche riduzione
-                    String tipo= (String) expr.accept(this);
-                    boolean isCompatibile=false;
-                    for(String[] riduzione: compatibilita){
-                        if(inputParam.get(i).equals(riduzione[0]) && tipo.equals(riduzione[1]))
-                            isCompatibile=true;
-                    }
-                    if(!tipo.equals(inputParam.get(i))) {
-                        throw new Eccezioni.CallFunTypeParamError();
-                    }else{
-                        //Aggiungo lo stream
-                        if (expr.getMode()==null)
-                            expr.setMode(typeStream[i]);
+        TypeField.TypeFieldFunction dichiarazione =(TypeField.TypeFieldFunction) result.getType();
+        ArrayList<String> inputParam= (ArrayList<String>) dichiarazione.getInputParam();
+        String[] typeStream=result.getPropreties().split(",");
+        int numeroParamteri=inputParam.size();
+        int numeroParametriChiamata= callFunOpExpr.getListExpr()!=null ? callFunOpExpr.getListExpr().size() : 0;
 
-                    }
-                }
-                if(dichiarazione.getOutputParam()!=null && !dichiarazione.getOutputParam().isEmpty()) {
-                    callFunOpExpr.setTipoEspressione(dichiarazione.getOutputParam().get(0));
-                    return dichiarazione.getOutputParam().get(0);
-                }else
-                    return null;
-            }
+        if(numeroParamteri!=numeroParametriChiamata) throw new Eccezioni.CallFunNumParamError(); //Il Numero di parametri non coincide
+
+        //Verifico che il tipo coincide
+        for(int i=0;i<numeroParametriChiamata;i++){
+            Expr expr=(callFunOpExpr.getListExpr().get(i));
+            //Controllo se ce qualche riduzione
+            String tipo= (String) expr.accept(this);
+            checkRiduzioni(inputParam.get(i),tipo);
+            //Aggiungo lo stream
+            if (expr.getMode()==null)
+                expr.setMode(typeStream[i]);
+
         }
+        if(dichiarazione.getOutputParam()!=null && !dichiarazione.getOutputParam().isEmpty()) {
+            callFunOpExpr.setTipoEspressione(dichiarazione.getOutputParam().get(0));
+            return dichiarazione.getOutputParam().get(0);
+        }else
+            return null;
 
     }
 
@@ -656,4 +620,17 @@ public class SemanticVisitor2 implements Visitor {
 
         throw new Eccezioni.UnaryOpNotValid();
     }
+
+    private void checkRiduzioni(String tipo1,String tipo2) throws Eccezioni.CallFunTypeParamError {
+        boolean isCompatibile=false;
+        for(String[] riduzione: compatibilita){
+            if(tipo1.equals(riduzione[0])&&tipo2.equals(riduzione[1]))
+                isCompatibile=true;
+        }
+        if(!isCompatibile) throw new Eccezioni.CallFunTypeParamError();
+    }
+
+
+
+
 }
