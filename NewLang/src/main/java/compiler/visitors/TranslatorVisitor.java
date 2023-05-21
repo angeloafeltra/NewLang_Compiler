@@ -409,13 +409,13 @@ public class TranslatorVisitor implements Visitor{
 
         switch (tipoOperazione1){
             case CONST_ARITMETICA:
-                return generaOpAritmetica(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+                return generaOpAritmeticaOrBoolean(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
             case CONST_RELAZIONALE:
                 return generaOpRelazionale(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
             case CONST_STRCAT:
-                return generaOpStrCat(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+                return generaOpStrCat(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2());
             case CONST_BOOLEANA:
-                return generaOpBooleana(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+                return generaOpAritmeticaOrBoolean(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
             case "potenza":
                 return generaOpPow(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
             default:
@@ -675,7 +675,7 @@ public class TranslatorVisitor implements Visitor{
     }
 
 
-    private String generaOpAritmetica(Expr expr1,Expr expr2,String tipoOperazione) throws Exception {
+    private String generaOpAritmeticaOrBoolean(Expr expr1,Expr expr2,String tipoOperazione) throws Exception {
         String expr1_str= (String) expr1.accept(this);
         String expr2_str= (String) expr2.accept(this);
         return expr1_str+tipoOperazione+expr2_str;
@@ -696,13 +696,7 @@ public class TranslatorVisitor implements Visitor{
         }
     }
 
-    private String generaOpBooleana(Expr expr1,Expr expr2,String tipoOperazione) throws Exception {
-        String expr1_str= (String) expr1.accept(this);
-        String expr2_str= (String) expr2.accept(this);
-        return expr1_str+tipoOperazione+expr2_str;
-    }
-
-    private String generaOpStrCat(Expr expr1,Expr expr2,String tipoOperazione) throws Exception {
+    private String generaOpStrCat(Expr expr1,Expr expr2) throws Exception {
         String expr1_str= (String) expr1.accept(this);
         String expr2_str= (String) expr2.accept(this);
 

@@ -8,12 +8,15 @@ import compiler.visitors.semanticVisitor.SemanticVisitor2;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NewLang {
 
     public File compile(byte[] fileContent,String fileName){
 
         parser p = new parser(new Lexer(new InputStreamReader(new ByteArrayInputStream(fileContent))));
+        Logger logger = Logger.getLogger(NewLang.class.getName());
         try {
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) p.parse().value;
 
@@ -32,18 +35,19 @@ public class NewLang {
             Process process = builder.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
+
             while (true) {
                 line = r.readLine();
                 if (line == null) {
                     break;
                 }
-                System.out.println(line);
+                logger.log(Level.ALL,line);
             }
 
             return new File("test_files" + File.separator + "c_out" + File.separator + fileName +".out");
 
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            e.printStackTrace(System.err);
             return null;
         }
 

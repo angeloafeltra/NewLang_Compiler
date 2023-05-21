@@ -4,7 +4,10 @@ import compiler.NewLang;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,8 +48,14 @@ public class NewLangController {
             }
             byte[] executableBytes = output.toByteArray();
 
-
-            if(eseguibile.delete() && gcc.delete()){
+            //eseguibile.delete() && gcc.delete()
+            ArrayList<File> filesToDelete=new ArrayList<>(){
+                {
+                    add(eseguibile);
+                    add(gcc);
+                }
+            };
+            if( deleteFile(filesToDelete)){
                 Map<String, byte[]> json2 = new HashMap<>();
                 json2.put(CONST_FILE, executableBytes);
                 json2.put(CONST_ERROR,"Compilazione corretta".getBytes());
@@ -60,7 +69,12 @@ public class NewLangController {
             }
 
         }else{
-            if(!gcc.delete()) { System.out.println("Errore nel eliminazione del file"); }
+            ArrayList<File> filesToDelete=new ArrayList<>(){
+                {
+                    add(gcc);
+                }
+            };
+            if(deleteFile(filesToDelete)) { System.err.println("Errore nel eliminazione del file"); }
 
             Map<String, byte[]> json2 = new HashMap<>();
             json2.put(CONST_FILE, new byte[0]);
@@ -87,6 +101,17 @@ public class NewLangController {
         }
 
         return s.toString();
+    }
+
+    private boolean deleteFile(ArrayList<File> filesToDelete) {
+        for (File file:filesToDelete) {
+            try {
+                Files.delete(Path.of(file.getPath()));
+            } catch (IOException e) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
