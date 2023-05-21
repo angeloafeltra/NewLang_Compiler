@@ -1,5 +1,6 @@
 /Users/angeloafeltra/Documents/GitHub/NewLang_Compiler/NewLang/src/main/java/compiler/nodi/expr/CallFunOpExpr.java
 /Users/angeloafeltra/Documents/GitHub/NewLang_Compiler/NewLang/src/main/java/compiler/visitors/semanticVisitor/SemanticVisitor2.java
+/Users/angeloafeltra/Documents/GitHub/NewLang_Compiler/NewLang/src/main/java/compiler/visitors/ScriptConstant.java
 /Users/angeloafeltra/Documents/GitHub/NewLang_Compiler/NewLang/src/main/java/compiler/nodi/statement/Statement.java
 /Users/angeloafeltra/Documents/GitHub/NewLang_Compiler/NewLang/src/main/java/compiler/nodi/expr/UnaryOp.java
 /Users/angeloafeltra/Documents/GitHub/NewLang_Compiler/NewLang/src/main/java/compiler/nodi/expr/IdInitObbOp.java

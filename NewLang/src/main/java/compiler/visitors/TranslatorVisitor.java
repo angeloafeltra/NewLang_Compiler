@@ -40,6 +40,29 @@ public class TranslatorVisitor implements Visitor{
     private boolean main=false;
     private SymbolTable currentScope;
 
+    private static final String[][] CONV_TYPE_OP= { {"AddOp", "+"},
+                                                    {"DiffOp", "-"},
+                                                    {"MulOp", "*"},
+                                                    {"DivOp", "/"},
+                                                    {"PowOp", "pow"},
+                                                    {"GTOp", ">"},
+                                                    {"GEOp", ">="},
+                                                    {"LTOp", "<"},
+                                                    {"LEOp", "<="},
+                                                    {"NEOp", "!="},
+                                                    {"EQOp", "=="},
+                                                    {"StrCatOp", "strcat"},
+                                                    {"AndOp", "&&"},
+                                                    {"OrOp", "||"},
+                                                    {"UminusOp", "-1*"},
+                                                    {"NotOp", "!"}};
+
+
+
+
+
+
+
     public TranslatorVisitor(String filNameToConvert){
         FILE_NAME=filNameToConvert;
     }
@@ -596,22 +619,9 @@ public class TranslatorVisitor implements Visitor{
     private String convertTypeOp(String typeOp){
 
         String tipoOprazione="";
-        if(typeOp.equals("AddOp")) tipoOprazione="+";
-        if(typeOp.equals("DiffOp")) tipoOprazione="-";
-        if(typeOp.equals("MulOp")) tipoOprazione="*";
-        if(typeOp.equals("DivOp")) tipoOprazione="/";
-        if(typeOp.equals("PowOp")) tipoOprazione="pow";
-        if(typeOp.equals("GTOp")) tipoOprazione=">";
-        if(typeOp.equals("GEOp")) tipoOprazione=">=";
-        if(typeOp.equals("LTOp")) tipoOprazione="<";
-        if(typeOp.equals("LEOp")) tipoOprazione="<=";
-        if(typeOp.equals("NEOp")) tipoOprazione="!=";
-        if(typeOp.equals("EQOp")) tipoOprazione="==";
-        if(typeOp.equals("StrCatOp")) tipoOprazione="strcat";
-        if(typeOp.equals("AndOp")) tipoOprazione="&&";
-        if(typeOp.equals("OrOp")) tipoOprazione="||";
-        if(typeOp.equals("UminusOp")) tipoOprazione="-1*";
-        if(typeOp.equals("NotOp")) tipoOprazione="!";
+        for (String [] conversione:CONV_TYPE_OP){
+            if(typeOp.equals(conversione[0])) tipoOprazione=conversione[1];
+        }
         return tipoOprazione;
     }
 
@@ -660,27 +670,31 @@ public class TranslatorVisitor implements Visitor{
         fileWriter.write(main_fun.getIdentificatore().getLessema()+"(");
         //Se la funzione di start possiede dei parametri, li recupero da argv
         if(main_fun.getParams()!=null){
-            int i=0;
-            StringBuilder parametri=new StringBuilder();
-            for(ParDeclOp param: main_fun.getParams()){
-                String tipo=param.getType();
-                for(Identifier id:param.getIdList()){
-                    i++;
-                    if (tipo.equals(CONST_STRING)) parametri.append("argv["+i+"],");
-                    if(tipo.equals(CONST_INTEGER)) parametri.append("atoi(argv["+i+"]),");
-                    if(tipo.equals(CONST_FLOAT)) parametri.append("atof(argv["+i+"]),");
-                    if(tipo.equals(CONST_BOOLEAN)) parametri.append("str_to_bool(argv["+i+"]),");
-                    if(tipo.equals(CONST_CHAR)) parametri.append("*argv["+i+"],");
-                }
-            }
-            if(!parametri.toString().equals(""))
-                parametri= new StringBuilder(parametri.toString().substring(0, parametri.length() - 1));
-            fileWriter.write(parametri.toString());
+            fileWriter.write(generaParametriMain(main_fun));
         }
 
         fileWriter.write(");\n");
         fileWriter.write("return 0;\n");
         fileWriter.write("}\n");
+    }
+
+    private String generaParametriMain(FunOp main_fun){
+        int i=0;
+        StringBuilder parametri=new StringBuilder();
+        for(ParDeclOp param: main_fun.getParams()){
+            String tipo=param.getType();
+            for(Identifier id:param.getIdList()){
+                i++;
+                if (tipo.equals(CONST_STRING)) parametri.append("argv["+i+"],");
+                if(tipo.equals(CONST_INTEGER)) parametri.append("atoi(argv["+i+"]),");
+                if(tipo.equals(CONST_FLOAT)) parametri.append("atof(argv["+i+"]),");
+                if(tipo.equals(CONST_BOOLEAN)) parametri.append("str_to_bool(argv["+i+"]),");
+                if(tipo.equals(CONST_CHAR)) parametri.append("*argv["+i+"],");
+            }
+        }
+        if(!parametri.toString().equals(""))
+            parametri= new StringBuilder(parametri.toString().substring(0, parametri.length() - 1));
+        return parametri.toString();
     }
 
     public void generaFunzioni(ArrayList<FunOp> list_fun,FunOp main_fun,SymbolTable scope) throws Exception {
