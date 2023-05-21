@@ -388,83 +388,9 @@ public class TranslatorVisitor implements Visitor{
         return null;
     }
 
-    @Override
-    public Object visit(AritAndRelOp aritAndRelOp) throws Exception {
 
-        String espressione="";
-        String tipoOperazione=convertTypeOp(aritAndRelOp.getTypeOp());
-        //Ottengo la prima espressione
-        String expr1= (String) aritAndRelOp.getExpr1().accept(this);
-        //Ottengo la secondaEspressione
-        String expr2= (String) aritAndRelOp.getExpr2().accept(this);
+    //INSERIRE QUI
 
-        //Ottengo il tipo di operazione
-        String typeOp=aritAndRelOp.getTypeOp();
-
-        //Operazioni Aritmetiche
-        if(typeOp.equals("AddOp") || typeOp.equals("DiffOp") || typeOp.equals("MulOp") || typeOp.equals("DivOp")){
-            espressione = expr1 + tipoOperazione + expr2;
-            return espressione;
-        }
-
-
-        //Operazioni Relazionali
-        if(typeOp.equals("GTOp") || typeOp.equals("GEOp") || typeOp.equals("LTOp") || typeOp.equals("LEOp") ||
-                typeOp.equals("EQOp") || typeOp.equals("NEOp")) {
-
-            if (aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_STRING) || aritAndRelOp.getExpr1().getTipoEspressione().equals("char")){
-                if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_CHAR))
-                    expr1="char_to_str("+expr1+")";
-                if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_CHAR))
-                    expr2="char_to_str("+expr2+")";
-                espressione="strcmp("+expr1+","+expr2+")"+tipoOperazione+"0";
-            }else{
-                espressione = expr1 + tipoOperazione + expr2;
-            }
-
-
-            return espressione;
-
-        }
-
-        if(typeOp.equals("AndOp") || typeOp.equals("OrOp")){
-
-            espressione = expr1 + tipoOperazione + expr2;
-            return espressione;
-
-        }
-
-        if(typeOp.equals("StrCatOp")){
-            //Converto le espressioni in stringhe se sono di altro tipo
-            if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_INTEGER))
-                expr1="integer_to_str("+expr1+")";
-            if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_INTEGER))
-                expr2="integer_to_str("+expr2+")";
-            if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_FLOAT))
-                expr1="real_to_str("+expr1+")";
-            if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_FLOAT))
-                expr2="real_to_str("+expr2+")";
-            if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_CHAR))
-                expr1="char_to_str("+expr1+")";
-            if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_CHAR))
-                expr2="char_to_str("+expr2+")";
-            if(aritAndRelOp.getExpr1().getTipoEspressione().equals(CONST_BOOLEAN))
-                expr1="bool_to_str("+expr1+")";
-            if(aritAndRelOp.getExpr2().getTipoEspressione().equals(CONST_BOOLEAN))
-                expr2="bool_to_str("+expr2+")";
-
-            espressione="str_concat("+expr1+","+expr2+")";
-            return espressione;
-        }
-
-        if(typeOp.equals("PowOp")){
-            espressione=tipoOperazione+"("+expr1+","+expr2+")";
-            return espressione;
-        }
-
-
-        return espressione;
-    }
 
     @Override
     public Object visit(CallFunOpExpr callFunOpExpr) throws Exception {
@@ -701,7 +627,7 @@ public class TranslatorVisitor implements Visitor{
         return parametri.toString();
     }
 
-    public void generaFunzioni(ArrayList<FunOp> list_fun,FunOp main_fun,SymbolTable scope) throws Exception {
+    private void generaFunzioni(ArrayList<FunOp> list_fun,FunOp main_fun,SymbolTable scope) throws Exception {
         //Inserisco le funzioni
         if(list_fun!=null){
             for(FunOp fun: list_fun){
@@ -716,5 +642,122 @@ public class TranslatorVisitor implements Visitor{
         }
     }
 
+
+
+
+
+
+
+    @Override
+    public Object visit(AritAndRelOp aritAndRelOp) throws Exception {
+
+        String[][] typeOpBinaria= { {"AddOp", "aritmetica","+"},
+                                    {"DiffOp", "aritmetica","-"},
+                                    {"MulOp", "aritmetica","*"},
+                                    {"DivOp", "aritmetica","/"},
+                                    {"PowOp", "potenza","pow"},
+                                    {"GTOp", "relazionale",">"},
+                                    {"GEOp", "relazionale",">="},
+                                    {"LTOp", "relazionale","<"},
+                                    {"LEOp", "relazionale","<="},
+                                    {"NEOp", "relazionale","!="},
+                                    {"EQOp", "relazionale","=="},
+                                    {"StrCatOp", "strcat","strcat"},
+                                    {"AndOp", "booleana","&&"},
+                                    {"OrOp", "booleana","||"}};
+
+        String tipoOperazione1="";
+        String tipoOperazione2="";
+        for (String[] op :typeOpBinaria){
+            if (aritAndRelOp.getTypeOp().equals(op[0])){
+                tipoOperazione1=op[1];
+                tipoOperazione2=op[2];
+            }
+        }
+
+        switch (tipoOperazione1){
+            case "aritmetica":
+                return generaOpAritmetica(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            case "relazionale":
+                return generaOpRelazionale(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            case "strcat":
+                return generaOpStrCat(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            case "booleana":
+                return generaOpBooleana(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            case "potenza":
+                return generaOpPow(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            default:
+                return "";
+        }
+    }
+
+
+    private String generaOpAritmetica(Expr expr1,Expr expr2,String tipoOperazione) throws Exception {
+        String expr1_str= (String) expr1.accept(this);
+        String expr2_str= (String) expr2.accept(this);
+        return expr1_str+tipoOperazione+expr2_str;
+    }
+
+    private String generaOpRelazionale(Expr expr1,Expr expr2, String tipoOperazione) throws Exception {
+        String expr1_str= (String) expr1.accept(this);
+        String expr2_str= (String) expr2.accept(this);
+
+        if (expr1.getTipoEspressione().equals(CONST_STRING) || expr1.getTipoEspressione().equals("char")){
+            if(expr1.getTipoEspressione().equals(CONST_CHAR))
+                expr1_str="char_to_str("+expr1_str+")";
+            if(expr2.getTipoEspressione().equals(CONST_CHAR))
+                expr2_str="char_to_str("+expr2_str+")";
+            return "strcmp("+expr1_str+","+expr2_str+")"+tipoOperazione+"0";
+        }else{
+            return expr1_str + tipoOperazione + expr2_str;
+        }
+    }
+
+    private String generaOpBooleana(Expr expr1,Expr expr2,String tipoOperazione) throws Exception {
+        String expr1_str= (String) expr1.accept(this);
+        String expr2_str= (String) expr2.accept(this);
+        return expr1_str+tipoOperazione+expr2_str;
+    }
+
+    private String generaOpStrCat(Expr expr1,Expr expr2,String tipoOperazione) throws Exception {
+        String expr1_str= (String) expr1.accept(this);
+        String expr2_str= (String) expr2.accept(this);
+
+        switch (expr1.getTipoEspressione()){
+            case CONST_INTEGER:
+                expr1_str="integer_to_str("+expr1_str+")";
+                break;
+            case CONST_FLOAT:
+                expr1_str="real_to_str("+expr1_str+")";
+                break;
+            case CONST_CHAR:
+                expr1_str="char_to_str("+expr1_str+")";
+                break;
+            case CONST_BOOLEAN:
+                expr1_str="bool_to_str("+expr1_str+")";
+            default:
+        }
+        switch (expr2.getTipoEspressione()){
+            case CONST_INTEGER:
+                expr2_str="integer_to_str("+expr2_str+")";
+                break;
+            case CONST_FLOAT:
+                expr2_str="real_to_str("+expr2_str+")";
+                break;
+            case CONST_CHAR:
+                expr2_str="char_to_str("+expr2_str+")";
+                break;
+            case CONST_BOOLEAN:
+                expr2_str="bool_to_str("+expr2_str+")";
+            default:
+        }
+        return "str_concat("+expr1_str+","+expr2_str+")";
+    }
+
+    private String generaOpPow(Expr expr1,Expr expr2,String tipoOperazione) throws Exception {
+        String expr1_str= (String) expr1.accept(this);
+        String expr2_str= (String) expr2.accept(this);
+        return tipoOperazione+"("+expr1_str+","+expr2_str+")";
+    }
 
 }
