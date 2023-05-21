@@ -299,7 +299,7 @@ public class TranslatorVisitor implements Visitor{
                 case CONST_BOOLEAN:
                     fileWriter.write("scanf(\"%b\",&" + id.getLessema() + ");\n");
                     break;
-
+                default:
             }
         }
 
@@ -676,11 +676,24 @@ public class TranslatorVisitor implements Visitor{
             String tipo=param.getType();
             for(Identifier id:param.getIdList()){
                 i++;
-                if (tipo.equals(CONST_STRING)) parametri.append("argv["+i+"],");
-                if(tipo.equals(CONST_INTEGER)) parametri.append("atoi(argv["+i+"]),");
-                if(tipo.equals(CONST_FLOAT)) parametri.append("atof(argv["+i+"]),");
-                if(tipo.equals(CONST_BOOLEAN)) parametri.append("str_to_bool(argv["+i+"]),");
-                if(tipo.equals(CONST_CHAR)) parametri.append("*argv["+i+"],");
+                switch (tipo) {
+                    case CONST_STRING:
+                        parametri.append("argv["+i+"],");
+                        break;
+                    case CONST_INTEGER:
+                        parametri.append("atoi(argv["+i+"]),");
+                        break;
+                    case CONST_FLOAT:
+                        parametri.append("atof(argv["+i+"]),");
+                        break;
+                    case CONST_BOOLEAN:
+                        parametri.append("str_to_bool(argv["+i+"]),");
+                        break;
+                    case CONST_CHAR:
+                        parametri.append("*argv["+i+"],");
+                        break;
+                    default:
+                }
             }
         }
         if(!parametri.toString().equals(""))
