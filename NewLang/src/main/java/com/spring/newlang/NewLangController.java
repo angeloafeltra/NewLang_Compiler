@@ -10,8 +10,8 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 @RestController
@@ -21,6 +21,9 @@ public class NewLangController {
     public static final String CONST_ERROR="error";
     public static final String CONST_FILE="file";
     public static final String CONST_FILE_NAME="fileName";
+
+    private ArrayList<File> filesToDelete=new ArrayList<>();
+    private Logger logger = Logger.getLogger(NewLangController.class.getName());
 
 
     private SecureRandom random = new SecureRandom();
@@ -49,12 +52,8 @@ public class NewLangController {
             byte[] executableBytes = output.toByteArray();
 
             //eseguibile.delete() && gcc.delete()
-            ArrayList<File> filesToDelete=new ArrayList<>(){
-                {
-                    add(eseguibile);
-                    add(gcc);
-                }
-            };
+            filesToDelete.add(eseguibile);
+            filesToDelete.add(gcc);
             if( deleteFile(filesToDelete)){
                 Map<String, byte[]> json2 = new HashMap<>();
                 json2.put(CONST_FILE, executableBytes);
@@ -69,12 +68,8 @@ public class NewLangController {
             }
 
         }else{
-            ArrayList<File> filesToDelete=new ArrayList<>(){
-                {
-                    add(gcc);
-                }
-            };
-            if(deleteFile(filesToDelete)) { System.err.println("Errore nel eliminazione del file"); }
+            filesToDelete.add(gcc);
+            if(deleteFile(filesToDelete)) { logger.log(Level.WARNING,"Errore nel eliminazione del file"); }
 
             Map<String, byte[]> json2 = new HashMap<>();
             json2.put(CONST_FILE, new byte[0]);
@@ -111,6 +106,7 @@ public class NewLangController {
                 return false;
             }
         }
+        filesToDelete.clear();
         return true;
     }
 
