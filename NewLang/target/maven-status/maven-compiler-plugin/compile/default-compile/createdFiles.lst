@@ -60,5 +60,6 @@ com/spring/newlang/NewLangController.class
 compiler/visitors/semanticVisitor/SemanticVisitor1.class
 compiler/symbolTable/TypeField$TypeFieldFunction.class
 compiler/nodi/ProgramOp.class
+compiler/visitors/ScriptConstant.class
 compiler/visitors/semanticVisitor/Eccezioni$StringOpError.class
 compiler/nodi/statement/WhileOp.class

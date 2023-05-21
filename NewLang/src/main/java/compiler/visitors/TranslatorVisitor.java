@@ -15,6 +15,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import static compiler.visitors.ScriptConstant.SUPPORT_FUN_INTEGER_TO_STR;
+import static compiler.visitors.ScriptConstant.SUPPORT_FUN_REAL_TO_STR;
+import static compiler.visitors.ScriptConstant.SUPPORT_FUN_CHAR_TO_STR;
+import static compiler.visitors.ScriptConstant.SUPPORT_FUN_BOOL_TO_STR;
+import static compiler.visitors.ScriptConstant.SUPPORT_FUN_STR_CONCAT;
+import static compiler.visitors.ScriptConstant.SUPPORT_FUN_READ_STR;
+import static compiler.visitors.ScriptConstant.SUPPORT_FUN_STR_TO_BOOL;
+import static compiler.visitors.ScriptConstant.LIBRERIE;
+import static compiler.visitors.ScriptConstant.PROTOTIPI_FUN_SUP;
+
 public class TranslatorVisitor implements Visitor{
 
     public static final String DIR_TEST_FILES="test_files";
@@ -721,77 +731,21 @@ public class TranslatorVisitor implements Visitor{
     }
 
     public void addLibrerie() throws IOException {
-        fileWriter.write("#include <stdio.h>\n");
-        fileWriter.write("#include <stdlib.h>\n");
-        fileWriter.write("#include <string.h>\n");
-        fileWriter.write("#include <math.h>\n");
-        fileWriter.write("#include <unistd.h>\n");
-        fileWriter.write("#include <stdbool.h>\n");
-        fileWriter.write("#define MAXCHAR 512\n");
+        fileWriter.write(LIBRERIE);
     }
 
     public void addPrototipiFunzioniDiSupporto() throws IOException {
-        fileWriter.write("char* integer_to_str(int i);\n");
-        fileWriter.write("char* real_to_str(float i);\n");
-        fileWriter.write("char* char_to_str(char i);\n");
-        fileWriter.write("char* bool_to_str(bool i);\n");
-        fileWriter.write("char* str_concat(char* str1, char* str2);\n");
-        fileWriter.write("char* read_str();\n");
-        fileWriter.write("int str_to_bool(char* expr);\n");
-
-
+        fileWriter.write(PROTOTIPI_FUN_SUP);
     }
 
     public void addFunzioniDiSupporto() throws IOException {
-        fileWriter.write("\n//Funzioni di supporto \n");
-        fileWriter.write("char* integer_to_str(int i){\n");
-        fileWriter.write("int length= snprintf(NULL,0,\"%d\",i);\n");
-        fileWriter.write("char* result=malloc(length+1);\n");
-        fileWriter.write("snprintf(result,length+1,\"%d\",i);\n");
-        fileWriter.write("return result;\n");
-        fileWriter.write("}\n");
-
-        fileWriter.write("char* real_to_str(float i){\n");
-        fileWriter.write("int length= snprintf(NULL,0,\"%f\",i);\n");
-        fileWriter.write("char* result=malloc(length+1);\n");
-        fileWriter.write("snprintf(result,length+1,\"%f\",i);\n");
-        fileWriter.write("return result;\n");
-        fileWriter.write("}\n");
-
-        fileWriter.write("char* char_to_str(char i){\n");
-        fileWriter.write("int length= snprintf(NULL,0,\"%c\",i);\n");
-        fileWriter.write("char* result=malloc(length+1);\n");
-        fileWriter.write("snprintf(result,length+1,\"%c\",i);\n");
-        fileWriter.write("return result;\n");
-        fileWriter.write("}\n");
-
-        fileWriter.write("char* bool_to_str(bool i){\n");
-        fileWriter.write("int length= snprintf(NULL,0,\"%d\",i);\n");
-        fileWriter.write("char* result=malloc(length+1);\n");
-        fileWriter.write("snprintf(result,length+1,\"%d\",i);\n");
-        fileWriter.write("return result;\n");
-        fileWriter.write("}\n");
-
-        fileWriter.write("char* str_concat(char* str1, char* str2){\n");
-        fileWriter.write("char* result=malloc(sizeof(char)*MAXCHAR);\n");
-        fileWriter.write("result=strcat(result,str1);\n");
-        fileWriter.write("result=strcat(result,str2);\n");
-        fileWriter.write("return result;}\n");
-
-        fileWriter.write("\n");
-        fileWriter.write("char* read_str(){\n");
-        fileWriter.write("char* str=malloc(sizeof(char)*MAXCHAR);\n");
-        fileWriter.write("scanf(\"%s\",str);\n");
-        fileWriter.write("return str;}\n");
-
-        fileWriter.write("\n");
-        fileWriter.write("int str_to_bool(char* expr){\n");
-        fileWriter.write("int i=0;\n");
-        fileWriter.write("if ( (strcmp(expr, \"true\")==0) || (strcmp(expr, \"1\"))==0 )\n");
-        fileWriter.write("i=1;\n");
-        fileWriter.write("if ( (strcmp(expr, \"false\")==0) || (strcmp(expr, \"0\"))==0 )\n");
-        fileWriter.write("i=0;\n");
-        fileWriter.write("return i;}\n");
+        fileWriter.write(SUPPORT_FUN_INTEGER_TO_STR);
+        fileWriter.write(SUPPORT_FUN_REAL_TO_STR);
+        fileWriter.write(SUPPORT_FUN_CHAR_TO_STR);
+        fileWriter.write(SUPPORT_FUN_BOOL_TO_STR);
+        fileWriter.write(SUPPORT_FUN_STR_CONCAT);
+        fileWriter.write(SUPPORT_FUN_READ_STR);
+        fileWriter.write(SUPPORT_FUN_STR_TO_BOOL);
 
     }
 
