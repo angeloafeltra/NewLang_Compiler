@@ -38,6 +38,11 @@ public class TranslatorVisitor implements Visitor{
     public static final String CONST_ARITMETICA="aritmetica";
     public static final String CONST_RELAZIONALE="relazionale";
     public static final String CONST_BOOLEANA="booleana";
+    public static final String CONST_STRCAT="strcat";
+    public static final String CONST_INTEGER_TO_STR="integer_to_str(";
+    public static final String CONST_REAL_TO_STR="real_to_str(";
+    public static final String CONST_CHAR_TO_STR="char_to_str(";
+    public static final String CONST_BOOL_TO_STR="bool_to_str(";
 
     public  String FILE_NAME;
     private  FileWriter fileWriter;
@@ -55,7 +60,7 @@ public class TranslatorVisitor implements Visitor{
                                                     {"LEOp", "<="},
                                                     {"NEOp", "!="},
                                                     {"EQOp", "=="},
-                                                    {"StrCatOp", "strcat"},
+                                                    {"StrCatOp", CONST_STRCAT},
                                                     {"AndOp", "&&"},
                                                     {"OrOp", "||"},
                                                     {"UminusOp", "-1*"},
@@ -362,13 +367,13 @@ public class TranslatorVisitor implements Visitor{
                 fileWriter.write("printf(\"%s\",");
             String espressione= (String) expr.accept(this);
             if(expr.getTipoEspressione().equals(CONST_INTEGER))
-                espressione="integer_to_str("+espressione+")";
+                espressione=CONST_INTEGER_TO_STR+espressione+")";
             if(expr.getTipoEspressione().equals(CONST_FLOAT))
-                espressione="real_to_str("+espressione+")";
+                espressione=CONST_REAL_TO_STR+espressione+")";
             if(expr.getTipoEspressione().equals(CONST_CHAR))
-                espressione="char_to_str("+espressione+")";
+                espressione=CONST_CHAR_TO_STR+espressione+")";
             if(expr.getTipoEspressione().equals(CONST_BOOLEAN))
-                espressione="bool_to_str("+espressione+")";
+                espressione=CONST_BOOL_TO_STR+espressione+")";
             fileWriter.write(espressione+");\n");
         }
 
@@ -389,7 +394,7 @@ public class TranslatorVisitor implements Visitor{
                 {"LEOp", CONST_RELAZIONALE,"<="},
                 {"NEOp", CONST_RELAZIONALE,"!="},
                 {"EQOp", CONST_RELAZIONALE,"=="},
-                {"StrCatOp", "strcat","strcat"},
+                {"StrCatOp", CONST_STRCAT,CONST_STRCAT},
                 {"AndOp", CONST_BOOLEANA,"&&"},
                 {"OrOp", CONST_BOOLEANA,"||"}};
 
@@ -407,7 +412,7 @@ public class TranslatorVisitor implements Visitor{
                 return generaOpAritmetica(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
             case CONST_RELAZIONALE:
                 return generaOpRelazionale(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
-            case "strcat":
+            case CONST_STRCAT:
                 return generaOpStrCat(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
             case CONST_BOOLEANA:
                 return generaOpBooleana(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
@@ -501,7 +506,7 @@ public class TranslatorVisitor implements Visitor{
         if(((ConstOp) idInitObbOp.getExpr()).getTypeConst().equals("integer_const"))
             type="int";
         if(((ConstOp) idInitObbOp.getExpr()).getTypeConst().equals("real_const"))
-            type="float";
+            type=CONST_FLOAT;
         if(((ConstOp) idInitObbOp.getExpr()).getTypeConst().equals("char_const"))
             type = "char";
         if(((ConstOp) idInitObbOp.getExpr()).getTypeConst().equals("string_const"))
@@ -682,9 +687,9 @@ public class TranslatorVisitor implements Visitor{
 
         if (expr1.getTipoEspressione().equals(CONST_STRING) || expr1.getTipoEspressione().equals("char")){
             if(expr1.getTipoEspressione().equals(CONST_CHAR))
-                expr1_str="char_to_str("+expr1_str+")";
+                expr1_str=CONST_CHAR_TO_STR+expr1_str+")";
             if(expr2.getTipoEspressione().equals(CONST_CHAR))
-                expr2_str="char_to_str("+expr2_str+")";
+                expr2_str=CONST_CHAR_TO_STR+expr2_str+")";
             return "strcmp("+expr1_str+","+expr2_str+")"+tipoOperazione+"0";
         }else{
             return expr1_str + tipoOperazione + expr2_str;
@@ -703,31 +708,31 @@ public class TranslatorVisitor implements Visitor{
 
         switch (expr1.getTipoEspressione()){
             case CONST_INTEGER:
-                expr1_str="integer_to_str("+expr1_str+")";
+                expr1_str=CONST_INTEGER_TO_STR+expr1_str+")";
                 break;
             case CONST_FLOAT:
-                expr1_str="real_to_str("+expr1_str+")";
+                expr1_str=CONST_REAL_TO_STR+expr1_str+")";
                 break;
             case CONST_CHAR:
-                expr1_str="char_to_str("+expr1_str+")";
+                expr1_str=CONST_CHAR_TO_STR+expr1_str+")";
                 break;
             case CONST_BOOLEAN:
-                expr1_str="bool_to_str("+expr1_str+")";
+                expr1_str=CONST_BOOL_TO_STR+expr1_str+")";
                 break;
             default:
         }
         switch (expr2.getTipoEspressione()){
             case CONST_INTEGER:
-                expr2_str="integer_to_str("+expr2_str+")";
+                expr2_str=CONST_INTEGER_TO_STR+expr2_str+")";
                 break;
             case CONST_FLOAT:
-                expr2_str="real_to_str("+expr2_str+")";
+                expr2_str=CONST_REAL_TO_STR+expr2_str+")";
                 break;
             case CONST_CHAR:
-                expr2_str="char_to_str("+expr2_str+")";
+                expr2_str=CONST_CHAR_TO_STR+expr2_str+")";
                 break;
             case CONST_BOOLEAN:
-                expr2_str="bool_to_str("+expr2_str+")";
+                expr2_str=CONST_BOOL_TO_STR+expr2_str+")";
                 break;
             default:
         }
