@@ -1,8 +1,10 @@
 package com.example.newlangui;
 
+import com.example.FileDownloadUtil;
 import com.example.GenExecutable;
 import jakarta.jws.WebParam;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,7 +79,29 @@ public class NewLangController {
         }
     }
 
+    @GetMapping("/downloadFile/{fileCode}")
+    public ResponseEntity<?> downloadFile(@PathVariable("fileCode") String fileCode) {
+        FileDownloadUtil downloadUtil = new FileDownloadUtil();
 
+        Resource resource = null;
+        try {
+            resource = downloadUtil.getFileAsResource(fileCode);
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+
+        if (resource == null) {
+            return new ResponseEntity<>("File not found", HttpStatus.NOT_FOUND);
+        }
+
+        String contentType = "application/octet-stream";
+        String headerValue = "attachment; filename=\"" + resource.getFilename() + "\"";
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, headerValue)
+                .body(resource);
+    }
 
 
     @RequestMapping("/testConnection")

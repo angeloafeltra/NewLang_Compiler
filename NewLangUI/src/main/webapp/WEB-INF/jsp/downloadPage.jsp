@@ -31,7 +31,7 @@
         <div class="col-md-12">
             <div style="width: 550px;margin-right: auto;margin-left: auto;margin-top: 50px;text-align: center;">
                 <h1 style="font-size: 22px;width: 530px;text-align: center;margin-right: auto;margin-left: auto;color: var(--bs-red);"><strong>Compilazione avvenuta con successo!!!</strong></h1>
-                <a href="/fileConvertiti/${fileName}.out" id="linkDownload" download="${fileName}.out"><img style="margin-right: auto;margin-left: auto;margin-top: 10px;width: 80px;height: 80px;" src="/assets/img/file.png"></a>
+                <a href="/downloadFile/${fileName}.out" id="linkDownload"><img style="margin-right: auto;margin-left: auto;margin-top: 10px;width: 80px;height: 80px;" src="/assets/img/file.png"></a>
                 <p style="width: 311px;margin-right: auto;margin-left: auto;text-align: center;margin-top: 6px;">${fileName}.out</p>
             </div>
         </div>
