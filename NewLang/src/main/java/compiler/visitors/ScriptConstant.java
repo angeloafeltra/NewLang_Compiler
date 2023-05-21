@@ -68,6 +68,7 @@ public final class ScriptConstant {
                                                     "char* read_str();\n" +
                                                     "int str_to_bool(char* expr);\n";
 
+
 }
 
 

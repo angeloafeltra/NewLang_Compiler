@@ -30,152 +30,54 @@ public class TranslatorVisitor implements Visitor{
     public static final String DIR_TEST_FILES="test_files";
     public static final String DIR_FILE_C="c_out";
     public static final String ALTERNATIV_MAIN="main2";
-
     public static final String CONST_STRING="string";
     public static final String CONST_INTEGER="integer";
     public static final String CONST_FLOAT="float";
     public static final String CONST_BOOLEAN="boolean";
     public static final String CONST_CHAR="char";
-
-    public  String FILE_NAME="c_gen.c";
+    public  String FILE_NAME;
     private  FileWriter fileWriter;
-
     private boolean main=false;
     private SymbolTable currentScope;
 
     public TranslatorVisitor(String filNameToConvert){
         FILE_NAME=filNameToConvert;
     }
+    public TranslatorVisitor(){this.FILE_NAME="c_gen.c";}
 
-    public TranslatorVisitor(){}
 
     @Override
     public Object visit(ProgramOp programOp) throws Exception {
-        File FILE;
         currentScope=programOp.getSymbolTable();
 
-
-
-        // Inizializzo il file di scrittura
-        if (!(new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator)).exists()) {
-            Files.createDirectory(Paths.get(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator));
-            FILE = new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator + FILE_NAME);
-            boolean status=FILE.createNewFile();
-            if(!status) return null;
-        }else{
-            FILE = new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator + FILE_NAME);
-        }
-
-        fileWriter = new FileWriter(FILE);
-
-
-        // Inserisco le librerie
-        addLibrerie();
+        if(!inizializeFileWriter()) return null;
+        fileWriter.write(LIBRERIE);// Inserisco le librerie
         fileWriter.write("\n");
 
         //Inserisco i prototipi delle funzioni
         fileWriter.write("//Prototipi\n");
-        addPrototipiFunzioniDiSupporto();
-        if(programOp.getFunOpList()!=null){
-            for(FunOp fun:programOp.getFunOpList()){
-                String prototipo=generaPrototipo(fun);
-                fileWriter.write(prototipo);
-            }
-            //Se la funzione start si chiama main
-            //cambio il nome in main2, poiche avrei
-            //un errore altrimenti
-            if (programOp.getMain().getIdentificatore().getLessema().equals("main"))
-                programOp.getMain().getIdentificatore().setLessema(ALTERNATIV_MAIN);
-            String prototipo=generaPrototipo(programOp.getMain()); //Prototipo Main
-            fileWriter.write(prototipo);
-        }
+        fileWriter.write(PROTOTIPI_FUN_SUP);
+        generateListPrototipi((ArrayList<FunOp>) programOp.getFunOpList(),programOp.getMain());
         fileWriter.write("\n");
 
 
         //Inserisco le variabili
         fileWriter.write("//Variabili Globali\n");
-        if(programOp.getVarDeclList()!=null){
-
-            for(VarDeclOp variable:programOp.getVarDeclList()){
-                String tipo=convertType(variable.getType());
-                for(Expr expr:variable.getExprList()){
-                    if(expr instanceof Identifier) {
-                        fileWriter.write(tipo+" " + ((Identifier) expr).getLessema() + ";\n");
-                    }
-                }
-            }
-
-            for(VarDeclOp variable:programOp.getVarDeclList()){
-                variable.accept(this);
-            }
-        }
+        generaVariabiliGlobali((ArrayList<VarDeclOp>) programOp.getVarDeclList());
         fileWriter.write("\n");
 
 
-        //Inserisco il main
-        fileWriter.write("int main (int argc, char *argv[]){\n");
-
-        //Richiamo la funzione di start nel main
-        FunOp main_fun=programOp.getMain();
-        fileWriter.write(main_fun.getIdentificatore().getLessema()+"(");
-        //Se la funzione di start possiede dei parametri, li recupero da argv
-        if(main_fun.getParams()!=null){
-            int i=0;
-            StringBuilder parametri=new StringBuilder();
-            for(ParDeclOp param: main_fun.getParams()){
-                String tipo=param.getType();
-                for(Identifier id:param.getIdList()){
-                    i++;
-                    if(!tipo.equals(CONST_STRING)){
-                        if(tipo.equals(CONST_INTEGER)){
-                            parametri.append("atoi(argv["+i+"]),");
-                        }
-                        if(tipo.equals(CONST_FLOAT)){
-                            parametri.append("atof(argv["+i+"]),");
-                        }
-                        if(tipo.equals(CONST_BOOLEAN)){
-                            parametri.append("str_to_bool(argv["+i+"]),");
-                        }
-                        if(tipo.equals(CONST_CHAR)){
-                            parametri.append("*argv["+i+"],");
-                        }
-                    }
-                    else
-                        parametri.append("argv["+i+"],");
-                }
-            }
-            if(!parametri.toString().equals(""))
-                parametri= new StringBuilder(parametri.toString().substring(0, parametri.length() - 1));
-            fileWriter.write(parametri.toString());
-        }
-
-        fileWriter.write(");\n");
-
-        /**
-         currentScope=programOp.getMain().getSymbolTable();
-         programOp.getMain().getBody().accept(this);
-         currentScope=programOp.getSymbolTable();
-         */
-        fileWriter.write("return 0;\n");
-        fileWriter.write("}\n");
+        generaMain(programOp.getMain());//Inserisco il main
+        generaFunzioni((ArrayList<FunOp>) programOp.getFunOpList(),programOp.getMain(),currentScope); //Inserisco le funzioni
 
 
-        //Inserisco le funzioni
-        if(programOp.getFunOpList()!=null){
-            for(FunOp fun: programOp.getFunOpList()){
-                currentScope=fun.getSymbolTable();
-                fun.accept(this);
-                fileWriter.write("\n");
-                currentScope=programOp.getSymbolTable();
-            }
-            currentScope=programOp.getMain().getSymbolTable();
-            programOp.getMain().accept(this);
-            currentScope=programOp.getSymbolTable();
-
-        }
-
-
-        addFunzioniDiSupporto();
+        fileWriter.write(SUPPORT_FUN_INTEGER_TO_STR);
+        fileWriter.write(SUPPORT_FUN_REAL_TO_STR);
+        fileWriter.write(SUPPORT_FUN_CHAR_TO_STR);
+        fileWriter.write(SUPPORT_FUN_BOOL_TO_STR);
+        fileWriter.write(SUPPORT_FUN_STR_CONCAT);
+        fileWriter.write(SUPPORT_FUN_READ_STR);
+        fileWriter.write(SUPPORT_FUN_STR_TO_BOOL);
         fileWriter.close();
         return null;
     }
@@ -666,14 +568,14 @@ public class TranslatorVisitor implements Visitor{
         return espressione;
     }
 
-    public String convertType(String type){
+    private String convertType(String type){
         if(type.equals(CONST_INTEGER)) type="int";
         if(type.equals(CONST_BOOLEAN)) type="bool";
         if(type.equals(CONST_STRING)) type="char*";
         return type;
     }
 
-    public String generaPrototipo(FunOp fun) throws Exception {
+    private String generaPrototipo(FunOp fun) throws Exception {
         String tipoFunzione=convertType(fun.getType()); //Tipo della funzione
         String nomeFunzione=fun.getIdentificatore().getLessema(); //Nome della funzione
         StringBuilder parametri=new StringBuilder(); //Parametri Funzione
@@ -691,7 +593,7 @@ public class TranslatorVisitor implements Visitor{
         return tipoFunzione+" "+nomeFunzione+ "("+parametri.toString()+");\n";
     }
 
-    public String convertTypeOp(String typeOp){
+    private String convertTypeOp(String typeOp){
 
         String tipoOprazione="";
         if(typeOp.equals("AddOp"))
@@ -730,23 +632,88 @@ public class TranslatorVisitor implements Visitor{
         return tipoOprazione;
     }
 
-    public void addLibrerie() throws IOException {
-        fileWriter.write(LIBRERIE);
+
+
+    private boolean inizializeFileWriter() throws IOException {
+        File FILE;
+        // Inizializzo il file di scrittura
+        if (!(new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator)).exists()) {
+            Files.createDirectory(Paths.get(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator));
+            FILE = new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator + FILE_NAME);
+            if(!FILE.createNewFile()) return false;
+        }else{
+            FILE = new File(DIR_TEST_FILES + File.separator + DIR_FILE_C + File.separator + FILE_NAME);
+        }
+        fileWriter = new FileWriter(FILE);
+        return true;
     }
 
-    public void addPrototipiFunzioniDiSupporto() throws IOException {
-        fileWriter.write(PROTOTIPI_FUN_SUP);
+    private void generateListPrototipi(ArrayList<FunOp> listFun,FunOp main) throws Exception {
+        if(listFun!=null){
+            for(FunOp fun: listFun)
+                fileWriter.write(generaPrototipo(fun));
+            if (main.getIdentificatore().getLessema().equals("main"))
+                main.getIdentificatore().setLessema(ALTERNATIV_MAIN);
+            fileWriter.write(generaPrototipo(main)); //Prototipo Main
+        }
     }
 
-    public void addFunzioniDiSupporto() throws IOException {
-        fileWriter.write(SUPPORT_FUN_INTEGER_TO_STR);
-        fileWriter.write(SUPPORT_FUN_REAL_TO_STR);
-        fileWriter.write(SUPPORT_FUN_CHAR_TO_STR);
-        fileWriter.write(SUPPORT_FUN_BOOL_TO_STR);
-        fileWriter.write(SUPPORT_FUN_STR_CONCAT);
-        fileWriter.write(SUPPORT_FUN_READ_STR);
-        fileWriter.write(SUPPORT_FUN_STR_TO_BOOL);
+    private void generaVariabiliGlobali(ArrayList<VarDeclOp> listVar) throws Exception {
 
+        if (listVar != null) {
+            for (VarDeclOp variable : listVar) {
+                String tipo = convertType(variable.getType());
+                for (Expr expr : variable.getExprList())
+                    if (expr instanceof Identifier)
+                        fileWriter.write(tipo + " " + ((Identifier) expr).getLessema() + ";\n");
+
+            }
+            for (VarDeclOp variable : listVar) variable.accept(this);
+        }
     }
+
+    private void generaMain(FunOp main_fun) throws IOException {
+        fileWriter.write("int main (int argc, char *argv[]){\n");
+        fileWriter.write(main_fun.getIdentificatore().getLessema()+"(");
+        //Se la funzione di start possiede dei parametri, li recupero da argv
+        if(main_fun.getParams()!=null){
+            int i=0;
+            StringBuilder parametri=new StringBuilder();
+            for(ParDeclOp param: main_fun.getParams()){
+                String tipo=param.getType();
+                for(Identifier id:param.getIdList()){
+                    i++;
+                    if (tipo.equals(CONST_STRING)) parametri.append("argv["+i+"],");
+                    if(tipo.equals(CONST_INTEGER)) parametri.append("atoi(argv["+i+"]),");
+                    if(tipo.equals(CONST_FLOAT)) parametri.append("atof(argv["+i+"]),");
+                    if(tipo.equals(CONST_BOOLEAN)) parametri.append("str_to_bool(argv["+i+"]),");
+                    if(tipo.equals(CONST_CHAR)) parametri.append("*argv["+i+"],");
+                }
+            }
+            if(!parametri.toString().equals(""))
+                parametri= new StringBuilder(parametri.toString().substring(0, parametri.length() - 1));
+            fileWriter.write(parametri.toString());
+        }
+
+        fileWriter.write(");\n");
+        fileWriter.write("return 0;\n");
+        fileWriter.write("}\n");
+    }
+
+    public void generaFunzioni(ArrayList<FunOp> list_fun,FunOp main_fun,SymbolTable scope) throws Exception {
+        //Inserisco le funzioni
+        if(list_fun!=null){
+            for(FunOp fun: list_fun){
+                currentScope=fun.getSymbolTable();
+                fun.accept(this);
+                fileWriter.write("\n");
+                currentScope=scope;
+            }
+            currentScope=main_fun.getSymbolTable();
+            main_fun.accept(this);
+            currentScope=scope;
+        }
+    }
+
 
 }
