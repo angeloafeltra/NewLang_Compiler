@@ -58,11 +58,6 @@ public class TranslatorVisitor implements Visitor{
                                                     {"NotOp", "!"}};
 
 
-
-
-
-
-
     public TranslatorVisitor(String filNameToConvert){
         FILE_NAME=filNameToConvert;
     }
@@ -193,12 +188,9 @@ public class TranslatorVisitor implements Visitor{
         }
 
         if(bodyOp.getListStatement()!=null){
-            Collections.reverse(bodyOp.getListStatement()); //Provare ordine senza dopo aver completato altro
-            for(Statement stmt: bodyOp.getListStatement()){
-                if(!(main && stmt instanceof ReturnOp)) {
-                    stmt.accept(this);
-                }
-            }
+            Collections.reverse(bodyOp.getListStatement());
+            for(Statement stmt: bodyOp.getListStatement())
+                if(!(main && stmt instanceof ReturnOp)) stmt.accept(this);
         }
         return null;
     }
@@ -291,24 +283,23 @@ public class TranslatorVisitor implements Visitor{
             fileWriter.write("printf("+espressione+");\n"); //Stampo il messaggio della read
 
         for(Identifier id:readOp.getListId()){
-            if(id.getTipoEspressione().equals(CONST_INTEGER)) {
-                fileWriter.write("scanf(\"%d\",&" + id.getLessema() + ");\n");
-            }else {
-                if (id.getTipoEspressione().equals(CONST_FLOAT)) {
+            switch (id.getTipoEspressione()){
+                case CONST_INTEGER:
+                    fileWriter.write("scanf(\"%d\",&" + id.getLessema() + ");\n");
+                    break;
+                case CONST_FLOAT:
                     fileWriter.write("scanf(\"%f\",&" + id.getLessema() + ");\n");
-                }else {
-                    if (id.getTipoEspressione().equals(CONST_CHAR)) {
-                        fileWriter.write("scanf(\"%c\",&" + id.getLessema() + ");\n");
-                    }else {
-                        if (id.getTipoEspressione().equals(CONST_STRING)) {
-                            fileWriter.write(id.getLessema() + "=read_str();\n");
-                        }else {
-                            if (id.getTipoEspressione().equals(CONST_BOOLEAN)) {
-                                fileWriter.write("scanf(\"%b\",&" + id.getLessema() + ");\n");
-                            }
-                        }
-                    }
-                }
+                    break;
+                case CONST_CHAR:
+                    fileWriter.write("scanf(\"%c\",&" + id.getLessema() + ");\n");
+                    break;
+                case  CONST_STRING:
+                    fileWriter.write(id.getLessema() + "=read_str();\n");
+                    break;
+                case CONST_BOOLEAN:
+                    fileWriter.write("scanf(\"%b\",&" + id.getLessema() + ");\n");
+                    break;
+
             }
         }
 
