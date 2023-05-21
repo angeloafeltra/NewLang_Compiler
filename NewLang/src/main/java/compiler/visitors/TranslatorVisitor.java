@@ -35,6 +35,10 @@ public class TranslatorVisitor implements Visitor{
     public static final String CONST_FLOAT="float";
     public static final String CONST_BOOLEAN="boolean";
     public static final String CONST_CHAR="char";
+    public static final String CONST_ARITMETICA="aritmetica";
+    public static final String CONST_RELAZIONALE="relazionale";
+    public static final String CONST_BOOLEANA="booleana";
+
     public  String FILE_NAME;
     private  FileWriter fileWriter;
     private boolean main=false;
@@ -101,12 +105,6 @@ public class TranslatorVisitor implements Visitor{
     }
 
     @Override
-    /**
-     * Genero il codice c per le variabili inizializzate o quelle di tipo var
-     * il codice c delle variabili non inizializzate viene generato direttamente
-     * dalla root per correggere l'utilizzo di una variabile prima della sua dichiarazione
-     * permesso dal linguaggio NewLang
-     */
     public Object visit(VarDeclOp varDecl) throws Exception {
         String tipo=convertType(varDecl.getType());
 
@@ -170,22 +168,11 @@ public class TranslatorVisitor implements Visitor{
         return params;
     }
 
+
+
     @Override
     public Object visit(BodyOp bodyOp) throws Exception {
-        if(bodyOp.getListVar()!=null){
-            //Inserisco prima solo le dichiarazioni degli identificatori(ese: integer id;)
-            for(VarDeclOp variable:bodyOp.getListVar()){
-                String tipo=convertType(variable.getType());
-                for(Expr expr:variable.getExprList()){
-                    if(expr instanceof Identifier) {
-                        fileWriter.write(tipo+" " + ((Identifier) expr).getLessema() + ";\n");
-                    }
-                }
-            }
-
-            for(VarDeclOp variable:bodyOp.getListVar())
-                variable.accept(this);
-        }
+        generaVariabiliGlobali((ArrayList<VarDeclOp>) bodyOp.getListVar());
 
         if(bodyOp.getListStatement()!=null){
             Collections.reverse(bodyOp.getListStatement());
@@ -388,8 +375,48 @@ public class TranslatorVisitor implements Visitor{
         return null;
     }
 
+    @Override
+    public Object visit(AritAndRelOp aritAndRelOp) throws Exception {
 
-    //INSERIRE QUI
+        String[][] typeOpBinaria= { {"AddOp", CONST_ARITMETICA,"+"},
+                {"DiffOp", CONST_ARITMETICA,"-"},
+                {"MulOp", CONST_ARITMETICA,"*"},
+                {"DivOp", CONST_ARITMETICA,"/"},
+                {"PowOp", "potenza","pow"},
+                {"GTOp", CONST_RELAZIONALE,">"},
+                {"GEOp", CONST_RELAZIONALE,">="},
+                {"LTOp", CONST_RELAZIONALE,"<"},
+                {"LEOp", CONST_RELAZIONALE,"<="},
+                {"NEOp", CONST_RELAZIONALE,"!="},
+                {"EQOp", CONST_RELAZIONALE,"=="},
+                {"StrCatOp", "strcat","strcat"},
+                {"AndOp", CONST_BOOLEANA,"&&"},
+                {"OrOp", CONST_BOOLEANA,"||"}};
+
+        String tipoOperazione1="";
+        String tipoOperazione2="";
+        for (String[] op :typeOpBinaria){
+            if (aritAndRelOp.getTypeOp().equals(op[0])){
+                tipoOperazione1=op[1];
+                tipoOperazione2=op[2];
+            }
+        }
+
+        switch (tipoOperazione1){
+            case CONST_ARITMETICA:
+                return generaOpAritmetica(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            case CONST_RELAZIONALE:
+                return generaOpRelazionale(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            case "strcat":
+                return generaOpStrCat(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            case CONST_BOOLEANA:
+                return generaOpBooleana(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            case "potenza":
+                return generaOpPow(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
+            default:
+                return "";
+        }
+    }
 
 
     @Override
@@ -643,55 +670,6 @@ public class TranslatorVisitor implements Visitor{
     }
 
 
-
-
-
-
-
-    @Override
-    public Object visit(AritAndRelOp aritAndRelOp) throws Exception {
-
-        String[][] typeOpBinaria= { {"AddOp", "aritmetica","+"},
-                                    {"DiffOp", "aritmetica","-"},
-                                    {"MulOp", "aritmetica","*"},
-                                    {"DivOp", "aritmetica","/"},
-                                    {"PowOp", "potenza","pow"},
-                                    {"GTOp", "relazionale",">"},
-                                    {"GEOp", "relazionale",">="},
-                                    {"LTOp", "relazionale","<"},
-                                    {"LEOp", "relazionale","<="},
-                                    {"NEOp", "relazionale","!="},
-                                    {"EQOp", "relazionale","=="},
-                                    {"StrCatOp", "strcat","strcat"},
-                                    {"AndOp", "booleana","&&"},
-                                    {"OrOp", "booleana","||"}};
-
-        String tipoOperazione1="";
-        String tipoOperazione2="";
-        for (String[] op :typeOpBinaria){
-            if (aritAndRelOp.getTypeOp().equals(op[0])){
-                tipoOperazione1=op[1];
-                tipoOperazione2=op[2];
-            }
-        }
-
-        switch (tipoOperazione1){
-            case "aritmetica":
-                return generaOpAritmetica(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
-            case "relazionale":
-                return generaOpRelazionale(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
-            case "strcat":
-                return generaOpStrCat(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
-            case "booleana":
-                return generaOpBooleana(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
-            case "potenza":
-                return generaOpPow(aritAndRelOp.getExpr1(),aritAndRelOp.getExpr2(),tipoOperazione2);
-            default:
-                return "";
-        }
-    }
-
-
     private String generaOpAritmetica(Expr expr1,Expr expr2,String tipoOperazione) throws Exception {
         String expr1_str= (String) expr1.accept(this);
         String expr2_str= (String) expr2.accept(this);
@@ -735,6 +713,7 @@ public class TranslatorVisitor implements Visitor{
                 break;
             case CONST_BOOLEAN:
                 expr1_str="bool_to_str("+expr1_str+")";
+                break;
             default:
         }
         switch (expr2.getTipoEspressione()){
@@ -749,6 +728,7 @@ public class TranslatorVisitor implements Visitor{
                 break;
             case CONST_BOOLEAN:
                 expr2_str="bool_to_str("+expr2_str+")";
+                break;
             default:
         }
         return "str_concat("+expr1_str+","+expr2_str+")";
