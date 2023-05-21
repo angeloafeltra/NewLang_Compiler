@@ -6,7 +6,7 @@ WORKDIR /NewLangUi
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY src ./src
-COPY src/fileConvertiti ./fileConvertiti
+COPY fileConvertiti ./fileConvertiti
 
 RUN ./mvnw dependency:resolve
 RUN ./mvnw package
