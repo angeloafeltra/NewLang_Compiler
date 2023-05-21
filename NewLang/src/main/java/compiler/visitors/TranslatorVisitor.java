@@ -596,39 +596,22 @@ public class TranslatorVisitor implements Visitor{
     private String convertTypeOp(String typeOp){
 
         String tipoOprazione="";
-        if(typeOp.equals("AddOp"))
-            tipoOprazione="+";
-        if(typeOp.equals("DiffOp"))
-            tipoOprazione="-";
-        if(typeOp.equals("MulOp"))
-            tipoOprazione="*";
-        if(typeOp.equals("DivOp"))
-            tipoOprazione="/";
-        if(typeOp.equals("PowOp"))
-            tipoOprazione="pow";
-        if(typeOp.equals("GTOp"))
-            tipoOprazione=">";
-        if(typeOp.equals("GEOp"))
-            tipoOprazione=">=";
-        if(typeOp.equals("LTOp"))
-            tipoOprazione="<";
-        if(typeOp.equals("LEOp"))
-            tipoOprazione="<=";
-        if(typeOp.equals("NEOp"))
-            tipoOprazione="!=";
-        if(typeOp.equals("EQOp"))
-            tipoOprazione="==";
-        if(typeOp.equals("StrCatOp"))
-            tipoOprazione="strcat";
-        if(typeOp.equals("AndOp"))
-            tipoOprazione="&&";
-        if(typeOp.equals("OrOp"))
-            tipoOprazione="||";
-        if(typeOp.equals("UminusOp"))
-            tipoOprazione="-1*";
-        if(typeOp.equals("NotOp"))
-            tipoOprazione="!";
-
+        if(typeOp.equals("AddOp")) tipoOprazione="+";
+        if(typeOp.equals("DiffOp")) tipoOprazione="-";
+        if(typeOp.equals("MulOp")) tipoOprazione="*";
+        if(typeOp.equals("DivOp")) tipoOprazione="/";
+        if(typeOp.equals("PowOp")) tipoOprazione="pow";
+        if(typeOp.equals("GTOp")) tipoOprazione=">";
+        if(typeOp.equals("GEOp")) tipoOprazione=">=";
+        if(typeOp.equals("LTOp")) tipoOprazione="<";
+        if(typeOp.equals("LEOp")) tipoOprazione="<=";
+        if(typeOp.equals("NEOp")) tipoOprazione="!=";
+        if(typeOp.equals("EQOp")) tipoOprazione="==";
+        if(typeOp.equals("StrCatOp")) tipoOprazione="strcat";
+        if(typeOp.equals("AndOp")) tipoOprazione="&&";
+        if(typeOp.equals("OrOp")) tipoOprazione="||";
+        if(typeOp.equals("UminusOp")) tipoOprazione="-1*";
+        if(typeOp.equals("NotOp")) tipoOprazione="!";
         return tipoOprazione;
     }
 
