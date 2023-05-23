@@ -9,6 +9,7 @@ import compiler.visitors.semanticVisitor.SemanticVisitor2;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,7 +51,7 @@ public class NewLang {
             return new File("test_files" + File.separator + "c_out" + File.separator + fileName +".out");
 
         } catch (Exception e) {
-            e.printStackTrace(System.err);
+            logger.log(Level.WARNING, e.getMessage());
             return null;
         } finally {
             r.close();
