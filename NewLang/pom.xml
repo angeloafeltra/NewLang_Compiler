@@ -34,6 +34,7 @@
             <scope>test</scope>
         </dependency>
 
+
         <dependency>
             <groupId>com.github.vbmacher</groupId>
             <artifactId>java-cup-runtime</artifactId>
@@ -93,8 +94,14 @@
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-parent</artifactId>
-            <version>1.1.10</version>
+            <version>1.1.11</version>
             <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
         </dependency>
 
     </dependencies>
@@ -154,21 +161,51 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>SemanticTest.java</include>
-                        <include>SemanticTestAritmeticOp.java</include>
-                        <include>SemanticTestAssegnazione.java</include>
-                        <include>SemanticTestBooleanOp.java</include>
-                        <include>SemanticTestCallFun.java</include>
-                        <include>SemanticTestFunzioni.java</include>
-                        <include>SemanticTestIf.java</include>
-                        <include>SemanticTestRead.java</include>
-                        <include>SemanticTestRelationalOp.java</include>
-                        <include>SemanticTestReturn.java</include>
-                        <include>SemanticTestStringOp.java</include>
-                        <include>SemanticTestUnaryOp.java</include>
-                        <include>SemanticTestVariabili.java</include>
-                        <include>SemanticTestWhile.java</include>
-                        <include>TraductorTest.java</include>
+                        <include>testCompiler.SemanticTest.java</include>
+                        <include>testCompiler.SemanticTestAritmeticOp.java</include>
+                        <include>testCompiler.SemanticTestAssegnazione.java</include>
+                        <include>testCompiler.SemanticTestBooleanOp.java</include>
+                        <include>testCompiler.SemanticTestCallFun.java</include>
+                        <include>testCompiler.SemanticTestFunzioni.java</include>
+                        <include>testCompiler.SemanticTestIf.java</include>
+                        <include>testCompiler.SemanticTestRead.java</include>
+                        <include>testCompiler.SemanticTestRelationalOp.java</include>
+                        <include>testCompiler.SemanticTestReturn.java</include>
+                        <include>testCompiler.SemanticTestStringOp.java</include>
+                        <include>testCompiler.SemanticTestUnaryOp.java</include>
+                        <include>testCompiler.SemanticTestVariabili.java</include>
+                        <include>testCompiler.SemanticTestWhile.java</include>
+                        <include>testCompiler.TraductorTest.java</include>
+
+                        <include>evosuite_test.nodi.expr.AritAndRelOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.expr.CallFunOpExpr_ESTest.java</include>
+                        <include>evosuite_test.nodi.expr.ConstOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.expr.Expr_ESTest.java</include>
+                        <include>evosuite_test.nodi.expr.Identifier_ESTest.java</include>
+                        <include>evosuite_test.nodi.expr.IdInitObbOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.expr.IdInitOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.expr.UnaryOp_ESTest.java</include>
+
+                        <include>evosuite_test.nodi.statement.AssignOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.statement.CallFunOpStat_ESTest.java</include>
+                        <include>evosuite_test.nodi.statement.ForOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.statement.IfStatOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.statement.ReadOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.statement.ReturnOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.statement.Statement_ESTest.java</include>
+                        <include>evosuite_test.nodi.statement.WhileOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.statement.Write_ESTest.java</include>
+
+                        <include>evosuite_test.nodi.BodyOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.FunOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.ParDeclOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.ProgramOp_ESTest.java</include>
+                        <include>evosuite_test.nodi.VarDeclOp_ESTest.java</include>
+
+                        <include>evosuite_test.Decl_ESTest.java</include>
+                        <include>evosuite_test.RowTable_ESTest.java</include>
+                        <include>evosuite_test.SymbolTable_ESTest.java</include>
+                        <include>evosuite_test.TypeField_ESTest.java</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -202,9 +239,6 @@
                     <targetClasses>
                         <param>compiler.visitors.semanticVisitor.*</param>
                     </targetClasses>
-                    <targetTests>
-                        <param>testCompiler.SemanticTest</param>
-                    </targetTests>
                 </configuration>
             </plugin>
 

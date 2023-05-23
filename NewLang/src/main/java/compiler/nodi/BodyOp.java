@@ -39,8 +39,6 @@ public class BodyOp  extends DefaultMutableTreeNode implements Visitable {
 
     public BodyOp() {
         super("BodyOp");
-        for(VarDeclOp variable: listVar)
-            super.add(variable);
         this.listVar = null;
         this.listStatement = null;
     }

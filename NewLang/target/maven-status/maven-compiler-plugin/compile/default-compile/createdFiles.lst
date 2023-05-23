@@ -32,7 +32,6 @@ compiler/visitors/semanticVisitor/Eccezioni$AssignError.class
 compiler/visitors/semanticVisitor/Eccezioni$UnaryOpNotValid.class
 compiler/nodi/expr/Identifier.class
 compiler/visitors/semanticVisitor/Eccezioni$NoDeclarationError.class
-com/spring/newlang/NewLangController$2.class
 compiler/nodi/expr/CallFunOpExpr.class
 compiler/parser.class
 compiler/utilsClass/Decl.class
@@ -48,7 +47,6 @@ compiler/visitors/Visitor.class
 compiler/visitors/semanticVisitor/Eccezioni$InizializationError.class
 compiler/visitors/semanticVisitor/Eccezioni$TypeAssignError.class
 compiler/visitors/semanticVisitor/Eccezioni$WriteOpError.class
-com/spring/newlang/NewLangController$1.class
 compiler/nodi/statement/Statement.class
 compiler/nodi/expr/UnaryOp.class
 compiler/nodi/statement/AssignOp.class

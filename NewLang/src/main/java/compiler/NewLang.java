@@ -8,14 +8,17 @@ import compiler.visitors.semanticVisitor.SemanticVisitor2;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class NewLang {
 
-    public File compile(byte[] fileContent,String fileName){
+    private BufferedReader r;
 
-        parser p = new parser(new Lexer(new InputStreamReader(new ByteArrayInputStream(fileContent))));
+    public File compile(byte[] fileContent,String fileName) throws IOException {
+
+        parser p = new parser(new Lexer(new InputStreamReader(new ByteArrayInputStream(fileContent), Charset.forName("UTF-8"))));
         Logger logger = Logger.getLogger(NewLang.class.getName());
         try {
             DefaultMutableTreeNode root = (DefaultMutableTreeNode) p.parse().value;
@@ -33,7 +36,7 @@ public class NewLang {
                                                         fileName +".out");
             builder.redirectErrorStream(true);
             Process process = builder.start();
-            BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            r = new BufferedReader(new InputStreamReader(process.getInputStream(),Charset.forName("UTF-8")));
             String line;
 
             while (true) {
@@ -49,8 +52,9 @@ public class NewLang {
         } catch (Exception e) {
             e.printStackTrace(System.err);
             return null;
+        } finally {
+            r.close();
         }
-
 
     }
 

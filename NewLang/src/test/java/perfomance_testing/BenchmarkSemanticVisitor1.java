@@ -1,13 +1,17 @@
 package perfomance_testing;
 
-import compiler.NewLang;
+import compiler.Lexer;
+import compiler.nodi.ProgramOp;
+import compiler.parser;
+import compiler.visitors.semanticVisitor.SemanticVisitor1;
 import org.openjdk.jmh.annotations.*;
 
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
 
-public class BenchmarkCompiler {
+public class BenchmarkSemanticVisitor1 {
 
     @State(Scope.Benchmark)
     public static class FileToCompile{
@@ -52,31 +56,17 @@ public class BenchmarkCompiler {
         public String getFileName() {return fileName;}
     }
 
-
-
     @Benchmark
     @Fork(3)
     @Warmup(iterations = 3)
     @Measurement(iterations = 6)
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void measureAvgTimeCompiler(FileToCompile file) throws IOException {
-        NewLang newLang=new NewLang();
-        newLang.compile(file.getFileContent(),file.getFileName());
+    public void measureAvgTimeCompiler(BenchmarkCompiler.FileToCompile file) throws Exception {
+        parser p = new parser(new Lexer(new InputStreamReader(new ByteArrayInputStream(file.getFileContent()))));
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) p.parse().value;
+        ((ProgramOp) root).accept(new SemanticVisitor1());
     }
 
-    @Benchmark
-    @Fork(3)
-    @Warmup(iterations = 3)
-    @Measurement(iterations = 6)
-    @BenchmarkMode(Mode.Throughput)
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void measureThrptCompiler(FileToCompile file) throws IOException {
-        NewLang newLang=new NewLang();
-        newLang.compile(file.getFileContent(),file.getFileName());
-    }
-
-
-
-
+    
 }
