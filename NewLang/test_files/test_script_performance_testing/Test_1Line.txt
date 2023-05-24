@@ -1,0 +1,11 @@
+|* Programma di esempio del linguaggio newLang che da la possibilita all'utente di effettuare
+    delle operazioni aritmetiche tra due numeri|
+
+
+start:
+def esempio() : void {  ||Funzione main
+    ("Hello World")-->!;
+}
+
+
+

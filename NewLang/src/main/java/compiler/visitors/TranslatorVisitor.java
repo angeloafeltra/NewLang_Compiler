@@ -399,7 +399,7 @@ public class TranslatorVisitor implements Visitor{
                 {"OrOp", CONST_BOOLEANA,"||"}};
 
         String tipoOperazione1="";
-        String tipoOperazione2="";
+        String tipoOperazione2=null;
         for (String[] op :typeOpBinaria){
             if (aritAndRelOp.getTypeOp().equals(op[0])){
                 tipoOperazione1=op[1];
@@ -567,7 +567,7 @@ public class TranslatorVisitor implements Visitor{
 
     private String convertTypeOp(String typeOp){
 
-        String tipoOprazione="";
+        String tipoOprazione=null;
         for (String [] conversione:CONV_TYPE_OP){
             if(typeOp.equals(conversione[0])) tipoOprazione=conversione[1];
         }
@@ -631,10 +631,10 @@ public class TranslatorVisitor implements Visitor{
         int i=0;
         StringBuilder parametri=new StringBuilder();
         for(ParDeclOp param: main_fun.getParams()){
-            String tipo=param.getType();
-            for(Identifier id:param.getIdList()){
+            int size=param.getIdList().size();
+            for(int j=0;j<size;++j){
                 i++;
-                switch (tipo) {
+                switch (param.getType()) {
                     case CONST_STRING:
                         parametri.append("argv["+i+"],");
                         break;

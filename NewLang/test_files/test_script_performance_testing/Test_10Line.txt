@@ -1,0 +1,31 @@
+|* Programma di esempio del linguaggio newLang che da la possibilita all'utente di effettuare
+    delle operazioni aritmetiche tra due numeri|
+
+start:
+def esempio() : void {  ||Funzione main
+
+    menu();
+}
+
+
+def menu(): integer ||Funzione che gestisce il menù
+{
+	integer op;
+	("--------Menu--------")-->!;
+	("2) Addizione") -->!;
+	("3) Sottrazione") -->!;
+	("4) Moltiplicazione") -->!;
+	("5) Divisione") -->!;
+	("6) Potenza") -->!;
+
+	op <-- "Inserisci operazione:";
+	while op<2 or op>6 loop
+	    {
+		    op <-- "Operazione non valida [2-6], inserisci operazione:";
+		}
+
+	return op;
+}
+
+
+

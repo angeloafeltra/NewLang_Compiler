@@ -12,15 +12,14 @@ public class BenchmarkCompiler {
     @State(Scope.Benchmark)
     public static class FileToCompile{
 
-        private byte[] fileContent;
-        public String fileName;
         private SecureRandom random = new SecureRandom();
         @Setup
-        public void setup(){
+        public void setup(){}
 
-            //Leggo un file
+
+        public byte[] getFileContent(String path_test_file) {
+            byte[] fileContent;
             String separator = File.separator;
-            String path_test_file="NewLangExemple";
             File input_file = new File(
                     System.getProperty("user.dir") + separator + "test_files" + separator + path_test_file);
             byte[] buffer = new byte[1024];
@@ -35,36 +34,138 @@ public class BenchmarkCompiler {
             }
             fileContent= output.toByteArray();
 
-            //Genero il nome del file
+            return fileContent;
+        }
+
+
+
+        public String getFileName() {
             String alphaNumericStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
             StringBuilder s=new StringBuilder();
 
-            for(int i=0;i<15;i++){
-                int ch = random.nextInt(0,alphaNumericStr.length());
+            for(int i=0;i<15;i++) {
+                int ch = random.nextInt(0, alphaNumericStr.length());
                 s.append(alphaNumericStr.charAt(ch));
             }
-
-            fileName=s.toString();
-
+            return s.toString();
         }
 
-        public byte[] getFileContent() {return fileContent;}
-        public String getFileName() {return fileName;}
     }
 
 
 
     @Benchmark
     @Fork(3)
-    @Warmup(iterations = 3)
+    @Warmup(iterations = 2)
     @Measurement(iterations = 6)
     @BenchmarkMode(Mode.AverageTime)
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
-    public void measureAvgTimeCompiler(FileToCompile file) throws IOException {
+    public void measureAvgTimeCompilerFile1Line(FileToCompile file) throws IOException {
         NewLang newLang=new NewLang();
-        newLang.compile(file.getFileContent(),file.getFileName());
+        newLang.compile(file.getFileContent("/test_script_performance_testing/Test_1Line.txt"),file.getFileName());
     }
 
+    @Benchmark
+    @Fork(3)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 6)
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void measureAvgTimeCompilerFile10Line(FileToCompile file) throws IOException {
+        NewLang newLang=new NewLang();
+        newLang.compile(file.getFileContent("/test_script_performance_testing/Test_10Line.txt"),file.getFileName());
+    }
+
+    @Benchmark
+    @Fork(3)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 6)
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void measureAvgTimeCompilerFile100Line(FileToCompile file) throws IOException {
+        NewLang newLang=new NewLang();
+        newLang.compile(file.getFileContent("/test_script_performance_testing/Test_100Line.txt"),file.getFileName());
+    }
+
+
+
+    @Benchmark
+    @Fork(3)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 6)
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void measureAvgTimeCompilerFile500Line(FileToCompile file) throws IOException {
+        NewLang newLang=new NewLang();
+        newLang.compile(file.getFileContent("/test_script_performance_testing/Test_500Line.txt"),file.getFileName());
+    }
+
+
+
+
+    @Benchmark
+    @Fork(3)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 6)
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void measureAvgTimeCompilerFile750Line(FileToCompile file) throws IOException {
+        NewLang newLang=new NewLang();
+        newLang.compile(file.getFileContent("/test_script_performance_testing/Test_750Line.txt"),file.getFileName());
+    }
+
+
+
+    @Benchmark
+    @Fork(3)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 6)
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void measureAvgTimeCompilerFile1000Line(FileToCompile file) throws IOException {
+        NewLang newLang=new NewLang();
+        newLang.compile(file.getFileContent("/test_script_performance_testing/Test_1000Line.txt"),file.getFileName());
+    }
+
+    @Benchmark
+    @Fork(3)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 6)
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void measureAvgTimeCompilerFile2000Line(FileToCompile file) throws IOException {
+        NewLang newLang=new NewLang();
+        newLang.compile(file.getFileContent("/test_script_performance_testing/Test_2000Line.txt"),file.getFileName());
+    }
+
+
+
+    @Benchmark
+    @Fork(3)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 6)
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void measureAvgTimeCompilerFile50Line(FileToCompile file) throws IOException {
+        NewLang newLang=new NewLang();
+        newLang.compile(file.getFileContent("/test_script_performance_testing/Test_50Line.txt"),file.getFileName());
+    }
+
+    @Benchmark
+    @Fork(3)
+    @Warmup(iterations = 2)
+    @Measurement(iterations = 6)
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public void measureAvgTimeCompilerFile250Line(FileToCompile file) throws IOException {
+        NewLang newLang=new NewLang();
+        newLang.compile(file.getFileContent("/test_script_performance_testing/Test_250Line.txt"),file.getFileName());
+    }
+
+
+
+
+    /*
     @Benchmark
     @Fork(3)
     @Warmup(iterations = 3)
@@ -75,6 +176,7 @@ public class BenchmarkCompiler {
         NewLang newLang=new NewLang();
         newLang.compile(file.getFileContent(),file.getFileName());
     }
+    */
 
 
 

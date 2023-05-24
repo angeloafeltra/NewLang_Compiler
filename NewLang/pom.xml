@@ -206,6 +206,7 @@
                         <include>evosuite_test.RowTable_ESTest.java</include>
                         <include>evosuite_test.SymbolTable_ESTest.java</include>
                         <include>evosuite_test.TypeField_ESTest.java</include>
+
                     </includes>
                 </configuration>
             </plugin>

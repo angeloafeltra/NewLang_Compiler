@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.SecureRandom;
@@ -58,13 +59,13 @@ public class NewLangController {
             if( deleteFile(filesToDelete)){
                 Map<String, byte[]> json2 = new HashMap<>();
                 json2.put(CONST_FILE, executableBytes);
-                json2.put(CONST_ERROR,"Compilazione corretta".getBytes(Charset.forName("UTF-8")));
-                json2.put(CONST_FILE_NAME,fileName.getBytes(Charset.forName("UTF-8")));
+                json2.put(CONST_ERROR,"Compilazione corretta".getBytes(StandardCharsets.UTF_8));
+                json2.put(CONST_FILE_NAME,fileName.getBytes(StandardCharsets.UTF_8));
                 return json2;
             }else{
                 Map<String, byte[]> json2 = new HashMap<>();
                 json2.put(CONST_FILE, new byte[0]);
-                json2.put(CONST_ERROR, "Errore cancellazione".getBytes(Charset.forName("UTF-8")));
+                json2.put(CONST_ERROR, "Errore cancellazione".getBytes(StandardCharsets.UTF_8));
                 return json2;
             }
 
@@ -74,7 +75,7 @@ public class NewLangController {
 
             Map<String, byte[]> json2 = new HashMap<>();
             json2.put(CONST_FILE, new byte[0]);
-            json2.put(CONST_ERROR, "Errore compilazione".getBytes(Charset.forName("UTF-8")));
+            json2.put(CONST_ERROR, "Errore compilazione".getBytes(StandardCharsets.UTF_8));
             return json2;
         }
 
@@ -104,6 +105,7 @@ public class NewLangController {
             try {
                 Files.delete(Path.of(file.getPath()));
             } catch (IOException e) {
+                System.out.println(e.getMessage());
                 return false;
             }
         }

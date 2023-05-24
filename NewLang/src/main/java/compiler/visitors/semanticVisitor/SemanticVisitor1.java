@@ -334,10 +334,15 @@ public class SemanticVisitor1 implements Visitor {
                     ArrayList<String[]> listaParametri=new ArrayList<>();
                     for(ParDeclOp param: fun.getParams())
                         listaParametri.addAll((Collection<? extends String[]>) param.accept(this));
-
+                    /*
                     for(String[] parametro:listaParametri){
                         typeField.addInputParam(parametro[1]);
                         typeStream.append(parametro[2]+",");
+                    }*/
+                    int size= listaParametri.size();
+                    for(int i=0;i<size;++i){
+                        typeField.addInputParam(listaParametri.get(i)[1]);
+                        typeStream.append(listaParametri.get(i)[2]+",");
                     }
                 }
                 typeField.addOutputParam(fun.getType());
