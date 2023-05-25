@@ -1,0 +1,1928 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta charset="UTF-8"/>
+      <title>SpotBugs Report</title>
+      <style type="text/css">
+		.tablerow0 {
+			background: #EEEEEE;
+		}
+
+		.tablerow1 {
+			background: white;
+		}
+
+		.detailrow0 {
+			background: #EEEEEE;
+		}
+
+		.detailrow1 {
+			background: white;
+		}
+
+		.tableheader {
+			background: #b9b9fe;
+			font-size: larger;
+		}
+
+		.tablerow0:hover, .tablerow1:hover {
+			background: #aaffaa;
+		}
+
+		.priority-1 {
+				color: red;
+				font-weight: bold;
+		}
+		.priority-2 {
+				color: orange;
+				font-weight: bold;
+		}
+		.priority-3 {
+				color: green;
+				font-weight: bold;
+		}
+		.priority-4 {
+				color: blue;
+				font-weight: bold;
+		}
+		</style>
+      <script type="text/javascript">
+			function toggleRow(elid) {
+				if (document.getElementById) {
+					element = document.getElementById(elid);
+					if (element) {
+						if (element.style.display == 'none') {
+							element.style.display = 'block';
+							//window.status = 'Toggle on!';
+						} else {
+							element.style.display = 'none';
+							//window.status = 'Toggle off!';
+						}
+					}
+				}
+			}
+		</script>
+   </head>
+   <body>
+      <h1>
+         <a href="https://spotbugs.github.io/">SpotBugs</a> Report</h1>
+      <h2>Project Information</h2>
+      <p>Project: 
+		</p>
+      <p>SpotBugs version: 4.5.3</p>
+      <p>Code analyzed:</p>
+      <ul>
+         <li>/Users/angeloafeltra/Documents/GitHub/NewLang_Compiler/NewLang</li>
+      </ul>
+      <p>
+         <br/>
+         <br/>
+      </p>
+      <h2>Metrics</h2>
+      <p>652225 lines of code analyzed,
+	in 15320 classes, 
+	in 863 packages.</p>
+      <table width="500" cellpadding="5" cellspacing="2">
+         <tr class="tableheader">
+            <th align="left">Metric</th>
+            <th align="right">Total</th>
+            <th align="right">Density*</th>
+         </tr>
+         <tr class="tablerow0">
+            <td>High Priority Warnings</td>
+            <td align="right"/>
+            <td align="right">0.00</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>Medium Priority Warnings</td>
+            <td align="right">111</td>
+            <td align="right">0.17</td>
+         </tr>
+         <tr class="$totalClass">
+            <td>
+               <b>Total Warnings</b>
+            </td>
+            <td align="right">
+               <b>111</b>
+            </td>
+            <td align="right">
+               <b>0.17</b>
+            </td>
+         </tr>
+      </table>
+      <p>
+         <i>(* Defects per Thousand lines of non-commenting source statements)</i>
+      </p>
+      <p>
+         <br/>
+         <br/>
+      </p>
+      <h2>Contents</h2>
+      <ul>
+         <li>
+            <a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_SECURITY">Security Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_STYLE">Dodgy code Warnings</a>
+         </li>
+         <li>
+            <a href="#Details">Details</a>
+         </li>
+      </ul>
+      <h1>Summary</h1>
+      <table width="500" cellpadding="5" cellspacing="2">
+         <tr class="tableheader">
+            <th align="left">Warning Type</th>
+            <th align="right">Number</th>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+            </td>
+            <td align="right">92</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>
+               <a href="#Warnings_SECURITY">Security Warnings</a>
+            </td>
+            <td align="right">4</td>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <a href="#Warnings_STYLE">Dodgy code Warnings</a>
+            </td>
+            <td align="right">15</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>
+               <b>Total</b>
+            </td>
+            <td align="right">
+               <b>111</b>
+            </td>
+         </tr>
+      </table>
+      <h1>Warnings</h1>
+      <p>Click on a warning row to see full context information.</p>
+      <h2>
+         <a name="Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e117');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.BodyOp.getListStatement() may expose internal representation by returning BodyOp.listStatement</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e117" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.BodyOp<br/>In method compiler.nodi.BodyOp.getListStatement()<br/>Field compiler.nodi.BodyOp.listStatement<br/>At BodyOp.java:[line 47]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e133');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.BodyOp.getListVar() may expose internal representation by returning BodyOp.listVar</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e133" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.BodyOp<br/>In method compiler.nodi.BodyOp.getListVar()<br/>Field compiler.nodi.BodyOp.listVar<br/>At BodyOp.java:[line 46]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e208');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.FunOp.getBody() may expose internal representation by returning FunOp.body</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e208" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method compiler.nodi.FunOp.getBody()<br/>Field compiler.nodi.FunOp.body<br/>At FunOp.java:[line 63]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e224');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.FunOp.getIdentificatore() may expose internal representation by returning FunOp.identificatore</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e224" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method compiler.nodi.FunOp.getIdentificatore()<br/>Field compiler.nodi.FunOp.identificatore<br/>At FunOp.java:[line 57]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e240');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.FunOp.getParams() may expose internal representation by returning FunOp.params</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e240" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method compiler.nodi.FunOp.getParams()<br/>Field compiler.nodi.FunOp.params<br/>At FunOp.java:[line 59]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e256');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.FunOp.getSymbolTable() may expose internal representation by returning FunOp.symbolTable</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e256" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method compiler.nodi.FunOp.getSymbolTable()<br/>Field compiler.nodi.FunOp.symbolTable<br/>At FunOp.java:[line 80]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e403');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.ParDeclOp.getIdList() may expose internal representation by returning ParDeclOp.idList</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e403" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.ParDeclOp<br/>In method compiler.nodi.ParDeclOp.getIdList()<br/>Field compiler.nodi.ParDeclOp.idList<br/>At ParDeclOp.java:[line 34]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e503');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.ProgramOp.getFunOpList() may expose internal representation by returning ProgramOp.funOpList</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e503" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method compiler.nodi.ProgramOp.getFunOpList()<br/>Field compiler.nodi.ProgramOp.funOpList<br/>At ProgramOp.java:[line 80]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e519');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.ProgramOp.getMain() may expose internal representation by returning ProgramOp.main</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e519" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method compiler.nodi.ProgramOp.getMain()<br/>Field compiler.nodi.ProgramOp.main<br/>At ProgramOp.java:[line 78]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e535');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.ProgramOp.getSymbolTable() may expose internal representation by returning ProgramOp.symbolTable</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e535" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method compiler.nodi.ProgramOp.getSymbolTable()<br/>Field compiler.nodi.ProgramOp.symbolTable<br/>At ProgramOp.java:[line 84]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e551');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.ProgramOp.getVarDeclList() may expose internal representation by returning ProgramOp.varDeclList</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e551" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method compiler.nodi.ProgramOp.getVarDeclList()<br/>Field compiler.nodi.ProgramOp.varDeclList<br/>At ProgramOp.java:[line 77]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e698');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.expr.CallFunOpExpr.getIdentifier() may expose internal representation by returning CallFunOpExpr.identifier</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e698" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.expr.CallFunOpExpr<br/>In method compiler.nodi.expr.CallFunOpExpr.getIdentifier()<br/>Field compiler.nodi.expr.CallFunOpExpr.identifier<br/>At CallFunOpExpr.java:[line 37]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e714');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.expr.CallFunOpExpr.getListExpr() may expose internal representation by returning CallFunOpExpr.listExpr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e714" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.expr.CallFunOpExpr<br/>In method compiler.nodi.expr.CallFunOpExpr.getListExpr()<br/>Field compiler.nodi.expr.CallFunOpExpr.listExpr<br/>At CallFunOpExpr.java:[line 40]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e785');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.expr.IdInitObbOp.getExpr() may expose internal representation by returning IdInitObbOp.expr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e785" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.expr.IdInitObbOp<br/>In method compiler.nodi.expr.IdInitObbOp.getExpr()<br/>Field compiler.nodi.expr.IdInitObbOp.expr<br/>At IdInitObbOp.java:[line 25]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e801');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.expr.IdInitObbOp.getId() may expose internal representation by returning IdInitObbOp.id</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e801" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.expr.IdInitObbOp<br/>In method compiler.nodi.expr.IdInitObbOp.getId()<br/>Field compiler.nodi.expr.IdInitObbOp.id<br/>At IdInitObbOp.java:[line 21]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e853');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.expr.IdInitOp.getExpr() may expose internal representation by returning IdInitOp.expr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e853" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.expr.IdInitOp<br/>In method compiler.nodi.expr.IdInitOp.getExpr()<br/>Field compiler.nodi.expr.IdInitOp.expr<br/>At IdInitOp.java:[line 25]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e869');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.expr.IdInitOp.getId() may expose internal representation by returning IdInitOp.id</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e869" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.expr.IdInitOp<br/>In method compiler.nodi.expr.IdInitOp.getId()<br/>Field compiler.nodi.expr.IdInitOp.id<br/>At IdInitOp.java:[line 21]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e921');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.expr.UnaryOp.getExpr() may expose internal representation by returning UnaryOp.expr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e921" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.expr.UnaryOp<br/>In method compiler.nodi.expr.UnaryOp.getExpr()<br/>Field compiler.nodi.expr.UnaryOp.expr<br/>At UnaryOp.java:[line 20]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1000');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.AssignOp.getListExpr() may expose internal representation by returning AssignOp.listExpr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1000" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.AssignOp<br/>In method compiler.nodi.statement.AssignOp.getListExpr()<br/>Field compiler.nodi.statement.AssignOp.listExpr<br/>At AssignOp.java:[line 32]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1016');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.AssignOp.getListId() may expose internal representation by returning AssignOp.listId</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1016" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.AssignOp<br/>In method compiler.nodi.statement.AssignOp.getListId()<br/>Field compiler.nodi.statement.AssignOp.listId<br/>At AssignOp.java:[line 28]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1090');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.CallFunOpStat.getIdentifier() may expose internal representation by returning CallFunOpStat.identifier</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1090" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.CallFunOpStat<br/>In method compiler.nodi.statement.CallFunOpStat.getIdentifier()<br/>Field compiler.nodi.statement.CallFunOpStat.identifier<br/>At CallFunOpStat.java:[line 39]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1106');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.CallFunOpStat.getListExpr() may expose internal representation by returning CallFunOpStat.listExpr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1106" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.CallFunOpStat<br/>In method compiler.nodi.statement.CallFunOpStat.getListExpr()<br/>Field compiler.nodi.statement.CallFunOpStat.listExpr<br/>At CallFunOpStat.java:[line 42]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1177');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.ForOp.getBodyop() may expose internal representation by returning ForOp.bodyOp</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1177" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ForOp<br/>In method compiler.nodi.statement.ForOp.getBodyop()<br/>Field compiler.nodi.statement.ForOp.bodyOp<br/>At ForOp.java:[line 38]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1193');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.ForOp.getCons() may expose internal representation by returning ForOp.cons</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1193" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ForOp<br/>In method compiler.nodi.statement.ForOp.getCons()<br/>Field compiler.nodi.statement.ForOp.cons<br/>At ForOp.java:[line 34]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1209');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.ForOp.getId() may expose internal representation by returning ForOp.id</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1209" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ForOp<br/>In method compiler.nodi.statement.ForOp.getId()<br/>Field compiler.nodi.statement.ForOp.id<br/>At ForOp.java:[line 30]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1225');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.ForOp.getSymbolTable() may expose internal representation by returning ForOp.symbolTable</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1225" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ForOp<br/>In method compiler.nodi.statement.ForOp.getSymbolTable()<br/>Field compiler.nodi.statement.ForOp.symbolTable<br/>At ForOp.java:[line 41]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1313');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.IfStatOp.getBodyElse() may expose internal representation by returning IfStatOp.bodyElse</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1313" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method compiler.nodi.statement.IfStatOp.getBodyElse()<br/>Field compiler.nodi.statement.IfStatOp.bodyElse<br/>At IfStatOp.java:[line 49]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1329');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.IfStatOp.getBodyThen() may expose internal representation by returning IfStatOp.bodyThen</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1329" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method compiler.nodi.statement.IfStatOp.getBodyThen()<br/>Field compiler.nodi.statement.IfStatOp.bodyThen<br/>At IfStatOp.java:[line 45]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1345');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.IfStatOp.getExpr() may expose internal representation by returning IfStatOp.expr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1345" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method compiler.nodi.statement.IfStatOp.getExpr()<br/>Field compiler.nodi.statement.IfStatOp.expr<br/>At IfStatOp.java:[line 41]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1362');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.IfStatOp.getSymbolTableElse() may expose internal representation by returning IfStatOp.symbolTableElse</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1362" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method compiler.nodi.statement.IfStatOp.getSymbolTableElse()<br/>Field compiler.nodi.statement.IfStatOp.symbolTableElse<br/>At IfStatOp.java:[line 56]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1378');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.IfStatOp.getSymbolTableThen() may expose internal representation by returning IfStatOp.symbolTableThen</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1378" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method compiler.nodi.statement.IfStatOp.getSymbolTableThen()<br/>Field compiler.nodi.statement.IfStatOp.symbolTableThen<br/>At IfStatOp.java:[line 52]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1565');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.ReadOp.getExpr() may expose internal representation by returning ReadOp.expr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1565" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ReadOp<br/>In method compiler.nodi.statement.ReadOp.getExpr()<br/>Field compiler.nodi.statement.ReadOp.expr<br/>At ReadOp.java:[line 38]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1581');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.ReadOp.getListId() may expose internal representation by returning ReadOp.listId</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1581" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ReadOp<br/>In method compiler.nodi.statement.ReadOp.getListId()<br/>Field compiler.nodi.statement.ReadOp.listId<br/>At ReadOp.java:[line 37]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1651');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.ReturnOp.getExpr() may expose internal representation by returning ReturnOp.expr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1651" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ReturnOp<br/>In method compiler.nodi.statement.ReturnOp.getExpr()<br/>Field compiler.nodi.statement.ReturnOp.expr<br/>At ReturnOp.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1685');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.WhileOp.getBody() may expose internal representation by returning WhileOp.body</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1685" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.WhileOp<br/>In method compiler.nodi.statement.WhileOp.getBody()<br/>Field compiler.nodi.statement.WhileOp.body<br/>At WhileOp.java:[line 32]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1701');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.WhileOp.getExpr() may expose internal representation by returning WhileOp.expr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1701" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.WhileOp<br/>In method compiler.nodi.statement.WhileOp.getExpr()<br/>Field compiler.nodi.statement.WhileOp.expr<br/>At WhileOp.java:[line 28]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1717');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.WhileOp.getSymbolTable() may expose internal representation by returning WhileOp.symbolTable</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1717" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.WhileOp<br/>In method compiler.nodi.statement.WhileOp.getSymbolTable()<br/>Field compiler.nodi.statement.WhileOp.symbolTable<br/>At WhileOp.java:[line 37]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1810');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.nodi.statement.WriteOp.getListExpr() may expose internal representation by returning WriteOp.listExpr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1810" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.nodi.statement.WriteOp<br/>In method compiler.nodi.statement.WriteOp.getListExpr()<br/>Field compiler.nodi.statement.WriteOp.listExpr<br/>At WriteOp.java:[line 32]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1866');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.symbolTable.SymbolTable.getFather() may expose internal representation by returning SymbolTable.father</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1866" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.symbolTable.SymbolTable<br/>In method compiler.symbolTable.SymbolTable.getFather()<br/>Field compiler.symbolTable.SymbolTable.father<br/>At SymbolTable.java:[line 72]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1882');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.symbolTable.SymbolTable.getListRow() may expose internal representation by returning SymbolTable.listRow</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1882" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.symbolTable.SymbolTable<br/>In method compiler.symbolTable.SymbolTable.getListRow()<br/>Field compiler.symbolTable.SymbolTable.listRow<br/>At SymbolTable.java:[line 74]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1953');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.utilsClass.Decl.getFunOpList() may expose internal representation by returning Decl.funOpList</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1953" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.utilsClass.Decl<br/>In method compiler.utilsClass.Decl.getFunOpList()<br/>Field compiler.utilsClass.Decl.funOpList<br/>At Decl.java:[line 34]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1969');">
+            <td>
+               <span class="priority-2">EI</span>
+            </td>
+            <td>compiler.utilsClass.Decl.getVarDeclList() may expose internal representation by returning Decl.varDeclList</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1969" style="display: none;">
+                  <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+                  <br/>In class compiler.utilsClass.Decl<br/>In method compiler.utilsClass.Decl.getVarDeclList()<br/>Field compiler.utilsClass.Decl.varDeclList<br/>At Decl.java:[line 33]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e149');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.BodyOp(List, List) may expose internal representation by storing an externally mutable object into BodyOp.listStatement</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e149" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.BodyOp<br/>In method new compiler.nodi.BodyOp(List, List)<br/>Field compiler.nodi.BodyOp.listStatement<br/>Local variable named listStatement<br/>At BodyOp.java:[line 31]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e167');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.BodyOp(List, List) may expose internal representation by storing an externally mutable object into BodyOp.listVar</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e167" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.BodyOp<br/>In method new compiler.nodi.BodyOp(List, List)<br/>Field compiler.nodi.BodyOp.listVar<br/>Local variable named listVar<br/>At BodyOp.java:[line 25]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e272');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.FunOp(Identifier, String, BodyOp) may expose internal representation by storing an externally mutable object into FunOp.body</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e272" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method new compiler.nodi.FunOp(Identifier, String, BodyOp)<br/>Field compiler.nodi.FunOp.body<br/>Local variable named body<br/>At FunOp.java:[line 53]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e290');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.FunOp(Identifier, String, BodyOp) may expose internal representation by storing an externally mutable object into FunOp.identificatore</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e290" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method new compiler.nodi.FunOp(Identifier, String, BodyOp)<br/>Field compiler.nodi.FunOp.identificatore<br/>Local variable named identificatore<br/>At FunOp.java:[line 50]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e308');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.FunOp(Identifier, List, String, BodyOp) may expose internal representation by storing an externally mutable object into FunOp.body</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e308" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method new compiler.nodi.FunOp(Identifier, List, String, BodyOp)<br/>Field compiler.nodi.FunOp.body<br/>Local variable named body<br/>At FunOp.java:[line 37]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e326');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.FunOp(Identifier, List, String, BodyOp) may expose internal representation by storing an externally mutable object into FunOp.identificatore</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e326" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method new compiler.nodi.FunOp(Identifier, List, String, BodyOp)<br/>Field compiler.nodi.FunOp.identificatore<br/>Local variable named identificatore<br/>At FunOp.java:[line 34]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e344');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.FunOp(Identifier, List, String, BodyOp) may expose internal representation by storing an externally mutable object into FunOp.params</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e344" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method new compiler.nodi.FunOp(Identifier, List, String, BodyOp)<br/>Field compiler.nodi.FunOp.params<br/>Local variable named params<br/>At FunOp.java:[line 35]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e362');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>compiler.nodi.FunOp.setSymbolTable(SymbolTable) may expose internal representation by storing an externally mutable object into FunOp.symbolTable</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e362" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method compiler.nodi.FunOp.setSymbolTable(SymbolTable)<br/>Field compiler.nodi.FunOp.symbolTable<br/>Local variable named symbolTable<br/>At FunOp.java:[line 78]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e419');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.ParDeclOp(String, String, List) may expose internal representation by storing an externally mutable object into ParDeclOp.idList</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e419" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.ParDeclOp<br/>In method new compiler.nodi.ParDeclOp(String, String, List)<br/>Field compiler.nodi.ParDeclOp.idList<br/>Local variable named idList<br/>At ParDeclOp.java:[line 29]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e567');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.ProgramOp(FunOp, List) may expose internal representation by storing an externally mutable object into ProgramOp.funOpList</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e567" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method new compiler.nodi.ProgramOp(FunOp, List)<br/>Field compiler.nodi.ProgramOp.funOpList<br/>Local variable named funOpList<br/>At ProgramOp.java:[line 49]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e586');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.ProgramOp(FunOp, List) may expose internal representation by storing an externally mutable object into ProgramOp.main</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e586" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method new compiler.nodi.ProgramOp(FunOp, List)<br/>Field compiler.nodi.ProgramOp.main<br/>Local variable named main<br/>At ProgramOp.java:[line 50]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e604');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.ProgramOp(List, FunOp, List) may expose internal representation by storing an externally mutable object into ProgramOp.funOpList</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e604" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method new compiler.nodi.ProgramOp(List, FunOp, List)<br/>Field compiler.nodi.ProgramOp.funOpList<br/>Local variable named funOpList<br/>At ProgramOp.java:[line 32]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e622');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.ProgramOp(List, FunOp, List) may expose internal representation by storing an externally mutable object into ProgramOp.main</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e622" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method new compiler.nodi.ProgramOp(List, FunOp, List)<br/>Field compiler.nodi.ProgramOp.main<br/>Local variable named main<br/>At ProgramOp.java:[line 33]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e640');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.ProgramOp(List, FunOp, List) may expose internal representation by storing an externally mutable object into ProgramOp.varDeclList</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e640" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method new compiler.nodi.ProgramOp(List, FunOp, List)<br/>Field compiler.nodi.ProgramOp.varDeclList<br/>Local variable named varDeclList<br/>At ProgramOp.java:[line 31]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e658');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>compiler.nodi.ProgramOp.setSymbolTable(SymbolTable) may expose internal representation by storing an externally mutable object into ProgramOp.symbolTable</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e658" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method compiler.nodi.ProgramOp.setSymbolTable(SymbolTable)<br/>Field compiler.nodi.ProgramOp.symbolTable<br/>Local variable named symbolTable<br/>At ProgramOp.java:[line 82]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e730');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.expr.CallFunOpExpr(Identifier) may expose internal representation by storing an externally mutable object into CallFunOpExpr.identifier</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e730" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.expr.CallFunOpExpr<br/>In method new compiler.nodi.expr.CallFunOpExpr(Identifier)<br/>Field compiler.nodi.expr.CallFunOpExpr.identifier<br/>Local variable named identifier<br/>At CallFunOpExpr.java:[line 19]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e748');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.expr.CallFunOpExpr(Identifier, List) may expose internal representation by storing an externally mutable object into CallFunOpExpr.identifier</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e748" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.expr.CallFunOpExpr<br/>In method new compiler.nodi.expr.CallFunOpExpr(Identifier, List)<br/>Field compiler.nodi.expr.CallFunOpExpr.identifier<br/>Local variable named identifier<br/>At CallFunOpExpr.java:[line 33]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e766');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.expr.CallFunOpExpr(Identifier, List) may expose internal representation by storing an externally mutable object into CallFunOpExpr.listExpr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e766" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.expr.CallFunOpExpr<br/>In method new compiler.nodi.expr.CallFunOpExpr(Identifier, List)<br/>Field compiler.nodi.expr.CallFunOpExpr.listExpr<br/>Local variable named listExpr<br/>At CallFunOpExpr.java:[line 32]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e817');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.expr.IdInitObbOp(Identifier, Expr) may expose internal representation by storing an externally mutable object into IdInitObbOp.expr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e817" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.expr.IdInitObbOp<br/>In method new compiler.nodi.expr.IdInitObbOp(Identifier, Expr)<br/>Field compiler.nodi.expr.IdInitObbOp.expr<br/>Local variable named expr<br/>At IdInitObbOp.java:[line 17]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e835');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.expr.IdInitObbOp(Identifier, Expr) may expose internal representation by storing an externally mutable object into IdInitObbOp.id</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e835" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.expr.IdInitObbOp<br/>In method new compiler.nodi.expr.IdInitObbOp(Identifier, Expr)<br/>Field compiler.nodi.expr.IdInitObbOp.id<br/>Local variable named id<br/>At IdInitObbOp.java:[line 16]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e885');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.expr.IdInitOp(Identifier, Expr) may expose internal representation by storing an externally mutable object into IdInitOp.expr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e885" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.expr.IdInitOp<br/>In method new compiler.nodi.expr.IdInitOp(Identifier, Expr)<br/>Field compiler.nodi.expr.IdInitOp.expr<br/>Local variable named expr<br/>At IdInitOp.java:[line 17]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e903');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.expr.IdInitOp(Identifier, Expr) may expose internal representation by storing an externally mutable object into IdInitOp.id</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e903" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.expr.IdInitOp<br/>In method new compiler.nodi.expr.IdInitOp(Identifier, Expr)<br/>Field compiler.nodi.expr.IdInitOp.id<br/>Local variable named id<br/>At IdInitOp.java:[line 16]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e937');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.expr.UnaryOp(String, Expr) may expose internal representation by storing an externally mutable object into UnaryOp.expr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e937" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.expr.UnaryOp<br/>In method new compiler.nodi.expr.UnaryOp(String, Expr)<br/>Field compiler.nodi.expr.UnaryOp.expr<br/>Local variable named expr<br/>At UnaryOp.java:[line 16]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1032');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.AssignOp(List, List) may expose internal representation by storing an externally mutable object into AssignOp.listExpr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1032" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.AssignOp<br/>In method new compiler.nodi.statement.AssignOp(List, List)<br/>Field compiler.nodi.statement.AssignOp.listExpr<br/>Local variable named listExpr<br/>At AssignOp.java:[line 24]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1050');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.AssignOp(List, List) may expose internal representation by storing an externally mutable object into AssignOp.listId</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1050" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.AssignOp<br/>In method new compiler.nodi.statement.AssignOp(List, List)<br/>Field compiler.nodi.statement.AssignOp.listId<br/>Local variable named listId<br/>At AssignOp.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1122');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.CallFunOpStat(Identifier) may expose internal representation by storing an externally mutable object into CallFunOpStat.identifier</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1122" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.CallFunOpStat<br/>In method new compiler.nodi.statement.CallFunOpStat(Identifier)<br/>Field compiler.nodi.statement.CallFunOpStat.identifier<br/>Local variable named identifier<br/>At CallFunOpStat.java:[line 21]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1140');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.CallFunOpStat(Identifier, List) may expose internal representation by storing an externally mutable object into CallFunOpStat.identifier</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1140" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.CallFunOpStat<br/>In method new compiler.nodi.statement.CallFunOpStat(Identifier, List)<br/>Field compiler.nodi.statement.CallFunOpStat.identifier<br/>Local variable named identifier<br/>At CallFunOpStat.java:[line 34]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1158');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.CallFunOpStat(Identifier, List) may expose internal representation by storing an externally mutable object into CallFunOpStat.listExpr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1158" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.CallFunOpStat<br/>In method new compiler.nodi.statement.CallFunOpStat(Identifier, List)<br/>Field compiler.nodi.statement.CallFunOpStat.listExpr<br/>Local variable named listExpr<br/>At CallFunOpStat.java:[line 35]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1241');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.ForOp(IdInitOp, ConstOp, BodyOp) may expose internal representation by storing an externally mutable object into ForOp.bodyOp</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1241" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ForOp<br/>In method new compiler.nodi.statement.ForOp(IdInitOp, ConstOp, BodyOp)<br/>Field compiler.nodi.statement.ForOp.bodyOp<br/>Local variable named bodyOp<br/>At ForOp.java:[line 26]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1259');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.ForOp(IdInitOp, ConstOp, BodyOp) may expose internal representation by storing an externally mutable object into ForOp.cons</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1259" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ForOp<br/>In method new compiler.nodi.statement.ForOp(IdInitOp, ConstOp, BodyOp)<br/>Field compiler.nodi.statement.ForOp.cons<br/>Local variable named cons<br/>At ForOp.java:[line 25]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1277');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.ForOp(IdInitOp, ConstOp, BodyOp) may expose internal representation by storing an externally mutable object into ForOp.id</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1277" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ForOp<br/>In method new compiler.nodi.statement.ForOp(IdInitOp, ConstOp, BodyOp)<br/>Field compiler.nodi.statement.ForOp.id<br/>Local variable named id<br/>At ForOp.java:[line 24]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1295');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>compiler.nodi.statement.ForOp.setSymbolTable(SymbolTable) may expose internal representation by storing an externally mutable object into ForOp.symbolTable</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1295" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ForOp<br/>In method compiler.nodi.statement.ForOp.setSymbolTable(SymbolTable)<br/>Field compiler.nodi.statement.ForOp.symbolTable<br/>Local variable named symbolTable<br/>At ForOp.java:[line 43]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1394');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.IfStatOp(Expr, BodyOp) may expose internal representation by storing an externally mutable object into IfStatOp.bodyThen</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1394" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method new compiler.nodi.statement.IfStatOp(Expr, BodyOp)<br/>Field compiler.nodi.statement.IfStatOp.bodyThen<br/>Local variable named bodyThen<br/>At IfStatOp.java:[line 37]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1412');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.IfStatOp(Expr, BodyOp) may expose internal representation by storing an externally mutable object into IfStatOp.expr</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1412" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method new compiler.nodi.statement.IfStatOp(Expr, BodyOp)<br/>Field compiler.nodi.statement.IfStatOp.expr<br/>Local variable named expr<br/>At IfStatOp.java:[line 35]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1430');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.IfStatOp(Expr, BodyOp, BodyOp) may expose internal representation by storing an externally mutable object into IfStatOp.bodyElse</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1430" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method new compiler.nodi.statement.IfStatOp(Expr, BodyOp, BodyOp)<br/>Field compiler.nodi.statement.IfStatOp.bodyElse<br/>Local variable named bodyElse<br/>At IfStatOp.java:[line 27]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1448');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.IfStatOp(Expr, BodyOp, BodyOp) may expose internal representation by storing an externally mutable object into IfStatOp.bodyThen</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1448" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method new compiler.nodi.statement.IfStatOp(Expr, BodyOp, BodyOp)<br/>Field compiler.nodi.statement.IfStatOp.bodyThen<br/>Local variable named bodyThen<br/>At IfStatOp.java:[line 26]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1466');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.IfStatOp(Expr, BodyOp, BodyOp) may expose internal representation by storing an externally mutable object into IfStatOp.expr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1466" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method new compiler.nodi.statement.IfStatOp(Expr, BodyOp, BodyOp)<br/>Field compiler.nodi.statement.IfStatOp.expr<br/>Local variable named expr<br/>At IfStatOp.java:[line 25]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1484');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>compiler.nodi.statement.IfStatOp.setSymbolTableElse(SymbolTable) may expose internal representation by storing an externally mutable object into IfStatOp.symbolTableElse</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1484" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method compiler.nodi.statement.IfStatOp.setSymbolTableElse(SymbolTable)<br/>Field compiler.nodi.statement.IfStatOp.symbolTableElse<br/>Local variable named symbolTable<br/>At IfStatOp.java:[line 58]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1502');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>compiler.nodi.statement.IfStatOp.setSymbolTableThen(SymbolTable) may expose internal representation by storing an externally mutable object into IfStatOp.symbolTableThen</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1502" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.IfStatOp<br/>In method compiler.nodi.statement.IfStatOp.setSymbolTableThen(SymbolTable)<br/>Field compiler.nodi.statement.IfStatOp.symbolTableThen<br/>Local variable named symbolTable<br/>At IfStatOp.java:[line 54]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1597');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.ReadOp(List) may expose internal representation by storing an externally mutable object into ReadOp.listId</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1597" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ReadOp<br/>In method new compiler.nodi.statement.ReadOp(List)<br/>Field compiler.nodi.statement.ReadOp.listId<br/>Local variable named listId<br/>At ReadOp.java:[line 33]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1615');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.ReadOp(List, Expr) may expose internal representation by storing an externally mutable object into ReadOp.expr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1615" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ReadOp<br/>In method new compiler.nodi.statement.ReadOp(List, Expr)<br/>Field compiler.nodi.statement.ReadOp.expr<br/>Local variable named expr<br/>At ReadOp.java:[line 24]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1633');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.ReadOp(List, Expr) may expose internal representation by storing an externally mutable object into ReadOp.listId</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1633" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ReadOp<br/>In method new compiler.nodi.statement.ReadOp(List, Expr)<br/>Field compiler.nodi.statement.ReadOp.listId<br/>Local variable named listId<br/>At ReadOp.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1667');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.ReturnOp(Expr) may expose internal representation by storing an externally mutable object into ReturnOp.expr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1667" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ReturnOp<br/>In method new compiler.nodi.statement.ReturnOp(Expr)<br/>Field compiler.nodi.statement.ReturnOp.expr<br/>Local variable named expr<br/>At ReturnOp.java:[line 19]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1733');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.WhileOp(Expr, BodyOp) may expose internal representation by storing an externally mutable object into WhileOp.body</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1733" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.WhileOp<br/>In method new compiler.nodi.statement.WhileOp(Expr, BodyOp)<br/>Field compiler.nodi.statement.WhileOp.body<br/>Local variable named body<br/>At WhileOp.java:[line 24]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1752');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.WhileOp(Expr, BodyOp) may expose internal representation by storing an externally mutable object into WhileOp.expr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1752" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.WhileOp<br/>In method new compiler.nodi.statement.WhileOp(Expr, BodyOp)<br/>Field compiler.nodi.statement.WhileOp.expr<br/>Local variable named expr<br/>At WhileOp.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1770');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>compiler.nodi.statement.WhileOp.setSymbolTable(SymbolTable) may expose internal representation by storing an externally mutable object into WhileOp.symbolTable</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1770" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.WhileOp<br/>In method compiler.nodi.statement.WhileOp.setSymbolTable(SymbolTable)<br/>Field compiler.nodi.statement.WhileOp.symbolTable<br/>Local variable named symbolTable<br/>At WhileOp.java:[line 35]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1826');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.nodi.statement.WriteOp(String, List) may expose internal representation by storing an externally mutable object into WriteOp.listExpr</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1826" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.nodi.statement.WriteOp<br/>In method new compiler.nodi.statement.WriteOp(String, List)<br/>Field compiler.nodi.statement.WriteOp.listExpr<br/>Local variable named listExpr<br/>At WriteOp.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1898');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.symbolTable.SymbolTable(SymbolTable, List, String) may expose internal representation by storing an externally mutable object into SymbolTable.father</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1898" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.symbolTable.SymbolTable<br/>In method new compiler.symbolTable.SymbolTable(SymbolTable, List, String)<br/>Field compiler.symbolTable.SymbolTable.father<br/>Local variable named father<br/>At SymbolTable.java:[line 22]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1916');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new compiler.symbolTable.SymbolTable(SymbolTable, List, String) may expose internal representation by storing an externally mutable object into SymbolTable.listRow</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1916" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.symbolTable.SymbolTable<br/>In method new compiler.symbolTable.SymbolTable(SymbolTable, List, String)<br/>Field compiler.symbolTable.SymbolTable.listRow<br/>Local variable named listRow<br/>At SymbolTable.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1934');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>compiler.symbolTable.SymbolTable.setFather(SymbolTable) may expose internal representation by storing an externally mutable object into SymbolTable.father</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1934" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class compiler.symbolTable.SymbolTable<br/>In method compiler.symbolTable.SymbolTable.setFather(SymbolTable)<br/>Field compiler.symbolTable.SymbolTable.father<br/>Local variable named father<br/>At SymbolTable.java:[line 69]</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_SECURITY">Security Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e21');">
+            <td>
+               <span class="priority-2">SECCI</span>
+            </td>
+            <td>This usage of java/lang/ProcessBuilder.&lt;init&gt;([Ljava/lang/String;)V can be vulnerable to Command Injection</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e21" style="display: none;">
+                  <a href="#COMMAND_INJECTION">Bug type COMMAND_INJECTION (click for details)</a>
+                  <br/>In class compiler.NewLang<br/>In method compiler.NewLang.compile(byte[], String)<br/>At NewLang.java:[line 33]<br/>Sink method java/lang/ProcessBuilder.&lt;init&gt;([Ljava/lang/String;)V<br/>Sink parameter 0</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e37');">
+            <td>
+               <span class="priority-2">SECCRLFLOG</span>
+            </td>
+            <td>This use of java/util/logging/Logger.log(Ljava/util/logging/Level;Ljava/lang/String;)V might be used to include CRLF characters into log messages</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e37" style="display: none;">
+                  <a href="#CRLF_INJECTION_LOGS">Bug type CRLF_INJECTION_LOGS (click for details)</a>
+                  <br/>In class compiler.NewLang<br/>In method compiler.NewLang.compile(byte[], String)<br/>At NewLang.java:[line 48]<br/>Sink method java/util/logging/Logger.log(Ljava/util/logging/Level;Ljava/lang/String;)V<br/>Sink parameter 0<br/>Tainted source java/io/BufferedReader.readLine()Ljava/lang/String;<br/>At NewLang.java:[line 44]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e5');">
+            <td>
+               <span class="priority-2">SECPTI</span>
+            </td>
+            <td>This API (java/io/File.&lt;init&gt;(Ljava/lang/String;)V) reads a file whose location might be specified by user input</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e5" style="display: none;">
+                  <a href="#PATH_TRAVERSAL_IN">Bug type PATH_TRAVERSAL_IN (click for details)</a>
+                  <br/>In class com.spring.newlang.NewLangController<br/>In method com.spring.newlang.NewLangController.compileFileNewLang(Map)<br/>At NewLangController.java:[line 41]<br/>Sink method java/io/File.&lt;init&gt;(Ljava/lang/String;)V<br/>Sink parameter 0</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e57');">
+            <td>
+               <span class="priority-2">SECPTI</span>
+            </td>
+            <td>This API (java/io/File.&lt;init&gt;(Ljava/lang/String;)V) reads a file whose location might be specified by user input</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e57" style="display: none;">
+                  <a href="#PATH_TRAVERSAL_IN">Bug type PATH_TRAVERSAL_IN (click for details)</a>
+                  <br/>In class compiler.NewLang<br/>In method compiler.NewLang.compile(byte[], String)<br/>At NewLang.java:[line 51]<br/>Sink method java/io/File.&lt;init&gt;(Ljava/lang/String;)V<br/>Sink parameter 0</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_STYLE">Dodgy code Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e73');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.statement.Statement&gt; to java.util.ArrayList in new compiler.nodi.BodyOp(List, List)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e73" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.BodyOp<br/>In method new compiler.nodi.BodyOp(List, List)<br/>Actual type java.util.List&lt;compiler.nodi.statement.Statement&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listStatement<br/>At BodyOp.java:[line 31]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e95');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.VarDeclOp&gt; to java.util.ArrayList in new compiler.nodi.BodyOp(List, List)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e95" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.BodyOp<br/>In method new compiler.nodi.BodyOp(List, List)<br/>Actual type java.util.List&lt;compiler.nodi.VarDeclOp&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listVar<br/>At BodyOp.java:[line 25]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e186');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.ParDeclOp&gt; to java.util.ArrayList in new compiler.nodi.FunOp(Identifier, List, String, BodyOp)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e186" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.FunOp<br/>In method new compiler.nodi.FunOp(Identifier, List, String, BodyOp)<br/>Actual type java.util.List&lt;compiler.nodi.ParDeclOp&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from params<br/>At FunOp.java:[line 35]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e381');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.expr.Identifier&gt; to java.util.ArrayList in new compiler.nodi.ParDeclOp(String, String, List)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e381" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.ParDeclOp<br/>In method new compiler.nodi.ParDeclOp(String, String, List)<br/>Actual type java.util.List&lt;compiler.nodi.expr.Identifier&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from idList<br/>At ParDeclOp.java:[line 29]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e437');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.FunOp&gt; to java.util.ArrayList in new compiler.nodi.ProgramOp(FunOp, List)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e437" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method new compiler.nodi.ProgramOp(FunOp, List)<br/>Actual type java.util.List&lt;compiler.nodi.FunOp&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from funOpList<br/>At ProgramOp.java:[line 49]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e459');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.FunOp&gt; to java.util.ArrayList in new compiler.nodi.ProgramOp(List, FunOp, List)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e459" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method new compiler.nodi.ProgramOp(List, FunOp, List)<br/>Actual type java.util.List&lt;compiler.nodi.FunOp&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from funOpList<br/>At ProgramOp.java:[line 32]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e481');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.VarDeclOp&gt; to java.util.ArrayList in new compiler.nodi.ProgramOp(List, FunOp, List)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e481" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.ProgramOp<br/>In method new compiler.nodi.ProgramOp(List, FunOp, List)<br/>Actual type java.util.List&lt;compiler.nodi.VarDeclOp&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from varDeclList<br/>At ProgramOp.java:[line 31]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e676');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.expr.Expr&gt; to java.util.ArrayList in new compiler.nodi.expr.CallFunOpExpr(Identifier, List)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e676" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.expr.CallFunOpExpr<br/>In method new compiler.nodi.expr.CallFunOpExpr(Identifier, List)<br/>Actual type java.util.List&lt;compiler.nodi.expr.Expr&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listExpr<br/>At CallFunOpExpr.java:[line 32]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e955');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.expr.Expr&gt; to java.util.ArrayList in new compiler.nodi.statement.AssignOp(List, List)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e955" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.statement.AssignOp<br/>In method new compiler.nodi.statement.AssignOp(List, List)<br/>Actual type java.util.List&lt;compiler.nodi.expr.Expr&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listExpr<br/>At AssignOp.java:[line 24]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e978');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.expr.Identifier&gt; to java.util.ArrayList in new compiler.nodi.statement.AssignOp(List, List)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e978" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.statement.AssignOp<br/>In method new compiler.nodi.statement.AssignOp(List, List)<br/>Actual type java.util.List&lt;compiler.nodi.expr.Identifier&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listId<br/>At AssignOp.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1068');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.expr.Expr&gt; to java.util.ArrayList in new compiler.nodi.statement.CallFunOpStat(Identifier, List)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1068" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.statement.CallFunOpStat<br/>In method new compiler.nodi.statement.CallFunOpStat(Identifier, List)<br/>Actual type java.util.List&lt;compiler.nodi.expr.Expr&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listExpr<br/>At CallFunOpStat.java:[line 35]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1520');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.expr.Identifier&gt; to java.util.ArrayList in new compiler.nodi.statement.ReadOp(List)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1520" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ReadOp<br/>In method new compiler.nodi.statement.ReadOp(List)<br/>Actual type java.util.List&lt;compiler.nodi.expr.Identifier&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listId<br/>At ReadOp.java:[line 33]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1542');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.expr.Identifier&gt; to java.util.ArrayList in new compiler.nodi.statement.ReadOp(List, Expr)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1542" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.statement.ReadOp<br/>In method new compiler.nodi.statement.ReadOp(List, Expr)<br/>Actual type java.util.List&lt;compiler.nodi.expr.Identifier&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listId<br/>At ReadOp.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e1788');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.nodi.expr.Expr&gt; to java.util.ArrayList in new compiler.nodi.statement.WriteOp(String, List)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e1788" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.nodi.statement.WriteOp<br/>In method new compiler.nodi.statement.WriteOp(String, List)<br/>Actual type java.util.List&lt;compiler.nodi.expr.Expr&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listExpr<br/>At WriteOp.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e1844');">
+            <td>
+               <span class="priority-2">BC</span>
+            </td>
+            <td>Questionable cast from java.util.List&lt;compiler.symbolTable.RowTable&gt; to java.util.ArrayList in new compiler.symbolTable.SymbolTable(SymbolTable, List, String)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e1844" style="display: none;">
+                  <a href="#BC_BAD_CAST_TO_CONCRETE_COLLECTION">Bug type BC_BAD_CAST_TO_CONCRETE_COLLECTION (click for details)</a>
+                  <br/>In class compiler.symbolTable.SymbolTable<br/>In method new compiler.symbolTable.SymbolTable(SymbolTable, List, String)<br/>Actual type java.util.List&lt;compiler.symbolTable.RowTable&gt;<br/>Expected java.util.ArrayList<br/>Value loaded from listRow<br/>At SymbolTable.java:[line 23]</p>
+            </td>
+         </tr>
+      </table>
+      <h1>
+         <a name="Details">Details</a>
+      </h1>
+      <h2>
+         <a name="BC_BAD_CAST_TO_CONCRETE_COLLECTION">BC_BAD_CAST_TO_CONCRETE_COLLECTION: Questionable cast to concrete collection</a>
+      </h2>
+
+<p>
+This code casts an abstract collection (such as a Collection, List, or Set)
+to a specific concrete implementation (such as an ArrayList or HashSet).
+This might not be correct, and it may make your code fragile, since
+it makes it harder to switch to other concrete implementations at a future
+point. Unless you have a particular reason to do so, just use the abstract
+collection class.
+</p>
+
+    <h2>
+         <a name="EI_EXPOSE_REP">EI_EXPOSE_REP: May expose internal representation by returning reference to mutable object</a>
+      </h2>
+
+  <p> Returning a reference to a mutable object value stored in one of the object's fields
+  exposes the internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Returning a new copy of the object is better approach in many situations.</p>
+
+    <h2>
+         <a name="EI_EXPOSE_REP2">EI_EXPOSE_REP2: May expose internal representation by incorporating reference to mutable object</a>
+      </h2>
+
+  <p> This code stores a reference to an externally mutable object into the
+  internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Storing a copy of the object is better approach in many situations.</p>
+
+    <h2>
+         <a name="COMMAND_INJECTION">COMMAND_INJECTION: Potential Command Injection</a>
+      </h2>
+            
+<p>The highlighted API is used to execute a system command. If unfiltered input is passed to this API, it can lead to arbitrary command execution.</p>
+<br/>
+<p>
+    <b>Vulnerable Code:</b><br/>
+<pre>import java.lang.Runtime;
+
+Runtime r = Runtime.getRuntime();
+r.exec("/bin/sh -c some_tool" + input);</pre>
+</p>
+<p>
+<b>References</b><br/>
+<a href="https://www.owasp.org/index.php/Command_Injection">OWASP: Command Injection</a><br/>
+<a href="https://www.owasp.org/index.php/Top_10_2013-A1-Injection">OWASP: Top 10 2013-A1-Injection</a><br/>
+<a href="https://cwe.mitre.org/data/definitions/78.html">CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')</a>
+</p>
+
+        <h2>
+         <a name="CRLF_INJECTION_LOGS">CRLF_INJECTION_LOGS: Potential CRLF Injection for logs</a>
+      </h2>
+            
+<p>
+    When data from an untrusted source is put into a logger and not neutralized correctly,
+    an attacker could forge log entries or include malicious content.
+    Inserted false entries could be used to skew statistics, distract the administrator
+    or even to implicate another party in the commission of a malicious act.
+    If the log file is processed automatically, the attacker can render the file unusable
+    by corrupting the format of the file or injecting unexpected characters.
+    An attacker may also inject code or other commands into the log file and take advantage
+    of a vulnerability in the log processing utility (e.g. command injection or XSS).
+</p>
+<br/>
+<p>
+<b>Code at risk:</b><br/>
+<pre>String val = request.getParameter("user");
+String metadata = request.getParameter("metadata");
+[...]
+if(authenticated) {
+    log.info("User " + val + " (" + metadata + ") was authenticated successfully");
+}
+else {
+    log.info("User " + val + " (" + metadata + ") was not authenticated");
+}
+</pre>
+
+A malicious user could send the metadata parameter with the value: <code>"Firefox) was authenticated successfully\r\n[INFO] User bbb (Internet Explorer"</code>.
+</p>
+
+<b>Solution:</b><br/>
+<p>
+You can manually sanitize each parameter.
+<pre>
+log.info("User " + val.replaceAll("[\r\n]","") + " (" + userAgent.replaceAll("[\r\n]","") + ") was not authenticated");
+</pre>
+</p>
+
+<p>
+You can also configure your logger service to replace new line for all message events. Here is sample configuration for LogBack <a href="https://logback.qos.ch/manual/layouts.html#replace">using the <code>replace</code> function</a>.
+<pre>
+&lt;pattern&gt;%-5level - %replace(%msg){'[\r\n]', ''}%n&lt;/pattern&gt;
+</pre>
+</p>
+
+<p>
+Finally, you can use a logger implementation that replace new line by spaces.
+The project <a href="https://github.com/javabeanz/owasp-security-logging">OWASP Security Logging</a> has an implementation for Logback and Log4j.
+</p>
+
+<br/>
+<p>
+    <b>References</b><br/>
+    <a href="https://cwe.mitre.org/data/definitions/117.html">CWE-117: Improper Output Neutralization for Logs</a><br/>
+    <a href="https://cwe.mitre.org/data/definitions/93.html">CWE-93: Improper Neutralization of CRLF Sequences ('CRLF Injection')</a><br/>
+    <a href="https://logback.qos.ch/manual/layouts.html#replace">CWE-93: Improper Neutralization of CRLF Sequences ('CRLF Injection')</a><br/>
+    <a href="https://github.com/javabeanz/owasp-security-logging">OWASP Security Logging</a><br/>
+</p>
+
+
+        <h2>
+         <a name="PATH_TRAVERSAL_IN">PATH_TRAVERSAL_IN: Potential Path Traversal (file read)</a>
+      </h2>
+            
+<p>A file is opened to read its content. The filename comes from an <b>input</b> parameter.
+If an unfiltered parameter is passed to this file API, files from an arbitrary filesystem location could be read.</p>
+<p>This rule identifies <b>potential</b> path traversal vulnerabilities. In many cases, the constructed file path cannot be controlled
+by the user. If that is the case, the reported instance is a false positive.</p>
+<br/>
+
+<p>
+    <b>Vulnerable Code:</b><br/>
+<pre>@GET
+@Path("/images/{image}")
+@Produces("images/*")
+public Response getImage(@javax.ws.rs.PathParam("image") String image) {
+    File file = new File("resources/images/", image); //Weak point
+
+    if (!file.exists()) {
+        return Response.status(Status.NOT_FOUND).build();
+    }
+
+    return Response.ok().entity(new FileInputStream(file)).build();
+}</pre>
+</p>
+<br/>
+
+<p>
+    <b>Solution:</b><br/>
+<pre>import org.apache.commons.io.FilenameUtils;
+
+@GET
+@Path("/images/{image}")
+@Produces("images/*")
+public Response getImage(@javax.ws.rs.PathParam("image") String image) {
+    File file = new File("resources/images/", FilenameUtils.getName(image)); //Fix
+
+    if (!file.exists()) {
+        return Response.status(Status.NOT_FOUND).build();
+    }
+
+    return Response.ok().entity(new FileInputStream(file)).build();
+}</pre>
+</p>
+<br/>
+<p>
+<b>References</b><br/>
+<a href="http://projects.webappsec.org/w/page/13246952/Path%20Traversal">WASC: Path Traversal</a><br/>
+<a href="https://www.owasp.org/index.php/Path_Traversal">OWASP: Path Traversal</a><br/>
+<a href="https://capec.mitre.org/data/definitions/126.html">CAPEC-126: Path Traversal</a><br/>
+<a href="https://cwe.mitre.org/data/definitions/22.html">CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')</a>
+</p>
+
+        </body>
+</html>
