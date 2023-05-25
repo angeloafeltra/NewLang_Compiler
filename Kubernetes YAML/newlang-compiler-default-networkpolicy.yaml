@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: null
+  name: newlang-compiler-default
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              io.kompose.network/newlang-compiler-default: "true"
+  podSelector:
+    matchLabels:
+      io.kompose.network/newlang-compiler-default: "true"

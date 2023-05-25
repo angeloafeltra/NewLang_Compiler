@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.28.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: back-end
+  name: back-end
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: back-end
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.28.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/newlang-compiler-default: "true"
+        io.kompose.service: back-end
+    spec:
+      containers:
+        - image: angeloafeltra/newlang:back-end
+          name: back-end
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}
